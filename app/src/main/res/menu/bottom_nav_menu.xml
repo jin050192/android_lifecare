@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/navigation_helth"
+        android:icon="@mipmap/helthcare"
+        android:title="건강지수" />
+
+    <item
+        android:id="@+id/navigation_deeplearningcare"
+        android:icon="@mipmap/runingcare"
+        android:title="딥러닝케어" />
+
+    <item
+        android:id="@+id/navigation_mypage"
+        android:icon="@mipmap/mypage2"
+        android:title="마이페이지" />
+
+    <item
+        android:id="@+id/navigation_menu"
+        android:icon="@mipmap/menu"
+        android:title="메뉴" />
+
+</menu>
