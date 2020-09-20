@@ -1,6 +1,7 @@
 package com.example.lifecare.EclipseConnect;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +41,6 @@ public class SignInActivity extends AppCompatActivity {
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 InnerTask task = new InnerTask();
                 Map<String, String> map = new HashMap<>();
                 map.put("id", edtId.getText().toString());
@@ -63,11 +63,11 @@ public class SignInActivity extends AppCompatActivity {
         //작업을 쓰레드로 처리
         @Override
         protected String doInBackground(Map... maps) {
-            //HTTP 요청 준비
+            //HTTP 요청 준비 - Post 로 바꿀것
             HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "androidSignIn"); //스프링 url
             //파라미터 전송
             http.addAllParameters(maps[0]);
-
+            System.out.println("http ㅁㄴㅇㄻㄴㅇㄹ: " + http.getParameter());
             //HTTP 요청 전송
             HttpClient post = http.create();
             post.request();
@@ -82,18 +82,19 @@ public class SignInActivity extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(String s) {
-            Log.d("JSON_RESULT", s);
-
+            Log.d("JSON_RESULT ㅁㄴㅇㄹ", s);
+            SharedPreferenceHandler sh = new SharedPreferenceHandler(getApplicationContext());
             //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
             if(s.length() > 0) {
                 Gson gson = new Gson();
                 MemberVO m = gson.fromJson(s, MemberVO.class);
-                if (m.getMember_id() != null && m.getMember_step() != 8) {
+                if (m.getId() != null && m.getId() != "") {
                     // 페이지 이동
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    intent.putExtra("id", m.getMember_id());
+                    intent.putExtra("id", m.getId());
+                    sh.keepId(m.getId());
                     startActivity(intent);
-                } else if (m.getMember_step() != 8) {
+                } else if (m.getEnabled() != "1") {
                     Toast.makeText(getApplicationContext(), "회원 정보가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "가입 인증이 필요한 회원입니다.", Toast.LENGTH_SHORT).show();
