@@ -13,9 +13,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.SignInActivity;
+import com.example.lifecare.VO.UserVO;
+import com.example.lifecare.myPage.Mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    UserVO user = UserVO.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterMypage(View w){
-        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+        UserVO userVO = UserVO.getInstance();
+        if(userVO.getId() =="") {
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), Mypage.class);
+            startActivity(intent);
+        }
 
-        SharedPreferenceHandler sh = new SharedPreferenceHandler(getApplicationContext());
-        Toast toast = Toast.makeText(getApplicationContext(), sh.getId(), Toast.LENGTH_SHORT);
-        toast.show();
-        System.out.println("id : "+sh.getId());
-        startActivity(intent);
     }
 }

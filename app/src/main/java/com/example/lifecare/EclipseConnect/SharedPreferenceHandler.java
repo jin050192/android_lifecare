@@ -34,4 +34,13 @@ public class SharedPreferenceHandler {
             return null;
         }
     }
+
+    public void clear(){
+        SharedPreferences pref = mContext.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+
 }

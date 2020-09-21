@@ -1,7 +1,6 @@
 package com.example.lifecare.EclipseConnect;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
-import com.example.lifecare.VO.MemberVO;
+import com.example.lifecare.VO.UserVO;
 import com.google.gson.Gson;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 
 public class SignInActivity extends AppCompatActivity {
-
+    UserVO userVO = UserVO.getInstance();
     EditText edtId, edtPwd;
     Button btnSignIn;
 
@@ -87,17 +87,25 @@ public class SignInActivity extends AppCompatActivity {
             //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
             if(s.length() > 0) {
                 Gson gson = new Gson();
-                MemberVO m = gson.fromJson(s, MemberVO.class);
+                UserVO m = gson.fromJson(s, UserVO.class);
                 if (m.getId() != null && m.getId() != "") {
                     // 페이지 이동
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    intent.putExtra("id", m.getId());
+
+                    //로그인 유지
+                    userVO.setId(m.getId());
+                    userVO.setEnabled(m.getEnabled());
+                    userVO.setCustomer_echeck(m.getCustomer_echeck());
+
+                    //아이디 저장 & 자동로그인
                     sh.keepId(m.getId());
+
+                    StyleableToast.makeText(getApplicationContext(), m.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
                     startActivity(intent);
                 } else if (m.getEnabled() != "1") {
-                    Toast.makeText(getApplicationContext(), "회원 정보가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "회원 정보가 올바르지 않습니다.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "가입 인증이 필요한 회원입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "가입 인증이 필요한 회원입니다.", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();

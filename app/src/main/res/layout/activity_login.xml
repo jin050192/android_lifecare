@@ -34,6 +34,7 @@
         android:layout_gravity="center"
         android:layout_width="340dp"
         android:layout_height="60dp"
+        android:inputType="textPassword"
         android:hint="패스워드"
         />
     <Button

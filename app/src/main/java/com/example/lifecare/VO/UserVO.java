@@ -6,11 +6,16 @@ import java.sql.Timestamp;
  * Created by psn on 2018-01-18.
  */
 
-public class MemberVO {
-    // member_tbl
-    private String id;
-    private String customer_echeck;
-    private String enabled;
+public class UserVO {
+    private UserVO(){}
+    private static UserVO userVO= new UserVO();
+    public static UserVO getInstance(){
+        return userVO;
+    }
+
+    private String id="";
+    private String customer_echeck="";
+    private String enabled="";
 
     public String getId() {
         return id;
