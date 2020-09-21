@@ -34,4 +34,5 @@
         android:name="com.example.lifecare.ui.menu.menu"
         android:label="menu"
         tools:layout="@layout/fragment_menu" />
+
 </navigation>

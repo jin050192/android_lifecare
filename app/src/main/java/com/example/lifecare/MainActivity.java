@@ -11,6 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.lifecare.EclipseConnect.SignInActivity;
+import com.example.lifecare.drug.drugSearch;
+import com.example.lifecare.drug.hospitalRoom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void enterMypage(View w){
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+        startActivity(intent);
+    }
+
+    public void drugSearch(View w){
+        Intent intent = new Intent(getApplicationContext(), drugSearch.class);
+        startActivity(intent);
+    }
+    public void hospitalRoom(View w){
+        Intent intent = new Intent(getApplicationContext(), hospitalRoom.class);
         startActivity(intent);
     }
 }

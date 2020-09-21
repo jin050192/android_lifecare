@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".drug.hospitalRoom"
+        android:orientation="vertical"
+        android:background="@drawable/hospital">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/logo" />
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="#000000"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="병실 미리 보기 "
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="110dp"
+                android:background="@drawable/durg_button2"
+                android:layout_gravity="center"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text=" 2인실"
+                android:textSize="15dp"
+                />
+
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="110dp"
+                android:background="@drawable/durg_button2"
+                android:layout_marginRight="110dp"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text=" 4인실"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
