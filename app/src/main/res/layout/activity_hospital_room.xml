@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".information.hospitalRoom"
+        android:orientation="vertical"
+        android:background="@drawable/hospital"
+        android:id="@+id/room">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/logo" />
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="#000000"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="병실 미리 보기 "
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                android:id="@+id/btn_tworoom"
+                android:layout_width="60dp"
+                android:layout_height="120dp"
+                android:background="@drawable/door"
+                android:text=" 2인실"
+                android:textSize="15dp"
+                />
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="2 인실"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="110dp"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_fourroom"
+                    android:layout_width="60dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/door"
+                    android:text=" 2인실"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="4 인실"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

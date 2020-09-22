@@ -12,20 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+<!--
         <activity android:name=".login.KakaoLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ &ndash;&gt;
                 <data android:host="oauth"
                     android:scheme="kakao0f50af599b907a251aa406b100937b7b" />
             </intent-filter>
         </activity>
+-->
 
         <activity android:name=".myPage.Mypage" />
+
+        android:theme="@style/AppTheme">
+        <activity android:name=".information.information"></activity>
 
         <activity
             android:name=".MainActivity"
@@ -36,8 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".EclipseConnect.SignInActivity" />
+        <activity android:name=".drug.drugSearch" />
+        <activity android:name=".information.hospitalRoom" />
+        <activity android:name=".appointment.appointment" />
     </application>
 
 </manifest>

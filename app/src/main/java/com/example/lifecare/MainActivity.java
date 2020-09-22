@@ -15,6 +15,10 @@ import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.myPage.Mypage;
+import com.example.lifecare.appointment.appointment;
+import com.example.lifecare.drug.drugSearch;
+import com.example.lifecare.information.hospitalRoom;
+import com.example.lifecare.information.information;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,5 +57,21 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+    public void drugSearch(View w){
+        Intent intent = new Intent(getApplicationContext(), drugSearch.class);
+        startActivity(intent);
+    }
+    public void hospitalRoom(View w){
+        Intent intent = new Intent(getApplicationContext(), hospitalRoom.class);
+        startActivity(intent);
+    }
+    public void appointment(View w){
+        Intent intent = new Intent(getApplicationContext(), appointment.class);
+        startActivity(intent);
+    }
+    public void information(View w){
+        Intent intent = new Intent(getApplicationContext(), information.class);
+        startActivity(intent);
     }
 }

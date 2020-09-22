@@ -92,9 +92,9 @@ public class SignInActivity extends AppCompatActivity {
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
 
                     //로그인 유지
-                    userVO.setId(m.getId());
-                    userVO.setEnabled(m.getEnabled());
-                    userVO.setCustomer_echeck(m.getCustomer_echeck());
+//                    userVO.setId(m.getId());
+//                    userVO.setEnabled(m.getEnabled());
+//                    userVO.setCustomer_echeck(m.getCustomer_echeck());
 
                     //아이디 저장 & 자동로그인
                     sh.keepId(m.getId());

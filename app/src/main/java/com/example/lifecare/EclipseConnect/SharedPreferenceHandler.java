@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 
 public class SharedPreferenceHandler {
     private final String PREF_NAME = "com.example.lifecare";
-    public final static String PREF_INTRO_USER_AGREEMENT = "PREF_USER_AGREEMENT";
-    public final static String PREF_MAIN_VALUE = "PREF_MAIN_VALUE";
     static Context mContext;
 
     public SharedPreferenceHandler(Context c) {
