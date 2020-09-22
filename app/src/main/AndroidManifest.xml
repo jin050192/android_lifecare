@@ -28,7 +28,6 @@
 
         <activity android:name=".myPage.Mypage" />
 
-        android:theme="@style/AppTheme">
         <activity android:name=".information.information"></activity>
 
         <activity
