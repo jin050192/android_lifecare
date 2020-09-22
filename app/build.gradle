@@ -40,4 +40,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.1.0'
     //StyleableToast
     implementation 'com.muddzdev:styleabletoast:2.2.3'
+
+    //카카오 로그인
+    implementation "com.kakao.sdk:v2-user:2.0.0"
 }

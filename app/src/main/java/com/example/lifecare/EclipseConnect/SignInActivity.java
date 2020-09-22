@@ -48,7 +48,6 @@ public class SignInActivity extends AppCompatActivity {
                 task.execute(map);
             }
         });
-
     }
 
     //각 Activity 마다 Task 작성
