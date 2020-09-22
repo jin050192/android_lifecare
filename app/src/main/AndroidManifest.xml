@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".information.information"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".EclipseConnect.SignInActivity" />
         <activity android:name=".drug.drugSearch" />
-        <activity android:name=".drug.hospitalRoom"></activity>
+        <activity android:name=".drug.hospitalRoom" />
+        <activity android:name=".appointment.appointment" />
     </application>
 
 </manifest>
