@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".EclipseConnect.SignInActivity" />
         <activity android:name=".drug.drugSearch" />
-        <activity android:name=".drug.hospitalRoom" />
+        <activity android:name=".information.hospitalRoom" />
         <activity android:name=".appointment.appointment" />
     </application>
 

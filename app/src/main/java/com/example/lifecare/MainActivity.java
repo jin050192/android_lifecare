@@ -13,7 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearch;
-import com.example.lifecare.drug.hospitalRoom;
+import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
