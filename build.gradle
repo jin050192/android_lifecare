@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
+        mavenCentral()
         google()
         jcenter()
     }
@@ -14,8 +15,12 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
+        flatDir {
+            dirs 'libs'
+        }
         /*카카오*/
         maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'}
     }
@@ -23,4 +28,16 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task deleteObjectJar(type: Delete){
+    delete 'release/AndroidPlugin.jar'
+}
+
+// from 경로에 위치한 class결과물을 release 폴더에 AndroidPlugin.jar이름으로 위치.
+task exportJar(type: Copy){
+    from('build/intermediates/packaged-classes/release/')
+    into('release/')
+    include('classes.jar')
+    rename('classes.jar', 'AndroidPlugin.jar')
 }

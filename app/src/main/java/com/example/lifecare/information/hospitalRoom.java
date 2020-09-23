@@ -32,9 +32,9 @@ public class hospitalRoom extends AppCompatActivity {
                     switch ((v.getId())) {
                         case R.id.btn_tworoom:
                              v.setBackgroundResource(R.drawable.open_door);
-//                            Intent intent = new
-//                                    Intent(hospitalRoom.this, 3d.class);
-//                            startActivity(intent);
+                            Intent intent = new
+                                    Intent(hospitalRoom.this, UnityPlayerActivity.class);
+                            startActivity(intent);
                             break;
                         case R.id.btn_fourroom:
                              v.setBackgroundResource(R.drawable.open_door);

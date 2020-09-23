@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
+import com.example.lifecare.information.UnityPlayerActivity;
 import com.example.lifecare.myPage.Mypage;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearch;
@@ -21,7 +22,7 @@ import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity   {
 
     UserVO user = UserVO.getInstance();
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         /*하단바*/
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_helth, R.id.navigation_deeplearningcare,
+            R.id.navigation_home, R.id.navigation_helth, R.id.navigation_deeplearningcare,
                 R.id.navigation_mypage, R.id.navigation_menu)
                 .build();
 
