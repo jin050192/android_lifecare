@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -15,7 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.UserVO;
+import com.example.lifecare.login.KakaoLogin;
+import com.example.lifecare.login.SessionCallback;
 import com.google.gson.Gson;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.Session;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.HashMap;
@@ -29,6 +34,8 @@ public class SignInActivity extends AppCompatActivity {
     UserVO userVO = UserVO.getInstance();
     EditText edtId, edtPwd;
     Button btnSignIn;
+    ImageView btnKakaoLogin, btnNaverLogin;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +45,9 @@ public class SignInActivity extends AppCompatActivity {
         edtId = (EditText) findViewById(R.id.id);
         edtPwd = (EditText) findViewById(R.id.pwd);
         btnSignIn = (Button) findViewById(R.id.btn_login);
+        btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
+        btnNaverLogin = (ImageView) findViewById(R.id.naver);
+
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -45,7 +55,24 @@ public class SignInActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<>();
                 map.put("id", edtId.getText().toString());
                 map.put("pwd", edtPwd.getText().toString());
+
                 task.execute(map);
+            }
+        });
+
+        btnKakaoLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, KakaoLogin.class);
+                startActivity(intent);
+/*
+                if(userVO.getId() != ""){
+                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                    StyleableToast.makeText(getApplicationContext(), userVO.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
+                    startActivity(intent);
+                }else{
+                    StyleableToast.makeText(getApplicationContext(), "로그인에 실패하였습니다", Toast.LENGTH_LONG, R.style.mytoast).show();
+                }
+                */
             }
         });
     }

@@ -81,7 +81,7 @@
             android:src="@mipmap/naver"
             />
         <ImageView
-            android:id="@+id/cacao"
+            android:id="@+id/kakao"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="40dp"
