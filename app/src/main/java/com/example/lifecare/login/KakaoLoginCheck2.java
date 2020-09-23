@@ -1,77 +1,48 @@
-package com.example.lifecare.EclipseConnect;
+package com.example.lifecare.login;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.lifecare.EclipseConnect.HttpClient;
+import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
+import com.example.lifecare.EclipseConnect.SignInActivity;
+import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.UserVO;
-import com.example.lifecare.login.KakaoLoginCheck;
 import com.google.gson.Gson;
+import com.kakao.auth.Session;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by psn on 2018-01-18.
- */
-
-public class SignInActivity extends AppCompatActivity {
+public class KakaoLoginCheck2 extends AppCompatActivity {
     UserVO userVO = UserVO.getInstance();
-    EditText edtId, edtPwd;
-    Button btnSignIn;
-    ImageView btnKakaoLogin, btnNaverLogin;
-
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_kakao_login);
 
-        edtId = (EditText) findViewById(R.id.id);
-        edtPwd = (EditText) findViewById(R.id.pwd);
-        btnSignIn = (Button) findViewById(R.id.btn_login);
-        btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
-        btnNaverLogin = (ImageView) findViewById(R.id.naver);
+        System.out.println("****************************");
+        if(userVO.getId() != ""){
+            KakaoLoginCheck2.InnerTask task = new KakaoLoginCheck2.InnerTask();
+            Map<String, String> map = new HashMap<>();
 
+            map.put("kakaoId",userVO.getId());
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                InnerTask task = new InnerTask();
-                Map<String, String> map = new HashMap<>();
-                map.put("id", edtId.getText().toString());
-                map.put("pwd", edtPwd.getText().toString());
-
-                task.execute(map);
-            }
-        });
-
-        btnKakaoLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this, KakaoLoginCheck.class);
-                startActivity(intent);
-/*
-                if(userVO.getId() != ""){
-                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                    StyleableToast.makeText(getApplicationContext(), userVO.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
-                    startActivity(intent);
-                }else{
-                    StyleableToast.makeText(getApplicationContext(), "로그인에 실패하였습니다", Toast.LENGTH_LONG, R.style.mytoast).show();
-                }
-                */
-            }
-        });
+            task.execute(map);
+        }else{
+            Intent intent = new Intent(KakaoLoginCheck2.this, SignInActivity.class);
+            StyleableToast.makeText(getApplicationContext(), "카카오로그인에 실패하였습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
+            startActivity(intent);
+        }
     }
 
     //각 Activity 마다 Task 작성
@@ -87,7 +58,7 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Map... maps) {
             //HTTP 요청 준비 - Post 로 바꿀것
-            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "androidSignIn"); //스프링 url
+            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "kakaoSignIn"); //스프링 url
             //파라미터 전송
             http.addAllParameters(maps[0]);
             System.out.println("http ㅁㄴㅇㄻㄴㅇㄹ: " + http.getParameter());
@@ -113,7 +84,7 @@ public class SignInActivity extends AppCompatActivity {
                 UserVO m = gson.fromJson(s, UserVO.class);
                 if (m.getId() != null && m.getId() != "") {
                     // 페이지 이동
-                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                    Intent intent = new Intent(KakaoLoginCheck2.this, MainActivity.class);
 
                     //로그인 유지
 //                    userVO.setId(m.getId());
@@ -121,17 +92,23 @@ public class SignInActivity extends AppCompatActivity {
 //                    userVO.setCustomer_echeck(m.getCustomer_echeck());
 
                     //아이디 저장 & 자동로그인
-                    sh.keepId(m.getId());
+                    //sh.keepId(m.getId());
 
                     StyleableToast.makeText(getApplicationContext(), m.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
                     startActivity(intent);
                 } else if (m.getEnabled() != "1") {
+                    Intent intent = new Intent(KakaoLoginCheck2.this, SignInActivity.class);
                     Toast.makeText(getApplicationContext(), "회원 정보가 올바르지 않습니다.", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
                 } else {
+                    Intent intent = new Intent(KakaoLoginCheck2.this, SignInActivity.class);
                     Toast.makeText(getApplicationContext(), "가입 인증이 필요한 회원입니다.", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(KakaoLoginCheck2.this, SignInActivity.class);
+                Toast.makeText(getApplicationContext(), "카카오에 연동되어 있는 아이디가 없습니다.", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         }
     }

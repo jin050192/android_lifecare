@@ -75,3 +75,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+/*
+순서(Main Thread)
+1. aTask.execute()
+2. onPreExecuted()
+3. doInBackground()  : AsyuncTask aTask
+4. publishProgress() :  AsyuncTask aTask
+5. onProgressUpdate() : UI refresh
+6. publishProgress() :  AsyuncTask aTask
+7. onProgressUpdate() : UI refresh
+...
+8. return(result) : AsyuncTask aTask
+9. onPostExecuted()
+ */

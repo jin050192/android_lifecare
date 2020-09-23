@@ -4,18 +4,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.lifecare.EclipseConnect.HttpClient;
+import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.SignInActivity;
+import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.UserVO;
+import com.google.gson.Gson;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.muddzdev.styleabletoast.StyleableToast;
 
-public class KakaoLogin extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+
+public class KakaoLoginCheck extends AppCompatActivity {
     private SessionCallback sessionCallback = new SessionCallback();
     Session session;
     UserVO userVO = UserVO.getInstance();
@@ -28,7 +37,7 @@ public class KakaoLogin extends AppCompatActivity {
         session = Session.getCurrentSession();
         session.addCallback(sessionCallback);
 
-        session.open(AuthType.KAKAO_LOGIN_ALL, KakaoLogin.this);
+        session.open(AuthType.KAKAO_LOGIN_ALL, KakaoLoginCheck.this);
 
         try {
             Thread.sleep(1000);
@@ -36,7 +45,8 @@ public class KakaoLogin extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        finish();
+        Intent intent = new Intent(KakaoLoginCheck.this, KakaoLoginCheck2.class);
+        startActivity(intent);
     }
 
     @Override
@@ -45,16 +55,6 @@ public class KakaoLogin extends AppCompatActivity {
 
         // 세션 콜백 삭제
         Session.getCurrentSession().removeCallback(sessionCallback);
-
-        if(userVO.getId() != ""){
-            Intent intent = new Intent(KakaoLogin.this, MainActivity.class);
-            StyleableToast.makeText(getApplicationContext(), userVO.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
-            startActivity(intent);
-        }else{
-            Intent intent = new Intent(KakaoLogin.this, SignInActivity.class);
-            StyleableToast.makeText(getApplicationContext(), "카카오로그인에 실패하였습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
-            startActivity(intent);
-        }
     }
 
     @Override
