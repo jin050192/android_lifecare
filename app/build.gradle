@@ -13,6 +13,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,9 +28,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.1.0'
+    implementation 'com.android.support:support-core-utils:28.1.0'
+    implementation 'com.android.support:customtabs:28.1.0'
+    implementation 'com.android.support:support-v4:28.1.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -42,6 +51,9 @@ dependencies {
     implementation 'com.muddzdev:styleabletoast:2.2.3'
     //카카오 로그인
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    //네이버 로그인
+    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
+    //implementation files('libs\\naveridlogin_android_sdk_4.2.6.aar')
 
     implementation 'com.github.traex.rippleeffect:library:1.3'
 }

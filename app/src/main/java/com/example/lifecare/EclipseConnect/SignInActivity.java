@@ -1,5 +1,6 @@
 package com.example.lifecare.EclipseConnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,11 +18,20 @@ import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.login.KakaoLoginCheck;
+import com.example.lifecare.login.NaverLogin;
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.nhn.android.naverlogin.OAuthLogin.mOAuthLoginHandler;
 
 /**
  * Created by psn on 2018-01-18.
@@ -31,19 +41,29 @@ public class SignInActivity extends AppCompatActivity {
     UserVO userVO = UserVO.getInstance();
     EditText edtId, edtPwd;
     Button btnSignIn;
-    ImageView btnKakaoLogin, btnNaverLogin;
+    ImageView btnKakaoLogin;
 
+    //네이버 로그인 관련
+    private OAuthLoginButton mOAuthLoginButton;
+
+    //client 정보
+    private static String OAUTH_CLIENT_ID = "LFKH6Ooda771daTdxSSO";
+    private static String OAUTH_CLIENT_SECRET = "GWXuQveGk8";
+    private static String OAUTH_CLIENT_NAME = "홈페이지 연습";
+    private static OAuthLogin mOAuthLoginInstance;
+    private static Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mContext =this;
+
         edtId = (EditText) findViewById(R.id.id);
         edtPwd = (EditText) findViewById(R.id.pwd);
         btnSignIn = (Button) findViewById(R.id.btn_login);
         btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
-        btnNaverLogin = (ImageView) findViewById(R.id.naver);
 
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +92,68 @@ public class SignInActivity extends AppCompatActivity {
                 */
             }
         });
+
+
+        //초기화
+        initData();
     }
+
+    public void onButtonClick(View v) throws Throwable {
+        switch (v.getId()) {
+            case R.id.buttonOAuthLoginImg: {
+                mOAuthLoginInstance.startOauthLoginActivity(SignInActivity.this, mOAuthLoginHandler);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+
+    private void initData() {
+        //초기화
+        mOAuthLoginInstance = OAuthLogin.getInstance();
+        mOAuthLoginInstance.init(mContext, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_CLIENT_NAME);
+
+        mOAuthLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
+        mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
+
+        //custom img로 변경시 사용
+        //mOAuthLoginButton.setBgResourceId(R.drawable.btn_naver_white_kor);
+    }
+
+    /**
+     * OAuthLoginHandler를 startOAuthLoginActivity() 메서드 호출 시 파라미터로 전달하거나 OAuthLoginButton
+     객체에 등록하면 인증이 종료되는 것을 확인할 수 있습니다.
+     */
+    private OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+        @Override
+        public void run(boolean success) {
+            if (success) {
+                String accessToken = mOAuthLoginInstance.getAccessToken(mContext);
+                String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
+                long expiresAt = mOAuthLoginInstance.getExpiresAt(mContext);
+                String tokenType = mOAuthLoginInstance.getTokenType(mContext);
+
+                redirectSignupActivity();
+            } else {
+                String errorCode = mOAuthLoginInstance.getLastErrorCode(mContext).getCode();
+                String errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext);
+                Toast.makeText(mContext, "errorCode:" + errorCode + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+            }
+        };
+    };
+
+    // 네이버 성공 후 이동할 액티비티
+    protected void redirectSignupActivity() {
+
+        new RequestApiTask().execute();
+
+        finish();
+    }
+
+    // 네이버 로그인 성공시 토큰 받아오기
+
 
     //각 Activity 마다 Task 작성
     public class InnerTask extends AsyncTask<Map, Integer, String> {
@@ -133,6 +214,42 @@ public class SignInActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        startActivity(intent);
+
+        super.onDestroy();
+    }
+
+    private class RequestApiTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String url = "https://openapi.naver.com/v1/nid/me";
+            String at = mOAuthLoginInstance.getAccessToken(mContext);
+            return mOAuthLoginInstance.requestApi(mContext, at, url);
+        }
+
+        protected void onPostExecute(String content) {
+            System.out.println("====================== content : "+content);
+            System.out.println("====================== type : "+content.getClass());
+            final Intent intent = new Intent(SignInActivity.this, NaverLogin.class);
+            Gson gson = new Gson();
+            Map<String,Object> a = gson.fromJson(content, Map.class);
+            System.out.println("================================= a : "+a);
+            System.out.println("================================= a-b : "+(Map<String, Object>)a.get("response"));
+            Map<String, Object> b=(Map<String, Object>)a.get("response");
+            System.out.println("============== 정답  : " + (String)b.get("id"));
+
+            startActivity(intent);
         }
     }
 }

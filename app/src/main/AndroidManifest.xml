@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.KakaoLoginCheck2"></activity>
+        <activity android:name=".login.NaverLogin"></activity>
+        <activity android:name=".login.KakaoLoginCheck2" />
         <activity android:name=".login.KakaoLoginCheck" />
 
         <meta-data
