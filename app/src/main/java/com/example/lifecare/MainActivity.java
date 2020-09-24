@@ -3,7 +3,6 @@ package com.example.lifecare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -11,13 +10,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
-import com.example.lifecare.information.UnityPlayerActivity;
 import com.example.lifecare.myPage.Mypage;
 import com.example.lifecare.appointment.appointment;
-import com.example.lifecare.drug.drugSearch;
+import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity   {
 
     }
     public void drugSearch(View w){
-        Intent intent = new Intent(getApplicationContext(), drugSearch.class);
+        Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
         startActivity(intent);
     }
     public void hospitalRoom(View w){

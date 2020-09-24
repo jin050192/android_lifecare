@@ -1,23 +1,47 @@
 package com.example.lifecare.drug;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class drugSearch extends AppCompatActivity {
-
-
+    private  WebView webView;
+    private String url = "http://192.168.219.103/lifecare/android_drugSearch";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drug);
+        setContentView(R.layout.activity_durg_search);
+
+        webView = findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(url);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClientClass());
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()){
+            webView.goBack();
+            return true;
+        }
+        return  super.onKeyDown(keyCode,event);
+    }
+
+    private class  WebViewClientClass extends  WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+           view.loadUrl(url);
+           return  true;
+        }
     }
 }
