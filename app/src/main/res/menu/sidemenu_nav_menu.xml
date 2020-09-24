@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_menu1"
-        android:title="메뉴1" />
+        android:title="로그아웃 테스트" />
 
     <item
         android:id="@+id/navigation_menu2"

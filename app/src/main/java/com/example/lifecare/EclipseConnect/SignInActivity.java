@@ -47,10 +47,10 @@ public class SignInActivity extends AppCompatActivity {
     private OAuthLoginButton mOAuthLoginButton;
 
     //client 정보
-    private static String OAUTH_CLIENT_ID = "LFKH6Ooda771daTdxSSO";
-    private static String OAUTH_CLIENT_SECRET = "GWXuQveGk8";
-    private static String OAUTH_CLIENT_NAME = "홈페이지 연습";
-    private static OAuthLogin mOAuthLoginInstance;
+    public static String OAUTH_CLIENT_ID = "LFKH6Ooda771daTdxSSO";
+    public static String OAUTH_CLIENT_SECRET = "GWXuQveGk8";
+    public static String OAUTH_CLIENT_NAME = "홈페이지 연습";
+    public static OAuthLogin mOAuthLoginInstance;
     private static Context mContext;
 
     @Override
@@ -197,9 +197,9 @@ public class SignInActivity extends AppCompatActivity {
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
 
                     //로그인 유지
-//                    userVO.setId(m.getId());
-//                    userVO.setEnabled(m.getEnabled());
-//                    userVO.setCustomer_echeck(m.getCustomer_echeck());
+                    userVO.setId(m.getId());
+                    userVO.setEnabled(m.getEnabled());
+                    userVO.setCustomer_echeck(m.getCustomer_echeck());
 
                     //아이디 저장 & 자동로그인
                     sh.keepId(m.getId());
@@ -218,14 +218,14 @@ public class SignInActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        finish();
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
     protected void onDestroy() {
-        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        startActivity(intent);
 
+        System.out.println("===========================  sign destroy");
         super.onDestroy();
     }
 
@@ -243,12 +243,12 @@ public class SignInActivity extends AppCompatActivity {
             System.out.println("====================== type : "+content.getClass());
             final Intent intent = new Intent(SignInActivity.this, NaverLogin.class);
             Gson gson = new Gson();
-            Map<String,Object> a = gson.fromJson(content, Map.class);
-            System.out.println("================================= a : "+a);
-            System.out.println("================================= a-b : "+(Map<String, Object>)a.get("response"));
-            Map<String, Object> b=(Map<String, Object>)a.get("response");
-            System.out.println("============== 정답  : " + (String)b.get("id"));
+            Map<String,Object> responseInfo = gson.fromJson(content, Map.class);
+            System.out.println("================================= a-b : "+(Map<String, Object>)responseInfo.get("response"));
+            Map<String, Object> responseUserInfo=(Map<String, Object>)responseInfo.get("response");
+            System.out.println("============== 정답  : " + (String)responseUserInfo.get("id"));
 
+            intent.putExtra("id", (String)responseUserInfo.get("id"));
             startActivity(intent);
         }
     }
