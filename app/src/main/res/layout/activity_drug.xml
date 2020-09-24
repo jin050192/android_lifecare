@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".drug.drugSearch"
+    tools:context=".drug.drugSearchMain"
     android:orientation="vertical">
 
 <ImageView
@@ -39,6 +39,7 @@ android:background="@drawable/dr" >
 
 
 <Button
+    android:id="@+id/btn_drugSearch"
     android:layout_width="200dp"
     android:layout_height="50dp"
     android:layout_gravity="center"
@@ -51,6 +52,7 @@ android:background="@drawable/dr" >
 
 
 <Button
+    android:id="@+id/btn_photoSearch"
     android:layout_width="200dp"
     android:layout_height="50dp"
     android:layout_gravity="center"

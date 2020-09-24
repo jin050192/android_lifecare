@@ -19,10 +19,10 @@ public class hospitalRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_room);
 
-        ImageButton btn1 = (ImageButton) findViewById(R.id.btn_tworoom);
+//        ImageButton btn1 = (ImageButton) findViewById(R.id.btn_tworoom);
         ImageButton btn2 = (ImageButton) findViewById(R.id.btn_fourroom);
 
-        btn1.setOnClickListener(room);
+//        btn1.setOnClickListener(room);
         btn2.setOnClickListener(room);
     }
     View.OnClickListener room = new
@@ -30,17 +30,17 @@ public class hospitalRoom extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     switch ((v.getId())) {
-                        case R.id.btn_tworoom:
-                             v.setBackgroundResource(R.drawable.open_door);
-//                            Intent intent = new
-//                                    Intent(hospitalRoom.this, 3d.class);
-//                            startActivity(intent);
-                            break;
+//                        case R.id.btn_tworoom:
+//                             v.setBackgroundResource(R.drawable.open_door);
+//                            Intent1 = new
+//                                    Intent1(hospitalRoom.this, .class);
+//                            startActivity(intent1);
+//                            break;
                         case R.id.btn_fourroom:
                              v.setBackgroundResource(R.drawable.open_door);
-//                            Intent intent = new
-//                                    Intent(hospitalRoom.this, 3d.class);
-//                            startActivity(intent);
+                            Intent intent = new
+                                    Intent(hospitalRoom.this, UnityPlayerActivity.class);
+                            startActivity(intent);
                             break;
                     }
                 }
