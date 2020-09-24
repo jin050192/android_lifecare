@@ -2,51 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63499db3-502c-444c-a049-9734f841a274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/libs/arcore_client.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/arcore_rendering_utils.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/arcore_unity.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/google_ar_required.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/unity-classes.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/unityandroidpermissions.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/libs/unitygar.aar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/drug/drugSearchMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/information/UnityPlayerActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libarcore_camera_utility.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libmain.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libmono.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libunity.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libmain.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libmono.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libunity.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/app_banner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/app_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_durg_search.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/proguard-unity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/EclipseConnect/SignInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/EclipseConnect/SignInActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/drug/drugSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/drug/drugSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/information/hospitalRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lifecare/information/hospitalRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_drug.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_drug.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_room.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_room.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +18,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
