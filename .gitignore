@@ -19,16 +19,8 @@ build/
 
 # Log Files
 
-local.properties
-.idea/modules/app/app.iml
-.idea/misc.xml
-.idea/markdown-navigator.xml
-.idea/libraries/Gradle__com_github_traex_rippleeffect_library_1_3_aar.xml
-.idea/caches/build_file_checksums.ser
-.gradle/6.1.1/fileHashes/
-.idea/codeStyles/Project.xml
-.idea/gradle.xml
-*.imi
+.idea/
+*.iml
 
 *.log
 
