@@ -1,9 +1,21 @@
 package com.example.lifecare.EclipseConnect;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
+import android.media.Image;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.KeyProperties;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +24,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
@@ -28,20 +42,46 @@ import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 import static com.nhn.android.naverlogin.OAuthLogin.mOAuthLoginHandler;
 
 /**
  * Created by psn on 2018-01-18.
  */
-
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class SignInActivity extends AppCompatActivity {
+
     UserVO userVO = UserVO.getInstance();
     EditText edtId, edtPwd;
     Button btnSignIn;
     ImageView btnKakaoLogin;
+
+    /*지문인식 부분*/
+    private static final String KEY_NAME = "example_key";
+    private FingerprintManager fingerprintManager;
+    private KeyguardManager keyguardManager;
+    private KeyStore keyStore;
+    private KeyGenerator keyGenerator;
+    private Cipher cipher;
+    private FingerprintManager.CryptoObject cryptoObject;
+    private ImageView jimunLogin;
+    /*지문인식 부분*/
 
     //네이버 로그인 관련
     private OAuthLoginButton mOAuthLoginButton;
@@ -52,6 +92,7 @@ public class SignInActivity extends AppCompatActivity {
     private static String OAUTH_CLIENT_NAME = "홈페이지 연습";
     private static OAuthLogin mOAuthLoginInstance;
     private static Context mContext;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +105,7 @@ public class SignInActivity extends AppCompatActivity {
         edtPwd = (EditText) findViewById(R.id.pwd);
         btnSignIn = (Button) findViewById(R.id.btn_login);
         btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
-
+        jimunLogin = (ImageView) findViewById(R.id.jimun);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -93,6 +134,49 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+        /*지문로그인*/
+        jimunLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Customer_fingerprint = "";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    /*생체인식기능 manifests 에 권한 추가후 사용한다*/
+                    fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+
+                    /*잠금 해제와 해제된 잠금화면을 복구 시키는 역할을한다*/
+                    keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+
+
+
+                    /*지문 상태별 알림*/
+                    if (!fingerprintManager.isHardwareDetected()) {//Manifest에 Fingerprint 퍼미션을 추가해 워야 사용가능
+                        Toast.makeText(SignInActivity.this, "지문을 사용할 수 없는 디바이스 입니다.", Toast.LENGTH_SHORT).show();
+                    } else if (ContextCompat.checkSelfPermission(SignInActivity.this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(SignInActivity.this, "지문사용을 허용해 주세요.", Toast.LENGTH_SHORT).show();
+                        /*잠금화면 상태를 체크한다.*/
+                    } else if (!keyguardManager.isKeyguardSecure()) {
+                        Toast.makeText(SignInActivity.this, "잠금화면을 설정해 주세요.", Toast.LENGTH_SHORT).show();
+                    } else if (!fingerprintManager.hasEnrolledFingerprints()) {
+                        Toast.makeText(SignInActivity.this, "등록된 지문이 없습니다.", Toast.LENGTH_SHORT).show();
+                    } else {//모든 관문을 성공적으로 통과(지문인식을 지원하고 지문 사용이 허용되어 있고 잠금화면이 설정되었고 지문이 등록되어 있을때)
+                        Toast.makeText(SignInActivity.this, "손가락을 홈버튼에 대 주세요.", Toast.LENGTH_SHORT).show();
+
+                        generateKey();
+                        if (cipherInit()) {
+                            //지문 핸들러실행
+                            FingerprintHandler fingerprintHandler = new FingerprintHandler(SignInActivity.this);
+                            Customer_fingerprint = fingerprintHandler.startAutho(fingerprintManager, cryptoObject);
+
+                            SignInActivity.jimunTask task = new SignInActivity.jimunTask();
+                            Map<String, String> map = new HashMap<>();
+                            map.put("Customer_fingerprint", Customer_fingerprint);
+                            task.execute(map);
+                        }
+                    }
+                }
+            }
+        });
 
         //초기화
         initData();
@@ -216,6 +300,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         finish();
@@ -252,4 +337,106 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    /*지문인식 부분*/
+    /*지문인식 실행*/
+    public class jimunTask extends AsyncTask<Map, Integer, String> {
+
+        //doInBackground 실행되기 이전에 동작
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        //작업을 쓰레드로 처리
+        @Override
+        protected String doInBackground(Map... maps) {
+            //HTTP 요청 준비 - Post 로 바꿀것
+            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "jimunLogin"); //스프링 url
+
+            //파라미터 전송
+            http.addAllParameters(maps[0]);
+
+            //HTTP 요청 전송
+            HttpClient post = http.create();
+            post.request();
+
+            String body = post.getBody();
+
+            return body;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Gson gson = new Gson();
+            UserVO m = gson.fromJson(s, UserVO.class);
+            if(m == null){
+                Toast.makeText(mContext, "등록되지않은 아이디 또는 지문입니다 로그인 하여 등록하여주십시오.", Toast.LENGTH_LONG).show();
+            }else{
+                userVO.setId(m.getId());
+                Toast.makeText(mContext, "로그인되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
+    }
+    /*지문인식 실행*/
+
+    /*암호화*/
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public boolean cipherInit(){
+        try {
+            cipher = Cipher.getInstance(
+                    KeyProperties.KEY_ALGORITHM_AES + "/"
+                            + KeyProperties.BLOCK_MODE_CBC + "/"
+                            + KeyProperties.ENCRYPTION_PADDING_PKCS7);
+        } catch (NoSuchAlgorithmException |
+                NoSuchPaddingException e) {
+            throw new RuntimeException("Failed to get Cipher", e);
+        }
+        try {
+            keyStore.load(null);
+            SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
+                    null);
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            return true;
+        } catch (KeyPermanentlyInvalidatedException e) {
+            return false;
+        } catch (KeyStoreException | CertificateException
+                | UnrecoverableKeyException | IOException
+                | NoSuchAlgorithmException | InvalidKeyException e) {
+            throw new RuntimeException("Failed to init Cipher", e);
+        }
+    }
+    /*암호화*/
+
+    /*키생성*/
+    protected void generateKey() {
+        try {
+            keyStore = KeyStore.getInstance("AndroidKeyStore");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
+        } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
+            throw new RuntimeException("Failed to get KeyGenerator instance", e);
+        }
+
+        try {
+            keyStore.load(null);
+            keyGenerator.init(new KeyGenParameterSpec.Builder(KEY_NAME,
+                    KeyProperties.PURPOSE_ENCRYPT |
+                            KeyProperties.PURPOSE_DECRYPT)
+                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                    .setUserAuthenticationRequired(true)
+                    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                    .build());
+            keyGenerator.generateKey();
+        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException | CertificateException | IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*키생성*/
+    /*지문인식 부분*/
 }
