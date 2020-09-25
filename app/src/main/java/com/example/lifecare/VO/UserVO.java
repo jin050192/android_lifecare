@@ -16,6 +16,24 @@ public class UserVO {
     private String id="";
     private String customer_echeck="";
     private String enabled="";
+    private String Customer_fingerprint;
+    private String CUSTOMER_ID;
+
+    public String getCUSTOMER_ID() {
+        return CUSTOMER_ID;
+    }
+
+    public void setCUSTOMER_ID(String CUSTOMER_ID) {
+        this.CUSTOMER_ID = CUSTOMER_ID;
+    }
+
+    public String getCustomer_fingerprint() {
+        return Customer_fingerprint;
+    }
+
+    public void setCustomer_fingerprint(String customer_fingerprint) {
+        Customer_fingerprint = customer_fingerprint;
+    }
 
     public String getId() {
         return id;
