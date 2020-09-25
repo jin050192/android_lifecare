@@ -26,7 +26,8 @@ local.properties
 .gradle/6.1.1/fileHashes/
 .idea/codeStyles/Project.xml
 .idea/gradle.xml
-.idea/
+.idea/modules.xml
+.idea/libraries/
 *.iml
 
 *.log
