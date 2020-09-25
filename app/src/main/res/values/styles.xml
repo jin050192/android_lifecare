@@ -8,6 +8,7 @@
         <item name="android:statusBarColor">#58D3F7</item> <!--상태바 색-->
     </style>
 
+    <!-- 타이틀바 숨기기-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

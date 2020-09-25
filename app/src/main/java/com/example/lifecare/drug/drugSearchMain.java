@@ -38,9 +38,9 @@ public class drugSearchMain extends AppCompatActivity {
                     }
                     switch ((v.getId())) {
                         case R.id.btn_photoSearch:
-//                            Intent intent = new
-//                                    Intent(drugSearchMain.this, drugSearch.class);
-//                            startActivity(intent);
+                            Intent intent = new
+                                    Intent(drugSearchMain.this, drugPhoto.class);
+                            startActivity(intent);
                             break;
                     }
                 }
