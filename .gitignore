@@ -10,7 +10,6 @@
 *.ap_
 
 # Generated files
-bin/
 gen/
 out/
 
@@ -18,7 +17,6 @@ out/
 build/
 
 # Log Files
-
 local.properties
 .idea/modules/app/app.iml
 .idea/misc.xml
@@ -28,6 +26,9 @@ local.properties
 .gradle/6.1.1/fileHashes/
 .idea/codeStyles/Project.xml
 .idea/gradle.xml
+.idea/modules.xml
+.idea/libraries/
+*.iml
 
 *.log
 
