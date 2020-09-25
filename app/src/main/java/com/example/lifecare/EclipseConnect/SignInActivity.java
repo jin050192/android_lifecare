@@ -93,7 +93,6 @@ public class SignInActivity extends AppCompatActivity {
     public static OAuthLogin mOAuthLoginInstance;
     private static Context mContext;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,13 +164,9 @@ public class SignInActivity extends AppCompatActivity {
                         generateKey();
                         if (cipherInit()) {
                             //지문 핸들러실행
+                            jimunTask task = new jimunTask();
                             FingerprintHandler fingerprintHandler = new FingerprintHandler(SignInActivity.this);
-                            Customer_fingerprint = fingerprintHandler.startAutho(fingerprintManager, cryptoObject);
-
-                            SignInActivity.jimunTask task = new SignInActivity.jimunTask();
-                            Map<String, String> map = new HashMap<>();
-                            map.put("Customer_fingerprint", Customer_fingerprint);
-                            task.execute(map);
+                            fingerprintHandler.startAutho(fingerprintManager, cryptoObject ,task);
                         }
                     }
                 }
@@ -373,9 +368,8 @@ public class SignInActivity extends AppCompatActivity {
             if(m == null){
                 Toast.makeText(mContext, "등록되지않은 아이디 또는 지문입니다 로그인 하여 등록하여주십시오.", Toast.LENGTH_LONG).show();
             }else{
-                userVO.setId(m.getId());
                 Toast.makeText(mContext, "로그인되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                Intent intent = new Intent(mContext, MainActivity.class);
                 startActivity(intent);
             }
         }
