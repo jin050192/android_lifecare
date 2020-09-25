@@ -11,10 +11,11 @@ public class ReservationVO {
     private String doctor_name;
     private String doctor_major;
 
-    public ReservationVO(String doctor_major, String doctor_name, String reservation_date) {
+    public ReservationVO(String doctor_major, String doctor_name, String reservation_date, String appoint_num) {
         this.doctor_major = doctor_major;
         this.doctor_name = doctor_name;
         this.reservation_date = reservation_date;
+        this.appoint_num = appoint_num;
     }
 
     public String getAppoint_num() {
