@@ -53,7 +53,6 @@ public class FingerprintHandler  extends FingerprintManager.AuthenticationCallba
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         //해당기기에대한 고유번호를 받는 부분
         CUSTOMER_FINGERPRINT = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        Toast.makeText(context, CUSTOMER_FINGERPRINT, Toast.LENGTH_SHORT).show();
         this.update("", true);
     }
 

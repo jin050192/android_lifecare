@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,7 @@ import static android.content.Context.KEYGUARD_SERVICE;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class mypage extends Fragment  {
+
     /*지문인식 부분*/
     private static final String KEY_NAME = "example_key";
     private FingerprintManager fingerprintManager;
@@ -67,20 +69,20 @@ public class mypage extends Fragment  {
     /*지문인식 부분*/
 
     LinearLayout jimunadd;
-    ImageView jumunaddImg;
-
+    UserVO user = UserVO.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-
 
         BtnOnClickListener onClickListener = new BtnOnClickListener() ;
 
         jimunadd = (LinearLayout)view.findViewById(R.id.jimunadd);
         jimunadd.setOnClickListener(onClickListener);
 
-        jumunaddImg = (ImageView)view.findViewById(R.id.jumunaddImg);
-        jumunaddImg.setOnClickListener(onClickListener);
+        //마이페이지 이름
+        TextView Customername = (TextView)view.findViewById(R.id.Customername);
+        Customername.setText(user.getId());
+
         return view;
     }
 
@@ -124,11 +126,6 @@ public class mypage extends Fragment  {
             switch (v.getId()) {
                 case R.id.jimunadd: {
                     setJimun();
-                    System.out.println("================ ㅁㅇㅇ");
-                    break;
-                }
-                case R.id.jumunaddImg :{
-                    setJimun();
                     break;
                 }
                 default:
@@ -136,7 +133,6 @@ public class mypage extends Fragment  {
             }
         }
     }
-
 
     /*지문인식 부분*/
     /*지문인식 실행*/
@@ -232,6 +228,4 @@ public class mypage extends Fragment  {
             throw new RuntimeException(e);
         }
     }
-
-
 }
