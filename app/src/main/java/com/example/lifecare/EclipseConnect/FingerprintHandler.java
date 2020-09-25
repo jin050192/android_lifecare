@@ -21,18 +21,17 @@ public class FingerprintHandler  extends FingerprintManager.AuthenticationCallba
     CancellationSignal cancellationSignal;
     private Context context;
     private String CUSTOMER_FINGERPRINT;
-
+    SignInActivity.jimunTask task;
     public FingerprintHandler(Context context){
         this.context = context;
     }
 
     //메소드들 정의
 
-    public String startAutho(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject){
+    public void startAutho(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject, SignInActivity.jimunTask task){
         cancellationSignal = new CancellationSignal();
+        this.task = task;
         fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
-
-       return CUSTOMER_FINGERPRINT;
     }
 
     @Override
@@ -52,7 +51,10 @@ public class FingerprintHandler  extends FingerprintManager.AuthenticationCallba
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-        this.update("지문인식에 성공하였습니다.", true);
+        //해당기기에대한 고유번호를 받는 부분
+        CUSTOMER_FINGERPRINT = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        Toast.makeText(context, CUSTOMER_FINGERPRINT, Toast.LENGTH_SHORT).show();
+        this.update("", true);
     }
 
     public void stopFingerAuth(){
@@ -65,7 +67,10 @@ public class FingerprintHandler  extends FingerprintManager.AuthenticationCallba
         if(b == false){
             Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
         } else {//지문인증 성공
-            Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+
+            Map<String, String> map = new HashMap<>();
+            map.put("Customer_fingerprint", CUSTOMER_FINGERPRINT);
+            task.execute(map);
         }
     }
 }
