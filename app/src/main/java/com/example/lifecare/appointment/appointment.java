@@ -39,6 +39,12 @@ public class appointment extends AppCompatActivity {
                                     Intent(appointment.this, selectMajor.class);
                             startActivity(intent);
                             break;
+
+                        case R.id.btn_ReservationChk:
+                            intent = new
+                                    Intent(appointment.this, confirmReservation.class);
+                            startActivity(intent);
+                            break;
                     }
                 }
             };

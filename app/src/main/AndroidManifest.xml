@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".appointment.selectDoctor"></activity>
+        <activity android:name=".appointment.confirmReservation"></activity>
+        <activity android:name=".appointment.selectDate" />
+        <activity android:name=".appointment.selectDoctor" />
         <activity android:name=".appointment.selectMajor" />
         <!--
         <activity android:name=".login.KakaoLoginActivity">

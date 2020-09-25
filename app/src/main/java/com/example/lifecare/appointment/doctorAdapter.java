@@ -1,7 +1,5 @@
 package com.example.lifecare.appointment;
 
-import android.content.Context;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +15,22 @@ import com.example.lifecare.VO.DoctorVO;
 
 import java.util.ArrayList;
 
-public class doctorAdapter extends RecyclerView.Adapter<doctorAdapter.doctorViewHolder> {
+public class doctorAdapter extends RecyclerView.Adapter<doctorAdapter.doctorViewHolder> implements OnItemClickListener {
 
     private ArrayList<DoctorVO> arrayList;
+
+    OnItemClickListener listener;
+
+    public void setOnItemClicklistener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(doctorAdapter.doctorViewHolder holder, View view, int position) {
+        if(listener != null){
+            listener.onItemClick(holder,view,position);
+        }
+    }
 
     public class doctorViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
@@ -33,6 +44,16 @@ public class doctorAdapter extends RecyclerView.Adapter<doctorAdapter.doctorView
             this.tv_major = itemView.findViewById(R.id.tv_major);
             this.tv_name = itemView.findViewById(R.id.tv_name);
             this.tv_level = itemView.findViewById(R.id.tv_level);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null){
+                        listener.onItemClick(doctorViewHolder.this, v, position);
+                    }
+                }
+            });
         }
     }
 
@@ -50,10 +71,6 @@ public class doctorAdapter extends RecyclerView.Adapter<doctorAdapter.doctorView
     @Override
     public void onBindViewHolder(@NonNull doctorViewHolder holder, int position) {
 
-        holder.tv_major.setGravity(Gravity.CENTER);
-        holder.tv_name.setGravity(Gravity.CENTER);
-        holder.tv_level.setGravity(Gravity.CENTER);
-
         holder.tv_major.setText(arrayList.get(position).getDoctor_major());
         holder.tv_name.setText(arrayList.get(position).getDoctor_name());
         holder.tv_level.setText(arrayList.get(position).getDoctor_position());
@@ -63,6 +80,5 @@ public class doctorAdapter extends RecyclerView.Adapter<doctorAdapter.doctorView
     public int getItemCount() {
         return (arrayList != null ? arrayList.size() : 0);
     }
-
 
 }
