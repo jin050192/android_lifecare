@@ -29,10 +29,4 @@
         android:label="mypage"
         tools:layout="@layout/fragment_mypage" />
 
-    <fragment
-        android:id="@+id/navigation_menu"
-        android:name="com.example.lifecare.ui.menu.menu"
-        android:label="menu"
-        tools:layout="@layout/fragment_menu" />
-
 </navigation>

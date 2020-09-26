@@ -106,6 +106,7 @@ public class SignInActivity extends AppCompatActivity {
         btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
         jimunLogin = (ImageView) findViewById(R.id.jimun);
 
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 InnerTask task = new InnerTask();
@@ -145,8 +146,6 @@ public class SignInActivity extends AppCompatActivity {
 
                     /*잠금 해제와 해제된 잠금화면을 복구 시키는 역할을한다*/
                     keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-
-
 
                     /*지문 상태별 알림*/
                     if (!fingerprintManager.isHardwareDetected()) {//Manifest에 Fingerprint 퍼미션을 추가해 워야 사용가능
