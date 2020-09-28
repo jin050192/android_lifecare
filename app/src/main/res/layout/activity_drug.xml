@@ -60,7 +60,5 @@ android:background="@drawable/dr" >
     android:background="@drawable/durg_button2"
     android:text="사진으로 약 검색하기"
     android:textSize="20dp" />
-
-
 </LinearLayout>
     </LinearLayout>

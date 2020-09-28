@@ -1,159 +1,305 @@
 package com.example.lifecare.drug;
 
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.os.Bundle;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
-import com.example.lifecare.R;
-import com.google.android.material.snackbar.Snackbar;
-import android.widget.Button;
-import android.widget.ImageButton;
+import androidx.core.content.FileProvider;
 
-public class drugPhoto extends  AppCompatActivity
+import android.Manifest;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.*;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import com.example.lifecare.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.vision.v1.Vision;
+import com.google.api.services.vision.v1.VisionRequest;
+import com.google.api.services.vision.v1.VisionRequestInitializer;
+import com.google.api.services.vision.v1.model.*;
+
+import android.widget.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.*;
+
+public class drugPhoto extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
+    private static final String CLOUD_VISION_API_KEY = "AIzaSyDUb2zEquihVWGdgI8jr37Tn7ODW8DKGWk";
+    public static final String FILE_NAME = "temp.jpg";
+    private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
+    private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
+    private static final int MAX_LABEL_RESULTS = 10;
+    private static final int MAX_DIMENSION = 1200;
 
-    private static final String TAG = "android_camera_example";
-        private static final int PERMISSIONS_REQUEST_CODE = 100;
-        String[] REQUIRED_PERMISSIONS  = {Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        private static final int CAMERA_FACING = Camera.CameraInfo.CAMERA_FACING_BACK; // Camera.CameraInfo.CAMERA_FACING_FRONT
+    private static final int GALLERY_PERMISSIONS_REQUEST = 0;
+    private static final int GALLERY_IMAGE_REQUEST = 1;
+    public static final int CAMERA_PERMISSIONS_REQUEST = 2;
+    public static final int CAMERA_IMAGE_REQUEST = 3;
 
-        private SurfaceView surfaceView;
-        private CameraPreview mCameraPreview;
-        private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
-
+    private TextView mImageDetails;
+    private ImageView mMainImage;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
-            // 상태바를 안보이도록 합니다.
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-            // 화면 켜진 상태를 유지합니다.
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
             setContentView(R.layout.activity_drug_photo);
 
-            mLayout = findViewById(R.id.photo);
-            surfaceView = findViewById(R.id.v_drugPhoto);
-
-            // 런타임 퍼미션 완료될때 까지 화면에서 보이지 않게 해야합니다.
-            surfaceView.setVisibility(View.GONE);
-
-            ImageButton button = findViewById(R.id.btn_drugPhoto);
-            button.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    mCameraPreview.takePicture();
-
-                  if((v.getId()) == R.id.btn_drugPhoto){
-                        v.setBackgroundResource(R.drawable.pill2);
-                    }
-                }
+            FloatingActionButton fab = findViewById(R.id.fab);
+            fab.setOnClickListener(view -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(drugPhoto.this);
+                builder
+                        .setMessage(R.string.dialog_select_prompt)
+                        .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
+                        .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
+                builder.create().show();
             });
 
-            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            mImageDetails = findViewById(R.id.image_details);
+            mMainImage = findViewById(R.id.main_image);
+        }
 
-                int cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-                int writeExternalStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-                if ( cameraPermission == PackageManager.PERMISSION_GRANTED
-                        && writeExternalStoragePermission == PackageManager.PERMISSION_GRANTED) {
+    public void startGalleryChooser() {
+        if (PermissionUtils.requestPermission(this, GALLERY_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "사진 선택"),
+                    GALLERY_IMAGE_REQUEST);
+        }
+    }
+
+
+
+    public void startCamera() {
+        Toast.makeText(this, "-----------------------밖", Toast.LENGTH_SHORT).show();
+        if (PermissionUtils.requestPermission(
+                this,
+                CAMERA_PERMISSIONS_REQUEST,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Toast.makeText(this, "-----------------------Intent 아래 ", Toast.LENGTH_SHORT).show();
+            Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
+            Toast.makeText(this, "-----------------------photoUri 아래 ", Toast.LENGTH_SHORT).show();
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            Toast.makeText(this, "-----------------------putExtra 아래 ", Toast.LENGTH_SHORT).show();
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Toast.makeText(this, "-----------------------addFlags 아래 ", Toast.LENGTH_SHORT).show();
+            startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
+            Toast.makeText(this, "-----------------------startActivityForResult 아래 ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public File getCameraFile() {
+        File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        return new File(dir, FILE_NAME);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            uploadImage(data.getData());
+        } else if (requestCode == CAMERA_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
+            uploadImage(photoUri);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_PERMISSIONS_REQUEST:
+                if (PermissionUtils.permissionGranted(requestCode, CAMERA_PERMISSIONS_REQUEST, grantResults)) {
                     startCamera();
-                }else {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
-                            || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-
-                        Snackbar.make(mLayout, "이 앱을 실행하려면 카메라와 외부 저장소 접근 권한이 필요합니다.",
-                                Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View view) {
-
-                                ActivityCompat.requestPermissions( drugPhoto.this, REQUIRED_PERMISSIONS,
-                                        PERMISSIONS_REQUEST_CODE);
-                            }
-                        }).show();
-
-                    } else {
-                        // 2. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                        // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
-                                PERMISSIONS_REQUEST_CODE);
-                    }
-
                 }
+                break;
+            case GALLERY_PERMISSIONS_REQUEST:
+                if (PermissionUtils.permissionGranted(requestCode, GALLERY_PERMISSIONS_REQUEST, grantResults)) {
+                    startGalleryChooser();
+                }
+                break;
+        }
+    }
 
-            } else {
+    public void uploadImage(Uri uri) {
+        if (uri != null) {
+            try {
+                // scale the image to save on bandwidth
+                Bitmap bitmap =
+                        scaleBitmapDown(
+                                MediaStore.Images.Media.getBitmap(getContentResolver(), uri),
+                                MAX_DIMENSION);
 
-                final Snackbar snackbar = Snackbar.make(mLayout, "디바이스가 카메라를 지원하지 않습니다.",
-                        Snackbar.LENGTH_INDEFINITE);
-                snackbar.setAction("확인", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        snackbar.dismiss();
-                    }
-                });
-                snackbar.show();
+                callCloudVision(bitmap);
+                mMainImage.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                Log.d("사진 선택에 실패 하였습니다. " , e.getMessage());
+                Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
             }
+        } else {
+            Log.d("사진을 가져올 수 없습니다.", "사진을 가져올 수 없습니다.");
+            Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
         }
-        void startCamera(){
-            // Create the Preview view and set it as the content of this Activity.
-            mCameraPreview = new CameraPreview(this, this, CAMERA_FACING, surfaceView);
+    }
+
+    private Vision.Images.Annotate prepareAnnotationRequest(Bitmap bitmap) throws IOException {
+        HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
+        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+
+        VisionRequestInitializer requestInitializer =
+                new VisionRequestInitializer(CLOUD_VISION_API_KEY) {
+                   @Override
+                    protected void initializeVisionRequest(VisionRequest<?> visionRequest)
+                            throws IOException {
+                        super.initializeVisionRequest(visionRequest);
+
+                        String packageName = getPackageName();
+                        visionRequest.getRequestHeaders().set(ANDROID_PACKAGE_HEADER, packageName);
+
+                        String sig = PackageManagerUtils.getSignature(getPackageManager(), packageName);
+
+                        visionRequest.getRequestHeaders().set(ANDROID_CERT_HEADER, sig);
+                    }
+                };
+
+        Vision.Builder builder = new Vision.Builder(httpTransport, jsonFactory, null);
+        builder.setVisionRequestInitializer(requestInitializer);
+
+        Vision vision = builder.build();
+
+        BatchAnnotateImagesRequest batchAnnotateImagesRequest =
+                new BatchAnnotateImagesRequest();
+        batchAnnotateImagesRequest.setRequests(new ArrayList<AnnotateImageRequest>() {{
+            AnnotateImageRequest annotateImageRequest = new AnnotateImageRequest();
+
+            // Add the image
+            Image base64EncodedImage = new Image();
+            // Convert the bitmap to a JPEG
+            // Just in case it's a format that Android understands but Cloud Vision
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+            byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+            // Base64 encode the JPEG
+            base64EncodedImage.encodeContent(imageBytes);
+            annotateImageRequest.setImage(base64EncodedImage);
+
+            // add the features we want
+            annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
+                Feature labelDetection = new Feature();
+                labelDetection.setType("TEXT_DETECTION");
+                labelDetection.setMaxResults(MAX_LABEL_RESULTS);
+                add(labelDetection);
+            }});
+
+            // Add the list of one thing to the request
+            add(annotateImageRequest);
+        }});
+
+        Vision.Images.Annotate annotateRequest =
+                vision.images().annotate(batchAnnotateImagesRequest);
+        // Due to a bug: requests to Vision API containing large images fail when GZipped.
+        annotateRequest.setDisableGZipContent(true);
+        Log.d("created Cloud Vision", "created Cloud Vision request object, sending request");
+
+        return annotateRequest;
+    }
+
+    private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
+        private final WeakReference<drugPhoto> mActivityWeakReference;
+        private Vision.Images.Annotate mRequest;
+
+        LableDetectionTask(drugPhoto activity, Vision.Images.Annotate annotate) {
+            mActivityWeakReference = new WeakReference<>(activity);
+            mRequest = annotate;
         }
 
-        //카메라 사용 권한 설정  - 됨
         @Override
-        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
+        protected String doInBackground(Object... params) {
+            try {
+                Log.d("created Cloud Vision", "created Cloud Vision request object, sending request");
+                BatchAnnotateImagesResponse response = mRequest.execute();
+                return convertResponseToString(response);
 
-            if ( requestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
+            } catch (GoogleJsonResponseException e) {
+                Log.d("failed to make API", "failed to make API request because " + e.getContent());
+            } catch (IOException e) {
+                Log.d("failed to make API", "failed to make API request because of other IOException " +
+                        e.getMessage());
+            }
+            return "Cloud Vision API request failed. Check logs for details.";
+        }
 
-                boolean check_result = true;
-
-                for (int result : grandResults) {
-                    if (result != PackageManager.PERMISSION_GRANTED) {
-                        check_result = false;
-                        break;
-                    }
-                }
-                if ( check_result ) {
-
-                    startCamera();
-                }
-                else {
-
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
-                            || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-                        Snackbar.make(mLayout, "카메라 권한이 거부되었습니다. 앱을 다시 실행하여 권한을 허용해주세요. ",
-                                Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                finish();
-                            }
-                        }).show();
-                    }else {
-                        Snackbar.make(mLayout, "설정(앱 정보)에서 권한을 허용해야 합니다. ",
-                                Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                finish();
-                            }
-                        }).show();
-                    }
-                }
+        protected void onPostExecute(String result) {
+            drugPhoto activity = mActivityWeakReference.get();
+            if (activity != null && !activity.isFinishing()) {
+                TextView imageDetail = activity.findViewById(R.id.image_details);
+                imageDetail.setText(result);
             }
         }
     }
+
+    private void callCloudVision(final Bitmap bitmap) {
+        // Switch text to loading
+        mImageDetails.setText(R.string.loading_message);
+
+        // Do the real work in an async task, because we need to use the network anyway
+        try {
+            AsyncTask<Object, Void, String> labelDetectionTask = new LableDetectionTask(this, prepareAnnotationRequest(bitmap));
+            labelDetectionTask.execute();
+        } catch (IOException e) {
+            Log.d("failed to make API", "failed to make API request because of other IOException " +
+                    e.getMessage());
+        }
+    }
+
+    private Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
+
+        int originalWidth = bitmap.getWidth();
+        int originalHeight = bitmap.getHeight();
+        int resizedWidth = maxDimension;
+        int resizedHeight = maxDimension;
+
+        if (originalHeight > originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = (int) (resizedHeight * (float) originalWidth / (float) originalHeight);
+        } else if (originalWidth > originalHeight) {
+            resizedWidth = maxDimension;
+            resizedHeight = (int) (resizedWidth * (float) originalHeight / (float) originalWidth);
+        } else if (originalHeight == originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = maxDimension;
+        }
+        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
+    }
+
+    private static String convertResponseToString(BatchAnnotateImagesResponse response) {
+        String message = "I found these things:\n\n";
+
+        List<EntityAnnotation> labels = response.getResponses().get(0).getTextAnnotations();
+        if (labels != null) {
+            message  = labels.get(0).getDescription();
+        } else {
+            message  = "없음~";
+        }
+        return message;
+    }
+}
