@@ -1,28 +1,40 @@
 package com.example.lifecare;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
-import com.example.lifecare.myPage.Mypage;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
+import com.example.lifecare.myPage.Mypage;
+import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
+import com.example.lifecare.ui.helth.helth;
+import com.example.lifecare.ui.home.home;
+import com.example.lifecare.ui.mypage.mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nhn.android.naverlogin.OAuthLogin;
 
-public class MainActivity extends AppCompatActivity   {
 
+@RequiresApi(api = Build.VERSION_CODES.M)
+public class MainActivity extends AppCompatActivity {
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private deeplearningcare deeplearningcare = new deeplearningcare();
+    private helth helth =new helth();
+    private mypage mypage = new mypage();
+    private home home = new home();
     UserVO user = UserVO.getInstance();
 
     @Override
@@ -30,23 +42,19 @@ public class MainActivity extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, home).commitAllowingStateLoss();
 
         /*하단바*/
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-            R.id.navigation_home, R.id.navigation_helth, R.id.navigation_deeplearningcare,
-                R.id.navigation_mypage, R.id.navigation_menu)
-                .build();
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
 
     }
 
+    /*마이페이지*/
     public void enterMypage(View w){
         UserVO userVO = UserVO.getInstance();
         System.out.println("=======================enterMypage : " + userVO.getId());
@@ -91,9 +99,37 @@ public class MainActivity extends AppCompatActivity   {
         mOAuthLoginInstance.init(this, SignInActivity.OAUTH_CLIENT_ID, SignInActivity.OAUTH_CLIENT_SECRET, SignInActivity.OAUTH_CLIENT_NAME);
     }
 
+    /* 네비게이션 아이템에대한 선택적 이벤트 발생 */
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            switch(menuItem.getItemId())
+            {
+                case R.id.navigation_deeplearningcare :
+                    transaction.replace(R.id.nav_host_fragment, deeplearningcare).commitAllowingStateLoss();
+                    break;
+                case R.id.navigation_helth:
+                    transaction.replace(R.id.nav_host_fragment, helth).commitAllowingStateLoss();
+                    break;
+                case R.id.navigation_mypage:
+                    /*로그인 안했을때*/
+                    if(user.getId() == ""){
+                        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                        startActivity(intent);
+                    }else {
+                        transaction.replace(R.id.nav_host_fragment, mypage).commitAllowingStateLoss();
+                    }
+                    break;
+                case R.id.navigation_home :
+                    transaction.replace(R.id.nav_host_fragment, home).commitAllowingStateLoss();
+                    break;
+            }
+            return true;
+        }
+    }
 }
-
-
 /*
 순서(Main Thread)
 1. aTask.execute()
