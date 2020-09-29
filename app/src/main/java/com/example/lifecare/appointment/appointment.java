@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
@@ -14,6 +15,7 @@ import com.example.lifecare.information.information;
 public class appointment extends AppCompatActivity {
     private Button btn_appointment;
     private Button btn_ReservationChk;
+    private Button btn_ResultChk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +24,11 @@ public class appointment extends AppCompatActivity {
 
         btn_appointment = findViewById(R.id.btn_appointment);
         btn_ReservationChk = findViewById(R.id.btn_ReservationChk);
+        btn_ResultChk = findViewById(R.id.btn_ResultChk);
 
         btn_appointment.setOnClickListener(myClickListener);
         btn_ReservationChk.setOnClickListener(myClickListener);
-
+        btn_ResultChk.setOnClickListener(myClickListener);
 
     }
 
@@ -45,7 +48,18 @@ public class appointment extends AppCompatActivity {
                                     Intent(appointment.this, confirmReservation.class);
                             startActivity(intent);
                             break;
+
+                        case R.id.btn_ResultChk:
+                            intent = new
+                                    Intent(appointment.this, diagnosis.class);
+                            startActivity(intent);
+                            break;
                     }
                 }
             };
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(appointment.this, MainActivity.class);
+        startActivity(intent);
+    }
 }

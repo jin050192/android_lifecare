@@ -126,7 +126,7 @@
                 android:text="결제 Payment"
                 android:textSize="17dp"
                 android:gravity="center"
-                />
+                android:onClick="payment" />
         </LinearLayout>
         <View
             android:id="@+id/hline2"
