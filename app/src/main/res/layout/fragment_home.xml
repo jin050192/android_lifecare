@@ -73,7 +73,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:onClick="enterMypage"
+            android:onClick="Chating"
             >
             <ImageView
                 android:layout_width="70dp"

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: :unitygar:@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da11cf4ae172db7fd045df65018b1202/jetified-unitygar/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da11cf4ae172db7fd045df65018b1202/jetified-unitygar/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da11cf4ae172db7fd045df65018b1202/jetified-unitygar/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf40ec3d7b4898856ddeb2aa431a7dd9/jetified-unitygar/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf40ec3d7b4898856ddeb2aa431a7dd9/jetified-unitygar/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf40ec3d7b4898856ddeb2aa431a7dd9/jetified-unitygar/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

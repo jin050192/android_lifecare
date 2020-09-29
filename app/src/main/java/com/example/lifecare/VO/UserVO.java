@@ -1,7 +1,5 @@
 package com.example.lifecare.VO;
 
-import java.sql.Timestamp;
-
 /**
  * Created by psn on 2018-01-18.
  */
@@ -13,7 +11,7 @@ public class UserVO {
         return userVO;
     }
 
-    private String id="";
+    private String id="홍길동";
     private String customer_echeck="";
     private String enabled="";
     private String Customer_fingerprint;

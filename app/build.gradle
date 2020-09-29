@@ -50,6 +50,18 @@ android {
 }
 
 
+
+apply plugin: 'com.android.application'
+// Add this line
+apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    // add the Firebase SDK for Google Analytics
+
+    // add SDKs for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+}
+
 dependencies {
     // http core와 cliient jar파일
     implementation files('libs/httpclient-4.2.2.jar')
@@ -74,6 +86,8 @@ dependencies {
 
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -104,5 +118,10 @@ dependencies {
     implementation(name: 'unityandroidpermissions', ext: 'aar')
     implementation(name: 'unitygar', ext: 'aar')
 
+    //채팅
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }

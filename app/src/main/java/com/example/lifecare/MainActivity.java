@@ -1,10 +1,12 @@
 package com.example.lifecare;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,19 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.lifecare.Chating.ChatActivity;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
-import com.example.lifecare.myPage.Mypage;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
 import com.example.lifecare.ui.home.home;
 import com.example.lifecare.ui.mypage.mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nhn.android.naverlogin.OAuthLogin;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -36,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
+
+    EditText etName;
+    CircleImageView ivProfile;
+
+    Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
-
     }
 
-    /*마이페이지*/
-    public void enterMypage(View w){
-        UserVO userVO = UserVO.getInstance();
-        System.out.println("=======================enterMypage : " + userVO.getId());
-
-        if(userVO.getId() =="") {
-            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+    /*1:1 채팅*/
+    public void Chating(View w){
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(getApplicationContext(), Mypage.class);
-            startActivity(intent);
-        }
-
     }
     public void drugSearch(View w){
         Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
@@ -84,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), information.class);
         startActivity(intent);
     }
-
-
     // 네이버 로그아웃 테스트
     public void test(View w){
         Toast.makeText(this, "userVO :" + user.getId(), Toast.LENGTH_LONG).show();
