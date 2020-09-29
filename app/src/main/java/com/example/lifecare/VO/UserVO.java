@@ -49,4 +49,11 @@ public class UserVO {
     public void setCustomer_echeck(String customer_echeck) {
         this.customer_echeck = customer_echeck;
     }
+
+    public void clearVO(){
+        id="";
+        customer_echeck="";
+        enabled="";
+        Customer_fingerprint=null;
+    }
 }
