@@ -1,5 +1,7 @@
 package com.example.lifecare;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
         /*상단바 숨기기*/
         getSupportActionBar().hide();
 
+        builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("어플 종료");
+        builder.setMessage("어플종료를 하시겠습니까?.");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(
+                    DialogInterface dialog, int id) {
+                //"예" 버튼 클릭시 실행하는 메소드
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+        builder.setNegativeButton("아니오",  null);
     }
 
     /*마이페이지*/
@@ -133,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        builder.create().show();
     }
 }
 /*

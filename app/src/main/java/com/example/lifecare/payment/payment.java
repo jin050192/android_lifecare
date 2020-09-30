@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,12 +24,15 @@ import com.example.lifecare.VO.DiagnosisVO;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.confirmReservation;
 import com.example.lifecare.appointment.diagnosis;
+import com.example.lifecare.appointment.selectDate;
 import com.google.gson.Gson;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class payment extends AppCompatActivity {
 
@@ -65,6 +69,15 @@ public class payment extends AppCompatActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Intent intent = new Intent(payment.this, payment.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //각 Activity 마다 Task 작성
@@ -74,6 +87,7 @@ public class payment extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
         }
 
         //작업을 쓰레드로 처리
@@ -134,6 +148,7 @@ public class payment extends AppCompatActivity {
                             map.put("diagnosis_num", diagnosis_num);
                             map.put("amount", customer_amount);
                             task2.execute(map); // 밑에 스프링과 연동 시키기
+
                         }
                     });
                     builder.setNegativeButton("아니오",  null);
@@ -181,5 +196,11 @@ public class payment extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(payment.this, MainActivity.class);
+        startActivity(intent);
     }
 }
