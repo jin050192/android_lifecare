@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
+    
     AlertDialog.Builder builder;
 
     @Override
@@ -73,17 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
     /*마이페이지*/
     public void enterMypage(View w){
-        UserVO userVO = UserVO.getInstance();
-        System.out.println("=======================enterMypage : " + userVO.getId());
+        System.out.println("=======================enterMypage : " + user.getId());
 
-        if(userVO.getId() =="") {
+        if(user.getId() =="") {
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
         }else{
             Intent intent = new Intent(getApplicationContext(), Mypage.class);
             startActivity(intent);
         }
-
     }
     public void drugSearch(View w){
         Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
@@ -94,22 +93,32 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void appointment(View w){
-        Intent intent = new Intent(getApplicationContext(), appointment.class);
-        startActivity(intent);
+        if(user.getId() =="") {
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), appointment.class);
+            startActivity(intent);
+        }
     }
     public void information(View w){
         Intent intent = new Intent(getApplicationContext(), information.class);
         startActivity(intent);
     }
     public void payment(View w){
-        Intent intent = new Intent(getApplicationContext(), payment.class);
-        startActivity(intent);
+        if(user.getId() =="") {
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), payment.class);
+            startActivity(intent);
+        }
     }
 
 
     // 네이버 로그아웃 테스트
     public void test(View w){
-        Toast.makeText(this, "userVO :" + user.getId(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "user :" + user.getId(), Toast.LENGTH_LONG).show();
         //logOut();
         //Toast.makeText(this, "로그아웃 작동", Toast.LENGTH_LONG).show();
     }

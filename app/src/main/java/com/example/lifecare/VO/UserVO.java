@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 /**
  * Created by psn on 2018-01-18.
  */
-
 public class UserVO {
     private UserVO(){}
     private static UserVO userVO= new UserVO();
