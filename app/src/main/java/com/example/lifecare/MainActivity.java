@@ -1,5 +1,7 @@
 package com.example.lifecare;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.example.lifecare.myPage.Mypage;
+import com.example.lifecare.payment.payment;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
 import com.example.lifecare.ui.home.home;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
+    
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +57,32 @@ public class MainActivity extends AppCompatActivity {
         /*상단바 숨기기*/
         getSupportActionBar().hide();
 
+        builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("어플 종료");
+        builder.setMessage("어플종료를 하시겠습니까?.");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(
+                    DialogInterface dialog, int id) {
+                //"예" 버튼 클릭시 실행하는 메소드
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+        builder.setNegativeButton("아니오",  null);
     }
 
     /*마이페이지*/
     public void enterMypage(View w){
-        UserVO userVO = UserVO.getInstance();
-        System.out.println("=======================enterMypage : " + userVO.getId());
+        System.out.println("=======================enterMypage : " + user.getId());
 
-        if(userVO.getId() =="") {
+        if(user.getId() =="") {
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
         }else{
             Intent intent = new Intent(getApplicationContext(), Mypage.class);
             startActivity(intent);
         }
-
     }
     public void drugSearch(View w){
         Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
@@ -77,18 +93,32 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void appointment(View w){
-        Intent intent = new Intent(getApplicationContext(), appointment.class);
-        startActivity(intent);
+        if(user.getId() =="") {
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), appointment.class);
+            startActivity(intent);
+        }
     }
     public void information(View w){
         Intent intent = new Intent(getApplicationContext(), information.class);
         startActivity(intent);
     }
+    public void payment(View w){
+        if(user.getId() =="") {
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), payment.class);
+            startActivity(intent);
+        }
+    }
 
 
     // 네이버 로그아웃 테스트
     public void test(View w){
-        Toast.makeText(this, "userVO :" + user.getId(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "user :" + user.getId(), Toast.LENGTH_LONG).show();
         //logOut();
         //Toast.makeText(this, "로그아웃 작동", Toast.LENGTH_LONG).show();
     }
@@ -128,6 +158,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        builder.create().show();
     }
 }
 /*

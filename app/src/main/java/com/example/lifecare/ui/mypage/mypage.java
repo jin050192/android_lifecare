@@ -69,6 +69,7 @@ public class mypage extends Fragment  {
     /*지문인식 부분*/
 
     LinearLayout jimunadd;
+    LinearLayout logoutBtn;
     UserVO user = UserVO.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,9 +80,14 @@ public class mypage extends Fragment  {
         jimunadd = (LinearLayout)view.findViewById(R.id.jimunadd);
         jimunadd.setOnClickListener(onClickListener);
 
+        logoutBtn = (LinearLayout)view.findViewById(R.id.logout);
+        logoutBtn.setOnClickListener(onClickListener);
+
         //마이페이지 이름
         TextView Customername = (TextView)view.findViewById(R.id.Customername);
         Customername.setText(user.getId());
+
+
 
         return view;
     }
@@ -126,6 +132,9 @@ public class mypage extends Fragment  {
             switch (v.getId()) {
                 case R.id.jimunadd: {
                     setJimun();
+                    break;
+                }case R.id.logout: {
+                    logout();
                     break;
                 }
                 default:
@@ -227,5 +236,15 @@ public class mypage extends Fragment  {
         } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException | CertificateException | IOException e){
             throw new RuntimeException(e);
         }
+    }
+    public void logout(){
+        Toast.makeText(getContext(), "로그아웃되었습니다", Toast.LENGTH_SHORT).show();
+        UserVO userVO = UserVO.getInstance();
+        userVO.clearVO();
+        Intent intent = new Intent(getContext(), MainActivity.class);
+
+        startActivity(intent);
+
+        //(MainActivity)getActivity().
     }
 }

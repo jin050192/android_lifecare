@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.lifecare.EclipseConnect.HttpClient;
 import com.example.lifecare.EclipseConnect.Web;
+import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.AppointmentVO;
 import com.example.lifecare.VO.ReservationVO;
@@ -187,5 +188,10 @@ public class confirmReservation extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "예약취소가 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(confirmReservation.this, MainActivity.class);
+        startActivity(intent);
     }
 }

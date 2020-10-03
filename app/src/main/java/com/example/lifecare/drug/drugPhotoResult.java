@@ -9,13 +9,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lifecare.EclipseConnect.HttpClient;
-import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.R;
-import com.example.lifecare.VO.DoctorVO;
 import com.example.lifecare.VO.DrugVO;
 import com.example.lifecare.appointment.OnItemClickListener;
 import com.example.lifecare.appointment.doctorAdapter;
@@ -27,8 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class drugPhothResult extends AppCompatActivity {
-        ArrayList<DrugVO> drugList = new ArrayList<>();
+public class drugPhotoResult extends AppCompatActivity {
+        ArrayList<Map<String, String>> drugList = new ArrayList<>();
 
         DrugVO drug = DrugVO.getInstance();
 
@@ -67,57 +66,65 @@ public class drugPhothResult extends AppCompatActivity {
                         linearLayoutManager.getOrientation());
                 recyclerView.addItemDecoration(dividerItemDecoration);
         }
+
         //각 Activity 마다 Task 작성
         public class DrugTask extends AsyncTask<Map, Integer, String> {
 
-        //doInBackground 실행되기 이전에 동작
-        @Override
-        protected void onPreExecute() { super.onPreExecute(); }
+                //doInBackground 실행되기 이전에 동작
+                @Override
+                protected void onPreExecute() { super.onPreExecute(); }
 
-        //작업을 쓰레드로 처리
-        @Override
-        protected String doInBackground(Map... maps) {
-                //HTTP 요청 준비 - Post 로 바꿀것
-                HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "drugPhotoSeaerch"); //스프링 url
-                //파라미터 전송
-                http.addAllParameters(maps[0]);
-                //HTTP 요청 전송
-                HttpClient post =http.create();
-                post.request();
+                //작업을 쓰레드로 처리
+                @Override
+                protected String doInBackground(Map... maps) {
+                        //HTTP 요청 준비 - Post 로 바꿀것
+                        HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "drugPhotoSeaerch"); //스프링 url
+                        //파라미터 전송
+                        http.addAllParameters(maps[0]);
+                        //HTTP 요청 전송
+                        HttpClient post =http.create();
+                        post.request();
 
-                String body = post.getBody(); //Web의 Controller에서 리턴한 값
-                System.out.print("body : " + body);
-                return body;
+                        String body = post.getBody(); //Web의 Controller에서 리턴한 값
+                        System.out.print("body : " + body);
+                        return body;
 
-        }
-        //doInBackground 종료되면 동작
-
-        // @param s : doInBackground에서 리턴한 body. JSON 데이터
-
-        @Override
-        protected void onPostExecute(String s) {
-                SharedPreferenceHandler sh = new SharedPreferenceHandler(getApplicationContext());
-                //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
-                if (s.length() > 0) {
-                        Gson gson = new Gson();
-                        drugList= gson.fromJson(s, drugList.getClass());
-
-                        for(DrugVO vo : drugList){
-                                DrugVO data = new DrugVO(vo.getDrug_number(), vo.getDrug_name(),vo.getDrug_enptname(),vo.getDrug_productimage(),vo.getDrug_frontShape(),vo.getDrug_color());
-                                arrayList.add(data);
-                                adapter.notifyDataSetChanged();
-                        }
-                } else {
-                        Toast.makeText(getApplicationContext(), "의료진 리스트 불러오기 실패", Toast.LENGTH_SHORT).show();
                 }
-        }
-//    public void onBackPressed() {
-//        Intent intent = new Intent(drugPhoto.this, drugSearchMain.class);
-//        startActivity(intent);
-//    }
+                //doInBackground 종료되면 동작
 
-        // 페이지 이동
-        // startActivity(intent);
-        drugAdapter.
-        }
+                // @param s : doInBackground에서 리턴한 body. JSON 데이터
+
+                @Override
+                protected void onPostExecute(String s) {
+                        // SharedPreferenceHandler sh = new SharedPreferenceHandler(getApplicationContext());
+                        Intent intent = new Intent(drugPhotoResult.this, drugPhotoResult.class);
+
+                        //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
+                        if (s.length() > 0) {
+                                Gson gson = new Gson();
+                                drugList = gson.fromJson(s, drugList.getClass());
+
+                                for (Map<String, String> map : drugList) {
+                                        DrugVO data = new DrugVO(map.get("d_num"), map.get("d_name"), map.get("d_emtp"), map.get("d_img"), map.get("d_f_shape"), map.get("d_color"));
+                                        drug_num = map.get("d_num");
+                                        arrayList.add(data);
+
+                                        adapter.notifyDataSetChanged();
+                                }
+
+                        } else {
+                                Toast.makeText(getApplicationContext(), "의약품 결과 조회 실패", Toast.LENGTH_SHORT).show();
+                        }
+//                        // 페이지 이동
+//                        adapter.setOnDrugClicklistener(new OnDrugclickListener() {
+//                                @Override
+//                                public void onDrugClick(drugAdapter.DrugViewHolder holder, View view, int position) {
+//                                        Intent intent = new Intent(drugPhotoResult.this, drugPhotoDetail.class);
+//                                        intent.putExtra("drug_num", drug_num);
+//                                        startActivity(intent);
+//                                }
+//                        });
+                }
+
+         }
 }
