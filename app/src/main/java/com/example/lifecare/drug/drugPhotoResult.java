@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.lifecare.EclipseConnect.HttpClient;
 import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.R;
+import com.example.lifecare.VO.AppointmentVO;
 import com.example.lifecare.VO.DrugVO;
 import com.example.lifecare.appointment.OnItemClickListener;
 import com.example.lifecare.appointment.doctorAdapter;
@@ -115,15 +116,17 @@ public class drugPhotoResult extends AppCompatActivity {
                         } else {
                                 Toast.makeText(getApplicationContext(), "의약품 결과 조회 실패", Toast.LENGTH_SHORT).show();
                         }
-//                        // 페이지 이동
-//                        adapter.setOnDrugClicklistener(new OnDrugclickListener() {
-//                                @Override
-//                                public void onDrugClick(drugAdapter.DrugViewHolder holder, View view, int position) {
-//                                        Intent intent = new Intent(drugPhotoResult.this, drugPhotoDetail.class);
-//                                        intent.putExtra("drug_num", drug_num);
-//                                        startActivity(intent);
-//                                }
-//                        });
+//                         // 페이지 이동
+                        adapter.setOnDrugClicklistener(new OnDrugclickListener() {
+                                @Override
+                                public void onDrugClick(drugAdapter.DrugViewHolder holder, View view, int position) {
+                                        DrugVO item = adapter.getItem(position);
+                                        Intent intent = new Intent(drugPhotoResult.this, drugPhotoDetail.class);
+
+                                        intent.putExtra("drug_num", item.getDrug_number());
+                                        startActivity(intent);
+                                }
+                        });
                 }
 
          }

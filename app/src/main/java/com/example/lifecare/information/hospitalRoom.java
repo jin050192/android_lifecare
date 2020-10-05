@@ -19,10 +19,8 @@ public class hospitalRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_room);
 
-//        ImageButton btn1 = (ImageButton) findViewById(R.id.btn_tworoom);
         ImageButton btn2 = (ImageButton) findViewById(R.id.btn_fourroom);
 
-//        btn1.setOnClickListener(room);
         btn2.setOnClickListener(room);
     }
     View.OnClickListener room = new

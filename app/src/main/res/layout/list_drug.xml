@@ -3,23 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/drug_list_lyout">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+<!--    <ScrollView-->
+<!--        android:id="@+id/drug_scrollView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
 
-    <LinearLayout
-        android:id="@+id/drug_layout"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
+        <LinearLayout
+            android:id="@+id/drug_layout"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
-    <ImageView
+        <ImageView
             android:id="@+id/d_img"
             android:layout_width="70dp"
             android:layout_height="?attr/actionBarSize"
@@ -48,7 +50,6 @@
             android:text="식별표시" />
 
 
-
         <TextView
             android:id="@+id/d_emtp"
             android:layout_width="wrap_content"
@@ -69,6 +70,7 @@
             />
 
         </LinearLayout>
-    </ScrollView>
+        
+<!--    </ScrollView>-->
 
 </LinearLayout>

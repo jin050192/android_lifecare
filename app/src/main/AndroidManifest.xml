@@ -36,13 +36,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< Updated upstream
-        <activity android:name=".payment.payment"></activity>
+        <activity android:name=".payment.payment"/>
         <activity android:name=".appointment.diagnosis" />
-=======
-        <activity android:name=".drug.drugPhotoDetail"></activity>
-        <activity android:name=".drug.drugPhotoResult" />
->>>>>>> Stashed changes
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -70,6 +66,8 @@
         <activity android:name=".drug.drugSearchMain" />
         <activity android:name=".drug.drugSearch" />
         <activity android:name=".drug.drugPhoto" />
+        <activity android:name=".drug.drugPhotoDetail"></activity>
+        <activity android:name=".drug.drugPhotoResult" />
         <activity android:name=".appointment.appointment" />
         <activity android:name=".appointment.confirmReservation" />
         <activity android:name=".appointment.selectDate" />
