@@ -1,24 +1,30 @@
-package com.example.lifecare.appointment;
+package com.example.lifecare.payment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.lifecare.EclipseConnect.HttpClient;
-import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
-import com.example.lifecare.VO.AppointmentVO;
-import com.example.lifecare.VO.DoctorVO;
+import com.example.lifecare.VO.DiagnosisVO;
 import com.example.lifecare.VO.UserVO;
+import com.example.lifecare.appointment.confirmReservation;
+import com.example.lifecare.appointment.diagnosis;
+import com.example.lifecare.appointment.selectDate;
 import com.google.gson.Gson;
 import com.muddzdev.styleabletoast.StyleableToast;
 
@@ -26,45 +32,52 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class selectDate extends AppCompatActivity {
+import javax.annotation.Nullable;
+
+public class payment extends AppCompatActivity {
 
     ArrayList<Map<String, String>> m = new ArrayList<>();
 
     private RecyclerView recyclerView;
-    private dateAdapter adapter;
-    private ArrayList<AppointmentVO> arrayList;
+    private payAdapter adapter;
+    private ArrayList<DiagnosisVO> arrayList;
 
-    private String doctor_id;
-    private String appoint_num;
-
+    private String diagnosis_num;
+    String customer_amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_date);
+        setContentView(R.layout.activity_payment);
 
-         // 전 화면에서 받아온 값
-        Intent getIntent = getIntent();
-        doctor_id = getIntent.getStringExtra("doctor_id");
+        String customer_id = UserVO.getInstance().getId();
 
-        selectDate.InnerTask task = new selectDate.InnerTask();
+        payment.InnerTask task = new payment.InnerTask();
         Map<String, String> map = new HashMap<>();
-        map.put("doctor_id", doctor_id);
-        if(map.get("doctor_id") != null) {
+        map.put("customer_id", customer_id);
+        if(map.get("customer_id") != null) {
             task.execute(map);
         }
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_selectDate);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_payList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
-        adapter = new dateAdapter(arrayList);
+        adapter = new payAdapter(arrayList);
         recyclerView.setAdapter(adapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Intent intent = new Intent(payment.this, payment.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //각 Activity 마다 Task 작성
@@ -74,13 +87,14 @@ public class selectDate extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
         }
 
         //작업을 쓰레드로 처리
         @Override
         protected String doInBackground(Map... maps) {
             //HTTP 요청 준비 - Post 로 바꿀것
-            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "dateList"); //스프링 url
+            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "payList"); //스프링 url
             //파라미터 전송
             http.addAllParameters(maps[0]);
             System.out.println("http ㅁㄴㅇㄻㄴㅇㄹ: " + http.getParameter());
@@ -93,47 +107,54 @@ public class selectDate extends AppCompatActivity {
         }
 
         //doInBackground 종료되면 동작
+
         /**
          * @param s : doInBackground에서 리턴한 body. JSON 데이터
          */
         @Override
         protected void onPostExecute(String s) {
-            Intent intent = new Intent(selectDate.this, selectDate.class);
+            Intent intent = new Intent(payment.this, payment.class);
 
             //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
             if(s.length() > 0) {
                 Gson gson = new Gson();
 
                 m = gson.fromJson(s, m.getClass());
-                //Map<String, Object>[] m = (Map<String, Object>[])gson.fromJson(s, Map[].class);
 
-                for(Map<String, String> map : m){
-                    AppointmentVO data = new AppointmentVO(map.get("appoint_num"), map.get("doctor_id"), map.get("appoint_date"));
+                for (Map<String, String> map : m) {
+                    DiagnosisVO data = new DiagnosisVO(map.get("diagnosis_num"), map.get("diagnosis_time"), map.get("doctor_major"), map.get("customer_amount"));
                     arrayList.add(data);
-                    appoint_num = map.get("appoint_num");
                     adapter.notifyDataSetChanged();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "날짜 리스트 불러오기 실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "결제 리스트 불러오기 실패", Toast.LENGTH_SHORT).show();
             }
 
-            adapter.setOnDateItemClicklistener(new OnDateItemClickListener() {
-                    @Override
-                    public void onItemClick(dateAdapter.dateViewHolder holder, View view, int position) {
-                        // 해당 시간 선택하면....
-                        AppointmentVO item = adapter.getItem(position);
-                        // System.out.println(item.getAppoint_num());
+            adapter.setOnpayItemClickListener(new OnpayItemClickListener() {
+                @Override
+                public void onItemClick(payAdapter.payViewHolder holder, View view, int position) {
+                    // 해당 진료 클릭하면
+                    DiagnosisVO item = adapter.getItem(position);
+                    diagnosis_num = item.getDiagnosis_num();
+                    customer_amount = item.getCustomer_amount();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(payment.this);
+                    builder.setTitle("결제진행창");
+                    builder.setMessage("해당 진료를 카카오페이로 결제하시겠습니까?");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            payment.InnerTask2 task2= new payment.InnerTask2();
+                            Map<String, String> map = new HashMap<>();
+                            map.put("diagnosis_num", diagnosis_num);
+                            map.put("amount", customer_amount);
+                            task2.execute(map); // 밑에 스프링과 연동 시키기
 
-                        selectDate.InnerTask2 task = new selectDate.InnerTask2();
-                        Map<String, String> map = new HashMap<>();
-                        map.put("appoint_num", item.getAppoint_num());
-                        map.put("doctor_id", item.getDoctor_id());
-                        map.put("appoint_date", item.getAppoint_date());
-                        map.put("customer_id", UserVO.getInstance().getId());
-                        if(map.get("appoint_num") != null) {
-                            task.execute(map); // 밑에 스프링과 연동 시키기
-                    }
-                    }
+                        }
+                    });
+                    builder.setNegativeButton("아니오",  null);
+                    builder.setNeutralButton("취소", null);
+                    builder.create().show();
+                }
             });
         }
     }
@@ -151,7 +172,7 @@ public class selectDate extends AppCompatActivity {
         @Override
         protected String doInBackground(Map... maps) {
             //HTTP 요청 준비 - Post 로 바꿀것
-            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "addReservation"); //스프링 url
+            HttpClient.Builder http = new HttpClient.Builder("POST", Web.servletURL + "kakaoPayGo"); //스프링 url
             //파라미터 전송
             http.addAllParameters(maps[0]);
             System.out.println("http ㅁㄴㅇㄻㄴㅇㄹ: " + http.getParameter());
@@ -160,6 +181,7 @@ public class selectDate extends AppCompatActivity {
             post.request();
 
             String body = post.getBody(); //Web의 Controller에서 리턴한 값
+            System.out.println("----------" + body);
             return body;
         }
 
@@ -170,27 +192,15 @@ public class selectDate extends AppCompatActivity {
          */
         @Override
         protected void onPostExecute(String s) {
-
-            //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
-            if (s.length() > 0) {
-                Gson gson = new Gson();
-                Map<String, String> map = new HashMap<String, String>();
-                map = gson.fromJson(s, map.getClass());
-
-                if (map.get("insertCnt") != null && map.get("insertCnt") != "") {
-                    Intent intent = new Intent(selectDate.this, confirmReservation.class);
-                    //Map<String, Object>[] m = (Map<String, Object>[])gson.fromJson(s, Map[].class);
-                    StyleableToast.makeText(getApplicationContext(), "진료예약에 성공했습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
-                    startActivity(intent);
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "진료 예약이 실패했습니다.", Toast.LENGTH_SHORT).show();
-            }
+            System.out.println(s);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+            startActivity(intent);
         }
     }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(selectDate.this, MainActivity.class);
+        Intent intent = new Intent(payment.this, MainActivity.class);
         startActivity(intent);
     }
 }

@@ -354,10 +354,12 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Gson gson = new Gson();
-            UserVO m = gson.fromJson(s, UserVO.class);
+            Map<String, Object> m = gson.fromJson(s, Map.class);
             if(m == null){
                 Toast.makeText(mContext, "등록되지않은 아이디 또는 지문입니다 로그인 하여 등록하여주십시오.", Toast.LENGTH_LONG).show();
             }else{
+                System.out.println(m.get("ID"));
+                userVO.setId(m.get("ID").toString());
                 Toast.makeText(mContext, "로그인되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, MainActivity.class);
                 startActivity(intent);

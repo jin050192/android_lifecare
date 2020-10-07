@@ -64,6 +64,7 @@ public class drugPhoto extends AppCompatActivity
                         .setMessage(R.string.dialog_select_prompt)
                         .setPositiveButton(R.string.dialog_select_gallery, (dialog, which) -> startGalleryChooser())
                         .setNegativeButton(R.string.dialog_select_camera, (dialog, which) -> startCamera());
+
                 builder.create().show();
             });
 
@@ -73,6 +74,7 @@ public class drugPhoto extends AppCompatActivity
 
 
     public void startGalleryChooser() {
+        Toast.makeText(drugPhoto.this, "갤러리가 선택되었습니다.", Toast.LENGTH_LONG).show();
         if (PermissionUtils.requestPermission(this, GALLERY_PERMISSIONS_REQUEST, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             Intent intent = new Intent();
             intent.setType("image/*");
@@ -85,22 +87,17 @@ public class drugPhoto extends AppCompatActivity
 
 
     public void startCamera() {
-        Toast.makeText(this, "-----------------------밖", Toast.LENGTH_SHORT).show();
+        Toast.makeText(drugPhoto.this, "카메라 선택되었습니다.", Toast.LENGTH_LONG).show();
         if (PermissionUtils.requestPermission(
                 this,
                 CAMERA_PERMISSIONS_REQUEST,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA)) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            Toast.makeText(this, "-----------------------Intent 아래 ", Toast.LENGTH_SHORT).show();
             Uri photoUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getCameraFile());
-            Toast.makeText(this, "-----------------------photoUri 아래 ", Toast.LENGTH_SHORT).show();
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            Toast.makeText(this, "-----------------------putExtra 아래 ", Toast.LENGTH_SHORT).show();
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Toast.makeText(this, "-----------------------addFlags 아래 ", Toast.LENGTH_SHORT).show();
             startActivityForResult(intent, CAMERA_IMAGE_REQUEST);
-            Toast.makeText(this, "-----------------------startActivityForResult 아래 ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -223,7 +220,7 @@ public class drugPhoto extends AppCompatActivity
         return annotateRequest;
     }
 
-    private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
+    private class LableDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<drugPhoto> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
 
@@ -251,8 +248,10 @@ public class drugPhoto extends AppCompatActivity
         protected void onPostExecute(String result) {
             drugPhoto activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
-                TextView imageDetail = activity.findViewById(R.id.image_details);
-                imageDetail.setText(result);
+
+
+                //TextView imageDetail = activity.findViewById(R.id.image_details);
+                //imageDetail.setText(result);
             }
         }
     }
@@ -291,15 +290,25 @@ public class drugPhoto extends AppCompatActivity
         return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
     }
 
-    private static String convertResponseToString(BatchAnnotateImagesResponse response) {
+    private String convertResponseToString(BatchAnnotateImagesResponse response) {
         String message = "I found these things:\n\n";
 
         List<EntityAnnotation> labels = response.getResponses().get(0).getTextAnnotations();
         if (labels != null) {
             message  = labels.get(0).getDescription();
+
+            Intent intent = new Intent(drugPhoto.this, drugPhotoResult.class);
+            intent.putExtra("result", message);
+            System.out.print("result : " + message);
+            startActivity(intent);
+
         } else {
-            message  = "없음~";
+            message  = "약을 인식 할 수 없습니다. 다시찍어주세요!";
         }
         return message;
     }
+
+
+
+
 }
