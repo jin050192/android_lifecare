@@ -1,12 +1,10 @@
 package com.example.lifecare;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lifecare.Chating.ChatActivity;
+import com.example.lifecare.Chating.ChatListActivity;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
@@ -29,8 +28,6 @@ import com.example.lifecare.ui.mypage.mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nhn.android.naverlogin.OAuthLogin;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class MainActivity extends AppCompatActivity {
@@ -40,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
-
-    EditText etName;
-    CircleImageView ivProfile;
-
-    Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +56,23 @@ public class MainActivity extends AppCompatActivity {
 
     /*1:1 채팅*/
     public void Chating(View w){
+        if(user.getId() == ""){
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(intent);
+        }else if(user.getId().equals("admin")){
+            Intent intent = new Intent(getApplicationContext(), ChatListActivity.class);
+            startActivity(intent);
+        }else{
             Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
             startActivity(intent);
+        }
     }
     public void drugSearch(View w){
         Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
+        startActivity(intent);
+    }
+    public void covid19(View w){
+        Intent intent = new Intent(getApplicationContext(), Covid.class);
         startActivity(intent);
     }
     public void hospitalRoom(View w){

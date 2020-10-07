@@ -1,6 +1,7 @@
 package com.example.lifecare.Chating;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ChatActivity extends AppCompatActivity {
+public class AdminChatActivity extends AppCompatActivity {
 
     EditText et;
     ListView listView;
@@ -35,7 +36,7 @@ public class ChatActivity extends AppCompatActivity {
 
     ArrayList<MessageItem> MessageItem = new ArrayList<>();
     ArrayList<Roomkey> key = new ArrayList<>();
-    ChatAdapter adapter;
+    AdminChatAdapter adapter;
 
     //Firebase Database 관리 객체참조변수
     FirebaseDatabase firebaseDatabase;
@@ -53,13 +54,15 @@ public class ChatActivity extends AppCompatActivity {
 
         et = findViewById(R.id.et);
         listView = findViewById(R.id.listview);
-        adapter = new ChatAdapter(MessageItem,getLayoutInflater());
+        adapter = new AdminChatAdapter(MessageItem,getLayoutInflater());
         listView.setAdapter(adapter);
 
         //Firebase DB관리 객체와 'caht'노드 참조객체 얻어오기
         FirebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        chatRef = firebaseDatabase.getReference(uservo.getId());
+        //방이름 넣기
+        Intent intent = getIntent();
+        chatRef = firebaseDatabase.getReference(intent.getStringExtra("ke"));
 
 
         //firebaseDB에서 채팅 메세지들 실시간 읽어오기..

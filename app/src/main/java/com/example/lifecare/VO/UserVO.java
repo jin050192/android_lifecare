@@ -11,7 +11,7 @@ public class UserVO {
         return userVO;
     }
 
-    private String id="홍길동";
+    private String id="";
     private String customer_echeck="";
     private String enabled="";
     private String Customer_fingerprint;

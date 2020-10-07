@@ -12,7 +12,7 @@ import com.example.lifecare.VO.UserVO;
 
 import java.util.ArrayList;
 
-public class ChatAdapter extends BaseAdapter {
+public class AdminChatAdapter extends BaseAdapter {
 
     ArrayList<MessageItem> messageItems;
     LayoutInflater layoutInflater;
@@ -20,7 +20,7 @@ public class ChatAdapter extends BaseAdapter {
     UserVO user = UserVO.getInstance();
 
 
-    public ChatAdapter(ArrayList<MessageItem> messageItems, LayoutInflater layoutInflater) {
+    public AdminChatAdapter(ArrayList<MessageItem> messageItems, LayoutInflater layoutInflater) {
         this.messageItems = messageItems;
         this.layoutInflater = layoutInflater;
     }
@@ -51,9 +51,9 @@ public class ChatAdapter extends BaseAdapter {
 
         //메세지가 내 메세지인지??
         if(item.getName().equals(user.getId())){
-            itemView= layoutInflater.inflate(R.layout.my_msgbox,viewGroup,false);
+            itemView= layoutInflater.inflate(R.layout.adminmy_msgbox,viewGroup,false);
         }else{
-            itemView= layoutInflater.inflate(R.layout.other_msgbox,viewGroup,false);
+            itemView= layoutInflater.inflate(R.layout.adminother_msgbox,viewGroup,false);
         }
 
         //만들어진 itemView에 값들 설정
