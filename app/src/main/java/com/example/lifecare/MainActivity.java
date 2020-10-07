@@ -80,9 +80,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*마이페이지*/
-    public void enterMypage(View w){
+    public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
-
         if(user.getId() =="") {
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
