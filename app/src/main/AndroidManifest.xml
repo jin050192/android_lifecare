@@ -85,6 +85,8 @@
         <activity android:name=".drug.drugSearchMain" />
         <activity android:name=".drug.drugSearch" />
         <activity android:name=".drug.drugPhoto" />
+        <activity android:name=".drug.drugPhotoDetail"></activity>
+        <activity android:name=".drug.drugPhotoResult" />
         <activity android:name=".appointment.appointment" />
         <activity android:name=".appointment.confirmReservation" />
         <activity android:name=".appointment.selectDate" />

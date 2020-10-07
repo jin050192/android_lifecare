@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    tools:context=".drug.drugPhotoDetail"
+   >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+                android:background="@drawable/beauback"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                app:titleEnabled="false">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:textAlignment="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="25dp"
+                    android:text="상세 정보 "
+                    android:textColor="#000000"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-35dp"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            android:background="@drawable/beauback"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@android:color/white"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/spacing_large"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="약품 이미지 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+                            <ImageView
+                                android:id="@+id/drug_image"
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginBottom="15dp"
+                                android:layout_gravity="center"
+                                app:layout_collapseMode="parallax" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="의약품명 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="의약품명 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="회사명"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_emtp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="20dp"
+                                android:text="회사명 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="일반/전문 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_division"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="10dp"
+                                android:text="일반/전문 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="허가일 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_lisenceDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="20dp"
+                                android:text="허가일 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="약품 분류 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="10dp"
+                                android:text="약품 분류 "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="제형"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_formulation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="20dp"
+                                android:text="제형"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="색상"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_color"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="20dp"
+                                android:text="색상"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="약품번호"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="20dp"
+                                android:text="약품번호"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:text="저장 방법"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40" />
+                            <TextView
+                                android:id="@+id/drug_storage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xmlarge"
+                                android:layout_marginLeft="10dp"
+                                android:text="저장방법"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@android:color/white"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/spacing_large"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:gravity="center_vertical"
+                            android:text="첨가제"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                            android:textColor="@color/grey_80" />
+
+                        <TextView
+                            android:id="@+id/drug_additives"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                          />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -42,7 +42,7 @@ public class selectDate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_date);
 
-        // 전 화면에서 받아온 값
+         // 전 화면에서 받아온 값
         Intent getIntent = getIntent();
         doctor_id = getIntent.getStringExtra("doctor_id");
 

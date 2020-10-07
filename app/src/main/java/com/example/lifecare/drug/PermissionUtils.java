@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.example.lifecare.drug;
 
 import android.app.Activity;
@@ -37,7 +36,6 @@ public class PermissionUtils {
                 permissionsNeeded.add(s);
             }
         }
-
         if (granted) {
             return true;
         } else {
