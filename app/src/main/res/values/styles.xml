@@ -6,7 +6,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">#58D3F7</item> <!--상태바 색-->
+
+        <!-- color high light -->
+        <item name="colorControlHighlight">#fd4381</item>
     </style>
+
 
     <!-- 타이틀바 숨기기-->
     <style name="AppTheme.NoActionBar">
@@ -56,6 +60,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
 
 
 </resources>

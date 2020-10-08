@@ -1,7 +1,5 @@
 package com.example.lifecare.VO;
 
-import android.net.Uri;
-
 public class DrugVO {
     public DrugVO(String drug_number, String drug_name, String drug_enptname, String drug_productimage, String drug_frontShape, String drug_color) {
         this.drug_number = drug_number;

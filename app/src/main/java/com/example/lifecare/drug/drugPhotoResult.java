@@ -9,18 +9,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lifecare.EclipseConnect.HttpClient;
 import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.R;
-import com.example.lifecare.VO.AppointmentVO;
 import com.example.lifecare.VO.DrugVO;
-import com.example.lifecare.appointment.OnItemClickListener;
-import com.example.lifecare.appointment.doctorAdapter;
-import com.example.lifecare.appointment.selectDate;
-import com.example.lifecare.appointment.selectDoctor;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -55,19 +49,36 @@ public class drugPhotoResult extends AppCompatActivity {
                     System.out.print("result : " + result);
                     task.execute(map);
                 }
+                initComponent();
+
+//                recyclerView = (RecyclerView) findViewById(R.id.v_drugResult);
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//                recyclerView.setLayoutManager(linearLayoutManager);
+//
+//                arrayList = new ArrayList<>();
+//                adapter = new drugAdapter(arrayList);
+//                recyclerView.setAdapter(adapter);
+//
+//                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+//                        linearLayoutManager.getOrientation());
+//                recyclerView.addItemDecoration(dividerItemDecoration);
+
+        }
+        private void initComponent(){
                 recyclerView = (RecyclerView) findViewById(R.id.v_drugResult);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 recyclerView.setLayoutManager(linearLayoutManager);
-
+                recyclerView.setHasFixedSize(true);
                 arrayList = new ArrayList<>();
                 adapter = new drugAdapter(arrayList);
+                recyclerView.setAdapter(adapter);
+
                 recyclerView.setAdapter(adapter);
 
                 DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                         linearLayoutManager.getOrientation());
                 recyclerView.addItemDecoration(dividerItemDecoration);
         }
-
         //각 Activity 마다 Task 작성
         public class DrugTask extends AsyncTask<Map, Integer, String> {
 

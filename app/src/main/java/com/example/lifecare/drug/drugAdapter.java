@@ -1,7 +1,9 @@
 package com.example.lifecare.drug;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.AppointmentVO;
 import com.example.lifecare.VO.DoctorVO;
@@ -26,13 +31,18 @@ public class drugAdapter extends RecyclerView.Adapter<drugAdapter.DrugViewHolder
     private ArrayList<DrugVO> arrayList;
     private Context mContext;
     OnDrugclickListener listener;
-//
-//    public drugAdapter(Context mContext, ArrayList<DrugVO> arrayList)
-//    {
-//        this.mContext = mContext;
-//        this.arrayList = arrayList;
-//        //this.itemLayout = itemLayout;
-//    }
+
+    public String image;
+
+    @LayoutRes
+    private int layout_id;
+
+    public drugAdapter(Context context, ArrayList<DrugVO> arrayList,  @LayoutRes int layout_id)
+    {
+        mContext = context;
+        this.arrayList = arrayList;
+        this.layout_id = layout_id;
+    }
     public void setOnDrugClicklistener(OnDrugclickListener listener){
         this.listener = listener;
     }
@@ -87,13 +97,18 @@ public class drugAdapter extends RecyclerView.Adapter<drugAdapter.DrugViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DrugViewHolder holder, int position) {
-        Glide.with(holder.d_img.getContext()).load(arrayList.get(position).getDrug_productimage()).into(holder.d_img);
 
-        holder.d_num.setText(arrayList.get(position).getDrug_number());
-        holder.d_name.setText(arrayList.get(position).getDrug_name());
-        holder.d_emtp.setText(arrayList.get(position).getDrug_enptname());
-        holder.d_f_shape.setText(arrayList.get(position).getDrug_frontShape());
+        if (holder instanceof DrugViewHolder) {
+            DrugViewHolder view = (DrugViewHolder) holder;
 
+           //Glide.with(holder.d_img.getContext()).load(arrayList.get(position).getDrug_productimage()).into(holder.d_img); ;
+
+            holder.d_num.setText(arrayList.get(position).getDrug_number());
+            holder.d_name.setText(arrayList.get(position).getDrug_name());
+            holder.d_emtp.setText(arrayList.get(position).getDrug_enptname());
+            holder.d_f_shape.setText(arrayList.get(position).getDrug_frontShape());
+            displayImageOriginal(mContext, view.d_img, arrayList.get(position).getDrug_productimage());
+        }
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -108,6 +123,16 @@ public class drugAdapter extends RecyclerView.Adapter<drugAdapter.DrugViewHolder
 //                mContext.startActivity(intent);
 //            }
 //        });
+    }
+
+    public static void displayImageOriginal(Context ctx, ImageView img, @SuppressLint("SupportAnnotationUsage") @DrawableRes String drawable) {
+        try {
+            Glide.with(ctx).load(drawable)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(img);
+        } catch (Exception e) {
+        }
     }
 
     @Override
