@@ -13,22 +13,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="1400dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:src="@mipmap/logo" />
-
-        <View
-            android:layout_gravity="center"
-            android:layout_width="350dp"
-            android:layout_height="2dp"
-            android:background="#000000" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="78dp"
@@ -37,6 +24,12 @@
             android:text=" 의약품 사진으로 조회 "
             android:textColor="#000000"
             android:textSize="30dp" />
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="#000000" />
 
     </LinearLayout>
 
@@ -56,9 +49,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="15dp"
+                android:text="사진을 선택해 주세요.
+                    \n촬영시 하얀배경에서 찍어 주세요."
                 android:textAlignment="center"
-                android:text="사진을 선택해 주세요."/>
+                android:textSize="20dp" />
 
             <ImageView
                 android:id="@+id/main_image"
@@ -69,12 +63,13 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/fab"
-        android:layout_width="50dp"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom|end"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center|right"
         android:layout_margin="16dp"
-        android:background="@drawable/pill2"/>
+        android:src="@drawable/cam"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

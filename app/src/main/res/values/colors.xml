@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+
     <color name="colorPrimaryLight">#1E88E5</color>
     <color name="colorAccentDark">#F50057</color>
     <color name="colorAccentLight">#FF80AB</color>
@@ -337,5 +338,6 @@
         <item type="color">#607d8b</item>
         <item type="color">#ff9800</item>
     </array>
+
 
 </resources>
