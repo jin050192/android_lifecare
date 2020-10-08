@@ -1,18 +1,14 @@
 package com.example.lifecare.EclipseConnect;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
@@ -34,13 +30,10 @@ import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.login.KakaoLoginCheck;
 import com.example.lifecare.login.NaverLogin;
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -58,8 +51,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-
-import static com.nhn.android.naverlogin.OAuthLogin.mOAuthLoginHandler;
 
 /**
  * Created by psn on 2018-01-18.

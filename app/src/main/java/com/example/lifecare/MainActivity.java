@@ -15,13 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.lifecare.Chating.ChatActivity;
+import com.example.lifecare.Chating.ChatListActivity;
 import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
-import com.example.lifecare.myPage.Mypage;
 import com.example.lifecare.payment.payment;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private mypage mypage = new mypage();
     private home home = new home();
     UserVO user = UserVO.getInstance();
-    
+
     AlertDialog.Builder builder;
 
     @Override
@@ -56,36 +57,48 @@ public class MainActivity extends AppCompatActivity {
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
+    }
 
-        builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("어플 종료");
-        builder.setMessage("어플종료를 하시겠습니까?.");
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(
-                    DialogInterface dialog, int id) {
-                //"예" 버튼 클릭시 실행하는 메소드
-                moveTaskToBack(true);
-                finishAndRemoveTask();
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        });
-        builder.setNegativeButton("아니오",  null);
+    /*1:1 채팅*/
+    public void Chating(View w) {
+        if (user.getId() == "") {
+
+            builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("어플 종료");
+            builder.setMessage("어플종료를 하시겠습니까?.");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                public void onClick(
+                        DialogInterface dialog, int id) {
+                    //"예" 버튼 클릭시 실행하는 메소드
+                    moveTaskToBack(true);
+                    finishAndRemoveTask();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+            });
+            builder.setNegativeButton("아니오", null);
+        }
     }
 
     /*마이페이지*/
-    public void enterMypage(View w){
+    public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
-
         if(user.getId() =="") {
             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
             startActivity(intent);
+        }else if(user.getId().equals("admin")){
+            Intent intent = new Intent(getApplicationContext(), ChatListActivity.class);
+            startActivity(intent);
         }else{
-            Intent intent = new Intent(getApplicationContext(), Mypage.class);
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
             startActivity(intent);
         }
     }
     public void drugSearch(View w){
         Intent intent = new Intent(getApplicationContext(), drugSearchMain.class);
+        startActivity(intent);
+    }
+    public void covid19(View w){
+        Intent intent = new Intent(getApplicationContext(), Covid.class);
         startActivity(intent);
     }
     public void hospitalRoom(View w){
@@ -114,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 
     // 네이버 로그아웃 테스트
     public void test(View w){

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "681557551995",
+    "firebase_url": "https://android-project-lifecare.firebaseio.com",
+    "project_id": "android-project-lifecare",
+    "storage_bucket": "android-project-lifecare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681557551995:android:ca172923796e6914d76bde",
+        "android_client_info": {
+          "package_name": "com.example.lifecare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681557551995-c0ffg565hunjmmoh3r18l0e1iq8hllb2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lifecare",
+            "certificate_hash": "f8a9fe9ab9b54e0b2f6e625725fd53cd8832250c"
+          }
+        },
+        {
+          "client_id": "681557551995-u6sjb0s2j4qc0dm4r4emsvkj6upul0e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArwjtr7FPniF_aofRr42jgiLVSlUG_D0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681557551995-u6sjb0s2j4qc0dm4r4emsvkj6upul0e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

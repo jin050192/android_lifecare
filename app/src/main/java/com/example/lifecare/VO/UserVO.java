@@ -1,7 +1,5 @@
 package com.example.lifecare.VO;
 
-import java.sql.Timestamp;
-
 /**
  * Created by psn on 2018-01-18.
  */

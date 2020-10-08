@@ -101,13 +101,13 @@ public class drugAdapter extends RecyclerView.Adapter<drugAdapter.DrugViewHolder
         if (holder instanceof DrugViewHolder) {
             DrugViewHolder view = (DrugViewHolder) holder;
 
-           //Glide.with(holder.d_img.getContext()).load(arrayList.get(position).getDrug_productimage()).into(holder.d_img); ;
+          Glide.with(holder.d_img.getContext()).load(arrayList.get(position).getDrug_productimage()).into(holder.d_img); ;
 
             holder.d_num.setText(arrayList.get(position).getDrug_number());
             holder.d_name.setText(arrayList.get(position).getDrug_name());
             holder.d_emtp.setText(arrayList.get(position).getDrug_enptname());
             holder.d_f_shape.setText(arrayList.get(position).getDrug_frontShape());
-            displayImageOriginal(mContext, view.d_img, arrayList.get(position).getDrug_productimage());
+          //  displayImageOriginal(mContext, view.d_img, arrayList.get(position).getDrug_productimage());
         }
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -125,15 +125,15 @@ public class drugAdapter extends RecyclerView.Adapter<drugAdapter.DrugViewHolder
 //        });
     }
 
-    public static void displayImageOriginal(Context ctx, ImageView img, @SuppressLint("SupportAnnotationUsage") @DrawableRes String drawable) {
-        try {
-            Glide.with(ctx).load(drawable)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(img);
-        } catch (Exception e) {
-        }
-    }
+//    public static void displayImageOriginal(Context ctx, ImageView img, @SuppressLint("SupportAnnotationUsage") @DrawableRes String drawable) {
+//        try {
+//            Glide.with(ctx).load(drawable)
+//                    .crossFade()
+//                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                    .into(img);
+//        } catch (Exception e) {
+//        }
+//    }
 
     @Override
     public int getItemCount() {
