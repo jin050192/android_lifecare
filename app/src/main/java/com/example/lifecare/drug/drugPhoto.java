@@ -57,7 +57,7 @@ public class drugPhoto extends AppCompatActivity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_drug_photo);
 
-            ImageButton fab = findViewById(R.id.fab);
+            Button fab = findViewById(R.id.fab);
             fab.setOnClickListener(view -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(drugPhoto.this);
                 builder

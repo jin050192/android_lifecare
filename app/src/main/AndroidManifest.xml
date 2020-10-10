@@ -47,56 +47,65 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Chating.ChatListActivity"></activity>
-        <activity android:name=".Covid" />
-        <activity android:name=".Chating.ChatActivity" />
-        <activity android:name=".payment.payment"></activity>
-        <activity android:name=".appointment.diagnosis" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".login.NaverLogin" />
-        <activity android:name=".login.KakaoLoginCheck2" />
-        <activity android:name=".login.KakaoLoginCheck" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Chating.AdminChatActivity"/>
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o"
-            />
+            android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o"/>
 
-        <activity android:name=".myPage.Mypage" />
-        <activity android:name=".information.information" />
-        <activity android:name=".EclipseConnect.SignInActivity" />
-        <activity android:name=".information.hospitalRoom" />
-        <activity android:name=".information.location" />
+
+        <activity android:name=".myPage.Mypage"/>
+
+        <activity android:name=".EclipseConnect.SignInActivity"/>
+
+        <activity android:name=".Covid"/>
+
+        <activity android:name=".login.NaverLogin"/>
+        <activity android:name=".login.KakaoLoginCheck2"/>
+        <activity android:name=".login.KakaoLoginCheck"/>
+
+        <activity android:name=".Chating.ChatActivity"/>
+        <activity android:name=".Chating.ChatListActivity"/>
+        <activity android:name=".Chating.AdminChatActivity"/>
+
+        <activity android:name=".information.information"/>
+        <activity android:name=".information.hospitalRoom"/>
+        <activity android:name=".information.UnityPlayerActivity"/>
+        <activity android:name=".information.location"/>
         <activity android:name=".information.pharmacy"/>
         <activity android:name=".information.tMap"/>
-        <activity android:name=".drug.drugSearchMain" />
-        <activity android:name=".drug.drugSearch" />
-        <activity android:name=".drug.drugPhoto" />
-        <activity android:name=".drug.drugPhotoDetail"></activity>
-        <activity android:name=".drug.drugPhotoResult" />
-        <activity android:name=".appointment.appointment" />
-        <activity android:name=".appointment.confirmReservation" />
-        <activity android:name=".appointment.selectDate" />
-        <activity android:name=".appointment.selectDoctor" />
-        <activity android:name=".appointment.selectMajor" />
 
+        <activity android:name=".drug.drugSearchMain"/>
+        <activity android:name=".drug.drugSearch"/>
+        <activity android:name=".drug.drugPhoto"/>
+        <activity android:name=".drug.drugPhotoDetail"/>
+        <activity android:name=".drug.drugPhotoResult"/>
+
+        <activity android:name=".appointment.diagnosis" />
+        <activity android:name=".appointment.appointment"/>
+        <activity android:name=".appointment.confirmReservation"/>
+        <activity android:name=".appointment.selectDate"/>
+        <activity android:name=".appointment.selectDoctor"/>
+        <activity android:name=".appointment.selectMajor"/>
+
+        <activity android:name=".payment.payment"/>
 
         <!--
         <activity android:name=".login.KakaoLoginActivity">
@@ -116,37 +125,34 @@
             android:label="@string/app_name">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
             <meta-data
                 android:name="unityplayer.UnityActivity"
                 android:value="true" />
-
-
         </activity>
 
         <meta-data
             android:name="unityplayer.SkipPermissionsDialog"
-            android:value="true" />
+            android:value="true"/>
         <meta-data
             android:name="unity.tango-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="unity.build-id"
-            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa" />
+            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa"/>
         <meta-data
             android:name="unity.splash-mode"
-            android:value="0" />
+            android:value="0"/>
         <meta-data
             android:name="unity.splash-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.1" />
-
+            android:value="2.1"/>
     </application>
 
 
