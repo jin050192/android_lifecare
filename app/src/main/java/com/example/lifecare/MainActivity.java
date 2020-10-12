@@ -184,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 }
+
+
+
+
+
 /*
 순서(Main Thread)
 1. aTask.execute()
