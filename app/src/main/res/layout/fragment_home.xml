@@ -31,9 +31,17 @@
 
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
+
+
+
+    <LinearLayout
         android:id="@+id/mainmenu1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/logo"
         android:orientation="horizontal"
         android:gravity="center"
@@ -45,6 +53,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="appointment"
             >
             <ImageView
                 android:layout_width="70dp"
@@ -57,7 +66,6 @@
                 android:text="진료예약 Appointment"
                 android:textSize="17dp"
                 android:gravity="center"
-                android:onClick="appointment"
                 />
         </LinearLayout>
         <View
@@ -103,7 +111,7 @@
     <LinearLayout
         android:id="@+id/mainmenu2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/wline2"
         android:orientation="horizontal"
         android:gravity="center"
@@ -114,6 +122,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="payment"
             >
             <ImageView
                 android:layout_width="70dp"
@@ -125,8 +134,7 @@
                 android:layout_height="match_parent"
                 android:text="결제 Payment"
                 android:textSize="17dp"
-                android:gravity="center"
-                android:onClick="payment" />
+                android:gravity="center"/>
         </LinearLayout>
         <View
             android:id="@+id/hline2"
@@ -170,19 +178,19 @@
     <LinearLayout
         android:id="@+id/mainmenu3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/wline3"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="15dp"
         >
-
+<!--3. 건강정보 health탭 oneclick 이벤트로 메소드를 등록하자 -->
         <LinearLayout
             android:id="@+id/menu5"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:onClick="test"
+            android:onClick="health"
             >
             <ImageView
                 android:layout_width="70dp"
@@ -210,6 +218,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="information"
             >
             <ImageView
                 android:layout_width="70dp"
@@ -221,9 +230,7 @@
                 android:layout_height="match_parent"
                 android:text="안내 Information"
                 android:textSize="17dp"
-                android:gravity="center"
-                android:onClick="information"
-                />
+                android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
     <View
@@ -236,10 +243,11 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="#D8D8D8"
         />
+
     <LinearLayout
         android:id="@+id/mainmenu4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/wline4"
         android:orientation="horizontal"
         android:gravity="center"
@@ -293,5 +301,6 @@
                 android:gravity="center"
                 />
         </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

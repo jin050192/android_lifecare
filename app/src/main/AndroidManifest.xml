@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lifecare"
     android:targetSandboxVersion="1">
-
     <!-- 저장소 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 카메라 사용 권한 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 사용 권한 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.READ_OWNER_DATA" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 지도 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 지도 -->
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.location.gps" />
 
@@ -27,12 +30,15 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name=".login.GlobalApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -40,54 +46,82 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Chating.ChatListActivity"></activity>
+
+        <activity android:name=".health.health"/>
+        <activity android:name=".Chating.ChatListActivity" />
         <activity android:name=".Covid" />
         <activity android:name=".Chating.ChatActivity" />
-        <activity android:name=".payment.payment"/>
+        <activity android:name=".payment.payment" />
         <activity android:name=".appointment.diagnosis" />
 
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".login.NaverLogin" />
-        <activity android:name=".login.KakaoLoginCheck2" />
-        <activity android:name=".login.KakaoLoginCheck" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Chating.AdminChatActivity"/>
+
+        <activity android:name=".Chating.AdminChatActivity" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o" />
+
         <activity android:name=".myPage.Mypage" />
         <activity android:name=".information.information" />
         <activity android:name=".EclipseConnect.SignInActivity" />
         <activity android:name=".information.hospitalRoom" />
-        <activity android:name=".information.UnityPlayerActivity" />
+        <activity android:name=".information.location" />
+        <activity android:name=".information.pharmacy" />
+        <activity android:name=".information.tMap" />
         <activity android:name=".drug.drugSearchMain" />
         <activity android:name=".drug.drugSearch" />
         <activity android:name=".drug.drugPhoto" />
-        <activity android:name=".drug.drugPhotoDetail"></activity>
+        <activity android:name=".drug.drugPhotoDetail" />
         <activity android:name=".drug.drugPhotoResult" />
         <activity android:name=".appointment.appointment" />
         <activity android:name=".appointment.confirmReservation" />
         <activity android:name=".appointment.selectDate" />
         <activity android:name=".appointment.selectDoctor" />
         <activity android:name=".appointment.selectMajor" />
+        <activity android:name=".login.NaverLogin"/>
+        <activity android:name=".login.KakaoLoginCheck2"/>
+        <activity android:name=".login.KakaoLoginCheck"/>
+        <activity android:name=".information.UnityPlayerActivity"/>
+        <!--
+        <activity android:name=".login.KakaoLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ &ndash;&gt;
+                <data android:host="oauth"
+                    android:scheme="kakao0f50af599b907a251aa406b100937b7b" />
+            </intent-filter>
+        </activity>
+        -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
             <meta-data
@@ -97,23 +131,31 @@
 
         <meta-data
             android:name="unityplayer.SkipPermissionsDialog"
-            android:value="true" />
+            android:value="true"/>
         <meta-data
             android:name="unity.tango-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="unity.build-id"
-            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa" />
+            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa"/>
         <meta-data
             android:name="unity.splash-mode"
-            android:value="0" />
+            android:value="0"/>
         <meta-data
             android:name="unity.splash-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="android.max_aspect"
+
             android:value="2.1" />
 
+
+
     </application>
+
+
+
+
+
 
 </manifest>
