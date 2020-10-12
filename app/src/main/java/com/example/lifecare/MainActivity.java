@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    /*1:1 채팅*/
+
+
     public void Chating(View w) {
         if (user.getId() == "") {
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*마이페이지*/
+    /*1:1 채팅*/
     public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
         if(user.getId() =="") {
