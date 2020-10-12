@@ -2,7 +2,7 @@ package com.example.lifecare.health;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 
 import android.Manifest;
 import android.content.Context;
@@ -12,18 +12,18 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.PrecomputedText;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lifecare.R;
-import com.example.lifecare.information.pharmacy;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.skt.Tmap.TMapGpsManager;
+
+
+
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +31,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-import javax.xml.transform.Result;
+
 
 public class health extends AppCompatActivity {
 //1.일단 패키지 생성 액티비티->엠티엑티비티 생성 ->MainActivity로 가보자
@@ -46,6 +46,14 @@ public class health extends AppCompatActivity {
     private TextView foodpoison;
     //미세먼지 지수
     private TextView fineDust;
+
+    //감기지수
+    private TextView cold;
+    String tCold="";
+    //폐질환 지수
+    private TextView lungDisease;
+    String tLungDisease="";
+
     //장소검색
     private EditText search;
     //좌표구하는 변수
@@ -143,7 +151,10 @@ public class health extends AppCompatActivity {
         foodpoison=findViewById(R.id.foodpoison);
         //미세먼지 지수
         fineDust=findViewById(R.id.fineDust);
-
+        //감기 지수
+//        cold=findViewById(R.id.cold);
+//        //폐질환 지수
+//        lungDisease=findViewById(R.id.lungDisease);
     }
 
     @Override
@@ -188,6 +199,7 @@ public class health extends AppCompatActivity {
                 System.out.println("가져온 값"+words);
                 String[] a={};
                 a =words.split(" ");
+
                 first=a[0]+" "+a[1];
                 if(first.equals("Find local")){
                     first="";
@@ -225,9 +237,15 @@ public class health extends AppCompatActivity {
                 Elements nJisu=doc3.select(".lv1");
                 jisu=nJisu.text();
 
+                //감기 단계
+                Document doc4=Jsoup.connect("https://www.weather.go.kr/weather/lifenindustry/li_asset/popup/imgdata_popup.jsp?CODE=D05&point=0").get();
+
+                Elements sCold=doc4.getElementsByTag("td");
 
 
-            } catch (IOException e) {
+
+
+            } catch (IOException  e) {
                 e.printStackTrace();
             }
             return null;
@@ -246,7 +264,10 @@ public class health extends AppCompatActivity {
             fineDust.setText(dust);
             //식중독 단계 뿌리기
             foodpoison.setText(jisu+" 단계 입니다.");
-
+            //            //감기지수 뿌리기
+            //            cold.setText(tCold+"단계입니다.");
+            //            //폐질환지수 뿌리기
+            //            lungDisease.setText(tLungDisease+"단계입니다.");
         }
     }
 
