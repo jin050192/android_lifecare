@@ -42,6 +42,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // Specify tflite file should not be compressed for the app apk 모델 파일이 압축되지 않도록 한다.
+    aaptOptions {
+        noCompress "tflite"
+    }
+
 //
 //    packagingOptions {
 //        doNotStrip "*/armeabi-v7a/*.so"
@@ -93,6 +99,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation files('libs\\com.skt.Tmap_1.66.jar')
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -138,4 +145,13 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'androidx.annotation:annotation:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //tensorflow-lite
+    implementation project(path: ':opencv')
+    implementation 'org.tensorflow:tensorflow-lite:1.13.1'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly'
 }

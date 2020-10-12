@@ -21,6 +21,8 @@ import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
+import com.example.lifecare.food.FoodActivity;
+import com.example.lifecare.food.LaunchActivity;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.example.lifecare.payment.payment;
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
+
+
     }
 
     /*1:1 채팅*/
@@ -126,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), payment.class);
             startActivity(intent);
         }
+    }
+    public void food(View w){
+        Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
+        startActivity(intent);
     }
 
     // 네이버 로그아웃 테스트
