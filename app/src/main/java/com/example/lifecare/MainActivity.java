@@ -31,7 +31,6 @@ import com.example.lifecare.ui.mypage.mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nhn.android.naverlogin.OAuthLogin;
 
-
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
