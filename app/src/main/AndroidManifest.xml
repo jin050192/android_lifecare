@@ -46,6 +46,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".health.health"/>
         <activity android:name=".Chating.ChatListActivity" />
         <activity android:name=".Covid" />
@@ -53,27 +54,26 @@
         <activity android:name=".payment.payment" />
         <activity android:name=".appointment.diagnosis" />
 
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".login.NaverLogin" />
-        <activity android:name=".login.KakaoLoginCheck2" />
-        <activity android:name=".login.KakaoLoginCheck" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+
 
         <activity android:name=".Chating.AdminChatActivity" />
 
@@ -98,6 +98,10 @@
         <activity android:name=".appointment.selectDate" />
         <activity android:name=".appointment.selectDoctor" />
         <activity android:name=".appointment.selectMajor" />
+        <activity android:name=".login.NaverLogin"/>
+        <activity android:name=".login.KakaoLoginCheck2"/>
+        <activity android:name=".login.KakaoLoginCheck"/>
+        <activity android:name=".information.UnityPlayerActivity"/>
         <!--
         <activity android:name=".login.KakaoLoginActivity">
             <intent-filter>
@@ -115,9 +119,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
             <meta-data
@@ -127,22 +131,26 @@
 
         <meta-data
             android:name="unityplayer.SkipPermissionsDialog"
-            android:value="true" />
+            android:value="true"/>
         <meta-data
             android:name="unity.tango-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="unity.build-id"
-            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa" />
+            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa"/>
         <meta-data
             android:name="unity.splash-mode"
-            android:value="0" />
+            android:value="0"/>
         <meta-data
             android:name="unity.splash-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="android.max_aspect"
+
             android:value="2.1" />
+
+
+
     </application>
 
 

@@ -21,42 +21,22 @@ public class appointment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
-
-        btn_appointment = findViewById(R.id.btn_appointment);
-        btn_ReservationChk = findViewById(R.id.btn_ReservationChk);
-        btn_ResultChk = findViewById(R.id.btn_ResultChk);
-
-        btn_appointment.setOnClickListener(myClickListener);
-        btn_ReservationChk.setOnClickListener(myClickListener);
-        btn_ResultChk.setOnClickListener(myClickListener);
-
+        getSupportActionBar().hide();
     }
 
-    View.OnClickListener myClickListener = new
-            View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch ((v.getId())) {
-                        case R.id.btn_appointment:
-                            Intent intent = new
-                                    Intent(appointment.this, selectMajor.class);
-                            startActivity(intent);
-                            break;
+    public void selectMajor(View w){
+        Intent intent = new Intent(getApplicationContext(), selectMajor.class);
+        startActivity(intent);
+    }
+    public void confirmReservation(View w){
+        Intent intent = new Intent(getApplicationContext(), confirmReservation.class);
+        startActivity(intent);
+    }
+    public void diagnosis(View w){
+        Intent intent = new Intent(getApplicationContext(), diagnosis.class);
+        startActivity(intent);
+    }
 
-                        case R.id.btn_ReservationChk:
-                            intent = new
-                                    Intent(appointment.this, confirmReservation.class);
-                            startActivity(intent);
-                            break;
-
-                        case R.id.btn_ResultChk:
-                            intent = new
-                                    Intent(appointment.this, diagnosis.class);
-                            startActivity(intent);
-                            break;
-                    }
-                }
-            };
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(appointment.this, MainActivity.class);
