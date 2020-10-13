@@ -60,13 +60,13 @@
             android:required="false" />
 
         <provider
-        android:name="androidx.core.content.FileProvider"
-        android:authorities="${applicationId}.provider"
-        android:exported="false"
-        android:grantUriPermissions="true">
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths" />
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
 
 
@@ -86,8 +86,6 @@
         <activity android:name=".EclipseConnect.SignInActivity" />
         <activity android:name=".information.hospitalRoom" />
         <activity android:name=".information.location" />
-        <activity android:name=".information.pharmacy" />
-        <activity android:name=".information.tMap" />
         <activity android:name=".drug.drugSearchMain" />
         <activity android:name=".drug.drugSearch" />
         <activity android:name=".drug.drugPhoto" />
@@ -102,13 +100,14 @@
         <activity android:name=".login.KakaoLoginCheck2"/>
         <activity android:name=".login.KakaoLoginCheck"/>
         <activity android:name=".information.UnityPlayerActivity"/>
+
+        <activity android:name=".information.googleMap"></activity>
         <!--
         <activity android:name=".login.KakaoLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ &ndash;&gt;
                 <data android:host="oauth"
                     android:scheme="kakao0f50af599b907a251aa406b100937b7b" />
@@ -152,10 +151,4 @@
 
 
     </application>
-
-
-
-
-
-
 </manifest>

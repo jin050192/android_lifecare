@@ -20,17 +20,15 @@ public class information extends AppCompatActivity {
     }
 
     public void findMap(View w){
-        Intent intent = new Intent(getApplicationContext(), pharmacy.class);
-        startActivity(intent);
-    }
-    public void findPharm(View w){
         Intent intent = new Intent(getApplicationContext(), location.class);
         startActivity(intent);
     }
-
+    public void findPharm(View w){
+        Intent intent = new Intent(getApplicationContext(), googleMap.class);
+        startActivity(intent);
+    }
     public void prevealRoom(View w){
         Intent intent = new Intent(getApplicationContext(), hospitalRoom.class);
         startActivity(intent);
     }
-
 }

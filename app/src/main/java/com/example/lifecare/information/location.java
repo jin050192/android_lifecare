@@ -35,8 +35,8 @@ public class location extends AppCompatActivity implements OnMapReadyCallback {
         mMap = googleMap;
         //지도타입 - 일반
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         oneMarker();
-        // manyMarker();
     }
 
     //마커하나찍는 기본 예제
