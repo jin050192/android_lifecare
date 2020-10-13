@@ -91,6 +91,8 @@ public class health extends AppCompatActivity {
     String words="";
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -245,6 +247,7 @@ public class health extends AppCompatActivity {
                 dust=nDust.select(".num").eq(0).text();
                 System.out.println("미세먼지 : "+dust);
 
+
                 //식중독 단계
                 Document doc3 =Jsoup.connect(word3).get();
                 Elements nJisu=doc3.select(".lv1");
@@ -288,6 +291,7 @@ public class health extends AppCompatActivity {
                 lung=lung.replace("  "," ");
                 String[] LA={};
                 LA=lung.split(" ");
+
                 //뇌질환가능지수 구하기
                 url="https://www.weather.go.kr/weather/lifenindustry/li_asset/popup/imgdata_popup.jsp?CODE=D02&point=1";
                 Document doc6=Jsoup.connect(url).get();
@@ -297,11 +301,12 @@ public class health extends AppCompatActivity {
                 String[] BA={};
                 BA=brain.split(" ");
 
+                System.out.println("ddddddddddddddddddd"+now[0].substring(0,2));
 
 
                 //현제위치의 결과값 구하기
                 for(int i= 0; i<location.length;i++){
-                    if(location[i].equals(now[0])){
+                    if(location[i].startsWith(now[0].substring(0,2))){
 
                         System.out.println(location[i]+"의 감기지수 : "+CA[i]);
                         tCold=CA[i];
@@ -345,6 +350,89 @@ public class health extends AppCompatActivity {
 
         }
     }
+
+
+
+/* 승운 실패
+    public void getDust(){
+        //미세먼지 네이버 에서 가져오기
+        Document doc2 = null;
+        try {
+            doc2 = Jsoup.connect("https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query="+first+"날씨").get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //미세먼지 가져오기
+        Elements nDust = doc2.select(".indicator").eq(1);
+        dust=nDust.select(".num").eq(0).text();
+        System.out.println("미세먼지 : "+dust);
+    }
+
+    public void getFoodPoison() throws IOException{
+        //식중독 단계
+        Document doc3 =Jsoup.connect(word3).get();
+        Elements nJisu=doc3.select(".lv1");
+        jisu=nJisu.text();
+    }
+
+    public void getCold() throws IOException{
+        //감기 단계
+        url="https://www.weather.go.kr/weather/lifenindustry/li_asset/popup/imgdata_popup.jsp?CODE=D05&point=1";
+        doc4=Jsoup.connect(url)
+                .header("origin",url)
+                .header("referer",url)
+                .ignoreContentType(true)
+                .get();
+
+        country=doc4.getElementsByTag("th");
+    }
+
+   public void getDataEdit() throws IOException{
+       //위치가공
+       String gagong=country.select("th").text();
+       gagong=gagong.substring(48);
+       gagong=gagong.replace("   "," ");
+       gagong=gagong.replace("  "," ");
+
+
+       //전국위치
+       String[] location={};
+       location=gagong.split(" ");
+       //현제위치
+       String[] now = {};
+       now=wWhere.split(" ");
+
+       //감기지수 구하기
+       String cold=doc4.getElementsByTag("td").text();
+       cold=cold.replace("   "," ");
+       cold=cold.replace("  "," ");
+       String[] CA={};
+       CA=cold.split(" ");
+
+       //폐질환가능지수 구하기
+       url="https://www.weather.go.kr/weather/lifenindustry/li_asset/popup/imgdata_popup.jsp?CODE=D01&point=1";
+       Document doc5 = Jsoup.connect(url).get();
+       String lung=doc5.getElementsByTag("td").text();
+       lung=lung.replace("   "," ");
+       lung=lung.replace("  "," ");
+       String[] LA={};
+       LA=lung.split(" ");
+
+       //뇌질환가능지수 구하기
+       url="https://www.weather.go.kr/weather/lifenindustry/li_asset/popup/imgdata_popup.jsp?CODE=D02&point=1";
+       Document doc6=Jsoup.connect(url).get();
+       String brain=doc6.getElementsByTag("td").text();
+       brain=brain.replace("   "," ");
+       brain=brain.replace("  "," ");
+       String[] BA={};
+       BA=brain.split(" ");
+
+       System.out.println("ddddddddddddddddddd"+now[0].substring(0,2));
+   }
+*/
+
+
+
 
 
 }

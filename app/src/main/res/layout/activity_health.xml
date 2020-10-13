@@ -10,11 +10,10 @@
     >
 
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="743dp"
         android:scrollbars="none"
         android:scrollingCache="true">
 
@@ -31,10 +30,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
                 android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginRight="@dimen/spacing_middle"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:visibility="visible"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp">
@@ -60,7 +59,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -74,7 +73,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -82,10 +81,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
                 android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginRight="@dimen/spacing_middle"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:visibility="visible"
                 app:cardBackgroundColor="#00000000"
                 app:cardCornerRadius="2dp"
@@ -94,22 +93,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="280dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/wi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_large"
                             android:text="날씨 정보"
-                            android:textStyle="bold"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                            android:textColor="@android:color/widget_edittext_dark" />
+                            android:textColor="@android:color/widget_edittext_dark"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/where"
@@ -173,9 +172,9 @@
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="식중독 단계"
-                                android:textStyle="bold"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
 
@@ -233,9 +232,9 @@
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="미세먼지 지수"
-                                android:textStyle="bold"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
 
@@ -260,9 +259,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textStyle="bold"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -301,9 +300,9 @@
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="감기지수"
-                                android:textStyle="bold"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
 
@@ -361,9 +360,9 @@
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="천식폐질환지수"
-                                android:textStyle="bold"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
 
@@ -388,9 +387,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textStyle="bold"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                android:textColor="@android:color/widget_edittext_dark" />
+                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -484,12 +483,18 @@
             </LinearLayout>
 
 
-
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="식중독지수 표"
+                    android:textColor="@android:color/widget_edittext_dark"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -498,11 +503,80 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/jisu" />
-
-
+                        android:src="@drawable/foodpoison" />
                 </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="감기가능지수 표"
+                    android:textColor="@android:color/widget_edittext_dark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="134dp"
+                        android:src="@drawable/cold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="천식폐질환지수 표"
+                    android:textColor="@android:color/widget_edittext_dark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:src="@drawable/lung" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="328dp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="뇌졸증지수 표"
+                    android:textColor="@android:color/widget_edittext_dark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="186dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="152dp"
+                        android:src="@drawable/brain" />
+                </LinearLayout>
             </LinearLayout>
 
 
