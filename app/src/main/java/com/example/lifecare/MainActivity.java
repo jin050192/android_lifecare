@@ -24,6 +24,7 @@ import com.example.lifecare.drug.drugSearchMain;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.example.lifecare.payment.payment;
+import com.example.lifecare.push.push;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
 import com.example.lifecare.ui.home.home;
@@ -116,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void information(View w){
         Intent intent = new Intent(getApplicationContext(), information.class);
+        startActivity(intent);
+    }
+    public void push(View w){
+        Intent intent = new Intent(getApplicationContext(), push.class);
         startActivity(intent);
     }
     public void payment(View w){
