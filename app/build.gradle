@@ -52,7 +52,17 @@ android {
 
 
 
+//그래프
+repositories{
+    maven {url "https://jitpack.io"}
+}
 
+dependencies {
+    implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
+    implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+}
+//그래프
 
 
 
