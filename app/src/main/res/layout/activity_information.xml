@@ -42,7 +42,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_8" />
+                        android:src="@drawable/map" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_21" />
+                        android:src="@drawable/mapparm" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/room" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
