@@ -30,6 +30,16 @@ local.properties
 .idea/libraries/
 *.iml
 
+
+#unity
+.idea/libraries/Gradle___arcore_client__aar.xml
+.idea/libraries/Gradle___arcore_rendering_utils__aar.xml
+.idea/libraries/Gradle___arcore_unity__aar.xml
+.idea/libraries/Gradle___google_ar_required__aar.xml
+.idea/libraries/Gradle___unityandroidpermissions__aar.xml
+.idea/libraries/Gradle___unitygar__aar.xml
+
+
 *.log
 
 # Android Studio
