@@ -53,34 +53,6 @@
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".payment.payment" />
         <activity android:name=".appointment.diagnosis" />
-
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
-
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-
-
-        <activity android:name=".Chating.AdminChatActivity" />
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o" />
-
         <activity android:name=".myPage.Mypage" />
         <activity android:name=".information.information" />
         <activity android:name=".EclipseConnect.SignInActivity" />
@@ -100,8 +72,8 @@
         <activity android:name=".login.KakaoLoginCheck2"/>
         <activity android:name=".login.KakaoLoginCheck"/>
         <activity android:name=".information.UnityPlayerActivity"/>
-
         <activity android:name=".information.googleMap"></activity>
+        <activity android:name=".Chating.AdminChatActivity" />
         <!--
         <activity android:name=".login.KakaoLoginActivity">
             <intent-filter>
@@ -128,6 +100,28 @@
                 android:value="true" />
         </activity>
 
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o" />
         <meta-data
             android:name="unityplayer.SkipPermissionsDialog"
             android:value="true"/>
@@ -145,10 +139,6 @@
             android:value="True"/>
         <meta-data
             android:name="android.max_aspect"
-
             android:value="2.1" />
-
-
-
     </application>
 </manifest>
