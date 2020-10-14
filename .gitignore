@@ -38,7 +38,7 @@ local.properties
 .idea/libraries/Gradle___google_ar_required__aar.xml
 .idea/libraries/Gradle___unityandroidpermissions__aar.xml
 .idea/libraries/Gradle___unitygar__aar.xml
-
+.idea/libraries/Gradle__com_naver_nid_naveridlogin_android_sdk_4_2_6_aar.xml
 
 *.log
 
