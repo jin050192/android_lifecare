@@ -1,8 +1,10 @@
 package com.example.lifecare;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -21,17 +24,16 @@ import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
+import com.example.lifecare.health.health;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.example.lifecare.payment.payment;
-import com.example.lifecare.push.push;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
 import com.example.lifecare.ui.home.home;
 import com.example.lifecare.ui.mypage.mypage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nhn.android.naverlogin.OAuthLogin;
-
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class MainActivity extends AppCompatActivity {
@@ -58,9 +60,26 @@ public class MainActivity extends AppCompatActivity {
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
+
+        //권한확인
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //권한이 없을 경우
+            //최초 권한 요청인지, 혹은 사용자에 의한 재요청인지 확인
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                // 사용자가 임의로 권한을 취소시킨 경우
+                // 권한 재요청
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+
+            }
+        }
     }
 
-    /*1:1 채팅*/
+
+
     public void Chating(View w) {
         if (user.getId() == "") {
 
@@ -80,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*마이페이지*/
+    /*1:1 채팅*/
     public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
         if(user.getId() =="") {
@@ -115,12 +134,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
     public void information(View w){
         Intent intent = new Intent(getApplicationContext(), information.class);
         startActivity(intent);
     }
-    public void push(View w){
-        Intent intent = new Intent(getApplicationContext(), push.class);
+    //2.인텐트 이벤트 설정 (매소드 명이 회색이면 아직 설정이 안되어있다는뜻->layout->프래그먼트_home으로가서 등록해보자)
+    public void health(View w){
+        Intent intent = new Intent(getApplicationContext(), health.class);
         startActivity(intent);
     }
     public void payment(View w){
@@ -182,6 +203,11 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 }
+
+
+
+
+
 /*
 순서(Main Thread)
 1. aTask.execute()

@@ -184,13 +184,13 @@
         android:gravity="center"
         android:layout_marginTop="15dp"
         >
-
+<!--3. 건강정보 health탭 oneclick 이벤트로 메소드를 등록하자 -->
         <LinearLayout
             android:id="@+id/menu5"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:onClick="test"
+            android:onClick="health"
             >
             <ImageView
                 android:layout_width="70dp"
@@ -287,7 +287,6 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:onClick="push"
             >
             <ImageView
                 android:layout_width="70dp"

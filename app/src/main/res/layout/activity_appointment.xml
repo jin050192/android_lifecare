@@ -43,7 +43,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_8" />
+                        android:src="@drawable/appointment" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -62,7 +62,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="병원에서 진료받을 시간을
+                                예약할 수 있습니다."
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -91,7 +92,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_21" />
+                        android:src="@drawable/appointlist" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="고객님의 예약 시간을
+                                조회할 수 있습니다."
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -138,7 +140,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/diagnosis" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -157,7 +159,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="고객님의 진료받은 내용을
+                                확인 할 수 있습니다."
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>

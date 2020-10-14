@@ -17,7 +17,6 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -47,8 +46,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".push.push"></activity>
 
+        <activity android:name=".health.health"/>
+        <activity android:name=".Chating.ChatListActivity" />
+        <activity android:name=".Covid" />
+        <activity android:name=".Chating.ChatActivity" />
+        <activity android:name=".payment.payment" />
+        <activity android:name=".appointment.diagnosis" />
+
+        <activity android:name=".push.push"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -63,47 +69,45 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+
+
+        <activity android:name=".Chating.AdminChatActivity" />
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCdm6_wcABuodGlN_i2wznZ6yIYkTHnr9o" />
 
         <activity android:name=".myPage.Mypage" />
-        <activity android:name=".EclipseConnect.SignInActivity" />
-        <activity android:name=".Covid" />
-        <activity android:name=".login.NaverLogin" />
-        <activity android:name=".login.KakaoLoginCheck2" />
-        <activity android:name=".login.KakaoLoginCheck" />
-        <activity android:name=".Chating.ChatActivity" />
-        <activity android:name=".Chating.ChatListActivity" />
-        <activity android:name=".Chating.AdminChatActivity" />
         <activity android:name=".information.information" />
+        <activity android:name=".EclipseConnect.SignInActivity" />
         <activity android:name=".information.hospitalRoom" />
-        <activity android:name=".information.UnityPlayerActivity" />
         <activity android:name=".information.location" />
-        <activity android:name=".information.pharmacy" />
-        <activity android:name=".information.tMap" />
         <activity android:name=".drug.drugSearchMain" />
         <activity android:name=".drug.drugSearch" />
         <activity android:name=".drug.drugPhoto" />
         <activity android:name=".drug.drugPhotoDetail" />
         <activity android:name=".drug.drugPhotoResult" />
-        <activity android:name=".appointment.diagnosis" />
         <activity android:name=".appointment.appointment" />
         <activity android:name=".appointment.confirmReservation" />
         <activity android:name=".appointment.selectDate" />
         <activity android:name=".appointment.selectDoctor" />
         <activity android:name=".appointment.selectMajor" />
-        <activity android:name=".payment.payment" />
+        <activity android:name=".login.NaverLogin"/>
+        <activity android:name=".login.KakaoLoginCheck2"/>
+        <activity android:name=".login.KakaoLoginCheck"/>
+        <activity android:name=".information.UnityPlayerActivity"/>
+
+        <activity android:name=".information.googleMap"></activity>
         <!--
         <activity android:name=".login.KakaoLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 &lt;!&ndash; Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ &ndash;&gt;
                 <data android:host="oauth"
                     android:scheme="kakao0f50af599b907a251aa406b100937b7b" />
@@ -114,9 +118,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
             <meta-data
@@ -126,21 +130,22 @@
 
         <meta-data
             android:name="unityplayer.SkipPermissionsDialog"
-            android:value="true" />
+            android:value="true"/>
         <meta-data
             android:name="unity.tango-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="unity.build-id"
-            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa" />
+            android:value="06920e9c-1df4-4fd2-9af0-ff8513f930aa"/>
         <meta-data
             android:name="unity.splash-mode"
-            android:value="0" />
+            android:value="0"/>
         <meta-data
             android:name="unity.splash-enable"
-            android:value="True" />
+            android:value="True"/>
         <meta-data
             android:name="android.max_aspect"
+
             android:value="2.1" />
 
         <service android:name=".push.FirebaseMessagingIDService"
@@ -157,8 +162,5 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-
     </application>
-
-
 </manifest>

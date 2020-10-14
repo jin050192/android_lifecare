@@ -61,7 +61,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_8" />
+                        android:src="@drawable/internal" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -80,7 +80,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="일반적으로 내장에 원인이 있는
+                                질환을 다루는 임상의학"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -109,7 +110,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_21" />
+                        android:src="@drawable/surgery" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -128,7 +129,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="수술적 치료를 주요 목적으로 하는
+                                분야의 의학"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -157,7 +159,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/psychiatry" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -176,7 +178,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="정신장애나 행동이상의 치료, 예방을
+                            목적으로 하는 의학"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -204,7 +207,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/neurology" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -223,7 +226,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="신경계의 장애를 진료의 대상으로 하는
+                            의술"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -250,7 +254,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/obstetrics" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -269,7 +273,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="임신·분만·여성의 성기에 관계있는 병을
+                            취급하는 임상과목"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -296,7 +301,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/urology" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -315,7 +320,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="비뇨기과학에 입각한 임상의학의 분과"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>
@@ -342,7 +347,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_10" />
+                        android:src="@drawable/eye" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -361,7 +366,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text=" 채 우 세 요"
+                            android:text="안구 및 그 부속기관의 질환을 취급하는
+                            의학의 한 분과"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_60" />
                     </LinearLayout>

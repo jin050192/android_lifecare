@@ -2,7 +2,6 @@ package com.example.lifecare;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,14 +21,12 @@ public class Covid extends AppCompatActivity {
     private TextView kr1 = null;
     private TextView kr2 = null;
     private TextView kr3 = null;
-    private TextView covidinformation = null;
     private TextView yesterday = null;
 
     private String kr1data= "";
     private String kr2data= "";
     private String kr3data= "";
     private String kr4data= "";
-    private String kr5data= "";
 
     Roomkey rkey = Roomkey.getInstance();
 
@@ -44,12 +41,11 @@ public class Covid extends AppCompatActivity {
         kr2 = (TextView)findViewById(R.id.kr2);
         kr3 = (TextView)findViewById(R.id.kr3);
         yesterday = (TextView)findViewById(R.id.yesterday);
-        covidinformation = (TextView)findViewById(R.id.covidinformation);
-        covidinformation.setMovementMethod(new ScrollingMovementMethod());
 
 
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
+
         /*상단바 숨기기*/
         getSupportActionBar().hide();
     }
@@ -84,9 +80,6 @@ public class Covid extends AppCompatActivity {
                 Elements krtitles4 = doc2.select(".ta_l").eq(10);
                 kr4data = krtitles4.text();
 
-                //전일대비
-                Elements krtitles5 = doc2.select(".ta_l");
-                kr5data = krtitles5.text();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -99,7 +92,6 @@ public class Covid extends AppCompatActivity {
             kr2.setText(kr2data);
             kr3.setText(kr3data);
             yesterday.setText(kr4data);
-            covidinformation.setText(kr5data);
         }
     }
 }
