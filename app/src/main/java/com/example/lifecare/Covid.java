@@ -1,5 +1,6 @@
 package com.example.lifecare;
 
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -173,10 +174,6 @@ public class Covid extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            kr1.setText(kr1data);
-            kr2.setText(kr2data);
-            kr3.setText(kr3data);
-            kr4.setText(kr4data);
 
             text.setText(textdata);
 
@@ -184,6 +181,42 @@ public class Covid extends AppCompatActivity {
             kr2_1.setText(kr2_1data);
             kr3_1.setText(kr3_1data);
             kr4_1.setText(kr4_1data);
+
+            ValueAnimator animator1 = ValueAnimator.ofInt(0, Integer.parseInt(kr1data.replace(",",""))); //0 is min number, 600 is max number
+            animator1.setDuration(3000); //Duration is in milliseconds
+            animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    kr1.setText(animation.getAnimatedValue().toString());
+                }
+            });
+            animator1.start();
+
+            ValueAnimator animator2 = ValueAnimator.ofInt(0, Integer.parseInt(kr2data.replace(",",""))); //0 is min number, 600 is max number
+            animator2.setDuration(3000); //Duration is in milliseconds
+            animator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    kr2.setText(animation.getAnimatedValue().toString());
+                }
+            });
+            animator2.start();
+
+            ValueAnimator animator3 = ValueAnimator.ofInt(0, Integer.parseInt(kr3data.replace(",",""))); //0 is min number, 600 is max number
+            animator3.setDuration(3000); //Duration is in milliseconds
+            animator3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    kr3.setText(animation.getAnimatedValue().toString());
+                }
+            });
+            animator3.start();
+
+            ValueAnimator animator4 = ValueAnimator.ofInt(0, Integer.parseInt(kr4data.replace(",",""))); //0 is min number, 600 is max number
+            animator4.setDuration(3000); //Duration is in milliseconds
+            animator4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    kr4.setText(animation.getAnimatedValue().toString());
+                }
+            });
+            animator4.start();
 
             float graph1 = Integer.parseInt(agedata1.replace(",",""));
             float graph2 = Integer.parseInt(agedata2.replace(",",""));
@@ -236,6 +269,11 @@ public class Covid extends AppCompatActivity {
             barChart.animateY(2000, Easing.EasingOption.EaseInCubic);
             barChart.invalidate();
             //그래프
+            startCountAnimation();
         }
+    }
+
+    private void startCountAnimation() {
+
     }
 }
