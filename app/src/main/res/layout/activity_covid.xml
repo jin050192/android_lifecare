@@ -21,6 +21,30 @@
             android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:text="코로나 실시간 현황"
+                    android:textSize="23dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Covid19 Real-time status"
+                    />
+
+            </LinearLayout>
+
             <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -29,8 +53,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="확진자 연령별 현황 : "/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
