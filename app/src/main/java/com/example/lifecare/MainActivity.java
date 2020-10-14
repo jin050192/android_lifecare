@@ -24,6 +24,7 @@ import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
+import com.example.lifecare.food.FoodPhoto;
 import com.example.lifecare.health.health;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), information.class);
         startActivity(intent);
     }
-//2.인텐트 이벤트 설정 (매소드 명이 회색이면 아직 설정이 안되어있다는뜻->layout->프래그먼트_home으로가서 등록해보자)
+    //2.인텐트 이벤트 설정 (매소드 명이 회색이면 아직 설정이 안되어있다는뜻->layout->프래그먼트_home으로가서 등록해보자)
     public void health(View w){
         Intent intent = new Intent(getApplicationContext(), health.class);
         startActivity(intent);
@@ -152,6 +153,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), payment.class);
             startActivity(intent);
         }
+    }
+
+    public void food(View w){
+        Intent intent = new Intent(getApplicationContext(), FoodPhoto.class);
+        startActivity(intent);
     }
 
     // 네이버 로그아웃 테스트
