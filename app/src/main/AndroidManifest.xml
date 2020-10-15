@@ -44,7 +44,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".food.FoodPhoto"></activity>
+
+        <activity android:name=".food.FoodPhoto" />
         <activity android:name=".Chating.AdminChatActivity" />
         <activity android:name=".myPage.Mypage" />
         <activity android:name=".information.information" />
@@ -72,8 +73,7 @@
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".payment.payment" />
         <activity android:name=".appointment.diagnosis" />
-        <activity android:name=".push.push" />
-
+        <activity android:name=".push.token"/>
         <service
             android:name=".push.FirebaseMessagingIDService"
             android:enabled="true"
