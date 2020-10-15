@@ -29,6 +29,7 @@ import com.example.lifecare.health.health;
 import com.example.lifecare.information.hospitalRoom;
 import com.example.lifecare.information.information;
 import com.example.lifecare.payment.payment;
+import com.example.lifecare.push.token;
 import com.example.lifecare.ui.deeplearningcare.deeplearningcare;
 import com.example.lifecare.ui.helth.helth;
 import com.example.lifecare.ui.home.home;
@@ -155,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void food(View w){
         Intent intent = new Intent(getApplicationContext(), FoodPhoto.class);
+        startActivity(intent);
+    }
+    public void token(View w){
+        Intent intent = new Intent(getApplicationContext(), token.class);
         startActivity(intent);
     }
 

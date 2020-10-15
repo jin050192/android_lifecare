@@ -83,7 +83,7 @@ public class FirebaseMessagingIDService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
+        // manage this apps subscr<activity android:name=".push.token"></activity>iptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(token);
     }
