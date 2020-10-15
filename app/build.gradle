@@ -1,9 +1,13 @@
 apply plugin: 'com.android.application'
+//그래프
+apply plugin: 'com.android.application'
+// Add this line
+apply plugin: 'com.google.gms.google-services'
 
 android {
 //    android.ndkVersion  "your-installed-ndk-version"
     compileSdkVersion 28
-    defaultConfig {
+    defaultConfig {햣 
         applicationId "com.example.lifecare"
         minSdkVersion 28
         targetSdkVersion 28
@@ -50,11 +54,13 @@ android {
 //    }
 }
 
-apply plugin: 'com.android.application'
-// Add this line
-apply plugin: 'com.google.gms.google-services'
+//그래프
+repositories{
+    maven {url "https://jitpack.io"}
+}
 
 dependencies {
+    //파이어베이스
     //firebase
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
@@ -72,9 +78,7 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-}
 
-dependencies {
     //푸시알람
     implementation "com.android.support:support-compat:28.0.0"
     // http core와 cliient jar파일
@@ -106,7 +110,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
 
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
@@ -156,5 +159,10 @@ dependencies {
     implementation('org.tensorflow:tensorflow-lite-support:0.0.0-nightly') { changing = true }
     implementation('org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly') { changing = true }
     implementation('org.tensorflow:tensorflow-lite-metadata:0.0.0-nightly') { changing = true }
+
+    //코로나페이지
+    implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
+    implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
 }
 
