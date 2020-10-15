@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void Chating(View w) {
         if (user.getId() == "") {
 
