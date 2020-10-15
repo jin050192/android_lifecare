@@ -98,6 +98,10 @@ public class FoodPhoto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_photo);
 
+        /*상단바 숨기기*/
+        getSupportActionBar().hide();
+
+
         Button fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(FoodPhoto.this);
@@ -193,22 +197,51 @@ public class FoodPhoto extends AppCompatActivity {
         String maxLabel="";
         float maxPossibility =0;
 
+        String maxProtein ="";
+        String maxCalcium = "";
+        String maxFat = "";
+        String maxCarbohydrate = "";
+        String maxVitaminC = "";
+
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open("custom_labels.txt")));
             for (int i = 0; i < 101; i++) {
-                String label = reader.readLine();
+                String line = reader.readLine();
+                String[] foodInfo = line.split(" ");
+
+                System.out.println(i);
+
+                String label = foodInfo[1];
+                String protein = foodInfo[2];
+                String calcium = foodInfo[3];
+                String fat = foodInfo[4];
+                String carbohydrate = foodInfo[5];
+                String vitaminC = foodInfo[6];
+
                 float probability = modelOutput[0][i];
                 if(maxPossibility <probability){
                     maxNum = i;
                     maxPossibility = probability;
                     maxLabel=label;
+                    maxProtein= protein;
+                    maxCalcium=calcium;
+                    maxFat = fat;
+                    maxCarbohydrate=carbohydrate;
+                    maxVitaminC=vitaminC;
                 }
-                Log.i("TAG", String.format("%s: %1.4f", label, probability));
+                Log.i("TAG", String.format("%s: %1.3f", label, probability));
             }
         } catch (IOException e) {
         }
-        mImageDetails.setText("선택된 음식 : " + maxLabel +", 확률 : " + maxPossibility);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("선택된 음식 : " + maxLabel +"\n 확률 : " + String.format("%1.3f", maxPossibility*100)+"%\n");
+        sb.append("단백질 : " + maxProtein +"g\t\t 칼슘 : " + maxCalcium+"mg\n");
+        sb.append("지방 : " + maxFat +"g\t\t  탄수화물 : " + maxCarbohydrate+"g\n");
+        sb.append("비타민C : " +maxVitaminC+"mg");
+
+        mImageDetails.setText(sb.toString());
     }
 
 
