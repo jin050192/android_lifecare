@@ -202,6 +202,7 @@ public class FoodPhoto extends AppCompatActivity {
         String maxFat = "";
         String maxCarbohydrate = "";
         String maxVitaminC = "";
+        String maxKcal="";
 
         try {
             BufferedReader reader = new BufferedReader(
@@ -218,6 +219,7 @@ public class FoodPhoto extends AppCompatActivity {
                 String fat = foodInfo[4];
                 String carbohydrate = foodInfo[5];
                 String vitaminC = foodInfo[6];
+                String kcal = foodInfo[7];
 
                 float probability = modelOutput[0][i];
                 if(maxPossibility <probability){
@@ -229,6 +231,7 @@ public class FoodPhoto extends AppCompatActivity {
                     maxFat = fat;
                     maxCarbohydrate=carbohydrate;
                     maxVitaminC=vitaminC;
+                    maxKcal = kcal;
                 }
                 Log.i("TAG", String.format("%s: %1.3f", label, probability));
             }
@@ -239,7 +242,8 @@ public class FoodPhoto extends AppCompatActivity {
         sb.append("선택된 음식 : " + maxLabel +"\n 확률 : " + String.format("%1.3f", maxPossibility*100)+"%\n");
         sb.append("단백질 : " + maxProtein +"g\t\t 칼슘 : " + maxCalcium+"mg\n");
         sb.append("지방 : " + maxFat +"g\t\t  탄수화물 : " + maxCarbohydrate+"g\n");
-        sb.append("비타민C : " +maxVitaminC+"mg");
+        sb.append("비타민C : " +maxVitaminC+"mg\n");
+        sb.append("칼로리 : "+maxKcal+"kcal");
 
         mImageDetails.setText(sb.toString());
     }
