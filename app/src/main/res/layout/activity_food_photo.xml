@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".drug.drugPhoto"
+    android:background="@drawable/camearbg"
+    android:id="@+id/foodphoto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1400dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text=" 음식으로 건강관리 "
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="#000000" />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="170dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/foodDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="사진을 선택해 주세요.
+                    \n촬영시 하얀배경에서 찍어 주세요."
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/main_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"/>
+        </LinearLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center|right"
+        android:layout_margin="16dp"
+        android:background="@drawable/cam"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
