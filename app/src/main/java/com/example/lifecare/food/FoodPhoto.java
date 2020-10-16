@@ -186,9 +186,6 @@ public class FoodPhoto extends AppCompatActivity {
         System.out.println("======================model Interpreter : "+interpreter.toString());
         System.out.println("======================model modelOutput : "+modelOutput.toString());
         interpreter.run(input, modelOutput);
-//        for(float a : modelOutput[0]){
-//            System.out.println(a);
-//        }
     }
 
     public void getLabel(){
