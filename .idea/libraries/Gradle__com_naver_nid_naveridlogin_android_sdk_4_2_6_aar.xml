@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.naver.nid:naveridlogin-android-sdk:4.2.6@aar">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9f34b4e1fcc712bf243d3b7a7ff38ec/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9f34b4e1fcc712bf243d3b7a7ff38ec/jetified-naveridlogin-android-sdk-4.2.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9f34b4e1fcc712bf243d3b7a7ff38ec/jetified-naveridlogin-android-sdk-4.2.6/res" />
-=======
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55bc831cd9beae580e6a6679f00993a3/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55bc831cd9beae580e6a6679f00993a3/jetified-naveridlogin-android-sdk-4.2.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55bc831cd9beae580e6a6679f00993a3/jetified-naveridlogin-android-sdk-4.2.6/res" />
->>>>>>> a447ce0bf77f77cbf024b38cf505f8310c5526a2
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6017a0394195ea2e8ca20b264cd074f2/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6017a0394195ea2e8ca20b264cd074f2/jetified-naveridlogin-android-sdk-4.2.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6017a0394195ea2e8ca20b264cd074f2/jetified-naveridlogin-android-sdk-4.2.6/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.naver.nid/naveridlogin-android-sdk/4.2.6/e0fe6a2922ddbf4d90c4e7c772a3591bdf4ea601/naveridlogin-android-sdk-4.2.6-javadoc.jar!/" />

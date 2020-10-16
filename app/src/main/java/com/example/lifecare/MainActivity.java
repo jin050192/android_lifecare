@@ -79,26 +79,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    public void Chating(View w) {
-        if (user.getId() == "") {
-
-            builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("어플 종료");
-            builder.setMessage("어플종료를 하시겠습니까?.");
-            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                public void onClick(
-                        DialogInterface dialog, int id) {
-                    //"예" 버튼 클릭시 실행하는 메소드
-                    moveTaskToBack(true);
-                    finishAndRemoveTask();
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                }
-            });
-            builder.setNegativeButton("아니오", null);
-        }
-    }
-
     /*1:1 채팅*/
     public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
@@ -209,6 +189,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("어플 종료");
+        builder.setMessage("어플종료를 하시겠습니까?.");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(
+                    DialogInterface dialog, int id) {
+                //"예" 버튼 클릭시 실행하는 메소드
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+        builder.setNegativeButton("아니오", null);
         builder.create().show();
     }
 }
