@@ -6,7 +6,6 @@
     android:background="@drawable/weather"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-
     >
 
 
@@ -17,70 +16,55 @@
         android:scrollbars="none"
         android:scrollingCache="true">
 
-
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:descendantFocusability="blocksDescendants"
             android:orientation="vertical"
             android:paddingTop="@dimen/spacing_medium">
 
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:visibility="visible"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
-
-
-            </androidx.cardview.widget.CardView>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/spacing_medium"
                 android:visibility="visible">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_medium"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:text="날씨 정보"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="25dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Weather Infomation"
+                    android:textColor="@color/cardview_dark_background"
+                    />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/slide"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_medium"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </androidx.cardview.widget.CardView>
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:ellipsize="marquee"
+                    android:textColor="@color/overlay_dark_90"
+                    />
 
             </LinearLayout>
 
+
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_marginLeft="@dimen/spacing_middle"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginRight="@dimen/spacing_middle"
@@ -88,7 +72,8 @@
                 android:visibility="visible"
                 app:cardBackgroundColor="#00000000"
                 app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,19 +81,18 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="280dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/wi"
+                            android:id="@+id/dgree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_large"
-                            android:text="날씨 정보"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                            android:textColor="@android:color/widget_edittext_dark"
-                            android:textStyle="bold" />
+                            android:text="°C"
+                            android:textSize="50dp"
+                            android:textColor="@android:color/widget_edittext_dark" />
 
                         <TextView
                             android:id="@+id/where"
@@ -121,35 +105,46 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/cardview_dark_background" />
 
-                        <TextView
-                            android:id="@+id/dgree"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/spacing_large"
-                            android:text="°C"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                            android:textColor="@android:color/widget_edittext_dark" />
-
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/weather_image"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                    <ImageView
+                        android:id="@+id/weather_image"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
                         android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:id="@+id/wi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="20dp"
+                        android:textColor="@android:color/widget_edittext_dark"
+                        android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/chart" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="130dp"
                 android:orientation="horizontal"
                 android:padding="@dimen/spacing_medium">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
@@ -159,7 +154,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <RelativeLayout
@@ -171,84 +166,70 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
-                                android:text="식중독 단계"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark"
-                                android:textStyle="bold" />
-
+                                android:text="식중독지수"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="18dp" />
                         </RelativeLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_40" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-
                             <View
                                 android:layout_width="@dimen/spacing_large"
                                 android:layout_height="wrap_content" />
-
                             <TextView
                                 android:id="@+id/foodpoison"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                                android:textColor="@android:color/widget_edittext_dark"
+                                android:textSize="14dp"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="단계"
+                                android:textSize="14dp"
+                                android:textColor="@color/cardview_dark_background"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
                     app:cardBackgroundColor="#00000000"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="미세먼지 지수"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark"
-                                android:textStyle="bold" />
-
+                                android:textSize="18dp"
+                                android:textColor="@color/cardview_dark_background"
+                                 />
                         </RelativeLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_40" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-
                             <View
                                 android:layout_width="@dimen/spacing_large"
                                 android:layout_height="wrap_content" />
@@ -259,7 +240,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="14dp"
                                 android:textColor="@android:color/widget_edittext_dark"
                                 android:textStyle="bold" />
 
@@ -273,11 +254,13 @@
 
             <!--감기지수//천식 폐질환   -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_medium">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
@@ -287,7 +270,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <RelativeLayout
@@ -300,16 +283,10 @@
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
                                 android:text="감기지수"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark"
-                                android:textStyle="bold" />
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="18dp" />
 
                         </RelativeLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_40" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -327,17 +304,24 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="14dp"
                                 android:textColor="@android:color/widget_edittext_dark"
                                 android:textStyle="bold" />
-
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="단계"
+                                android:textSize="14dp"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
@@ -359,17 +343,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/spacing_large"
-                                android:text="천식폐질환지수"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark"
-                                android:textStyle="bold" />
+                                android:text="폐질환지수"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textSize="18dp" />
 
                         </RelativeLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_40" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -387,24 +365,24 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="14dp"
                                 android:textColor="@android:color/widget_edittext_dark"
                                 android:textStyle="bold" />
-
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="단계"
+                                android:textSize="14dp"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
-            </LinearLayout>
-            <!--뇌졸증가능지수, 꽃가루농도위험지수-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
@@ -423,7 +401,7 @@
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="42dp"
+                                android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/spacing_large"
 
@@ -431,16 +409,11 @@
                                 android:layout_marginEnd="@dimen/spacing_large"
                                 android:layout_marginBottom="@dimen/spacing_large"
                                 android:text="뇌졸증 지수"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                                android:textColor="@android:color/widget_edittext_dark"
-                                android:textStyle="bold" />
+                                android:textSize="18dp"
+                                android:textColor="@color/cardview_dark_background"
+                                />
 
                         </RelativeLayout>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_40" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -458,127 +431,23 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="14dp"
                                 android:textColor="@android:color/widget_edittext_dark"
                                 android:textStyle="bold" />
-
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="단계"
+                                android:textSize="14dp"
+                                android:textColor="@color/cardview_dark_background"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_medium"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00000000"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp">
-
-
-                </androidx.cardview.widget.CardView>
-
-
             </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="식중독지수 표"
-                    android:textColor="@android:color/widget_edittext_dark"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="217dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/foodpoison" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="감기가능지수 표"
-                    android:textColor="@android:color/widget_edittext_dark"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="134dp"
-                        android:src="@drawable/cold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="천식폐질환지수 표"
-                    android:textColor="@android:color/widget_edittext_dark"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="130dp"
-                        android:src="@drawable/lung" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="328dp"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="뇌졸증지수 표"
-                    android:textColor="@android:color/widget_edittext_dark"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="186dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="152dp"
-                        android:src="@drawable/brain" />
-                </LinearLayout>
-            </LinearLayout>
-
 
         </LinearLayout>
 
