@@ -1,30 +1,20 @@
 package com.example.lifecare.drug;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lifecare.R;
-
-import java.io.File;
-import java.io.InputStream;
+import com.example.lifecare.push.token;
 
 public class drugSearchMain extends AppCompatActivity {
 
     Button drugSearch;
     Button photoSearch;
+    Button btn_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +26,11 @@ public class drugSearchMain extends AppCompatActivity {
 
         drugSearch =(Button)findViewById(R.id.btn_drugSearch);
         photoSearch =(Button)findViewById(R.id.btn_photoSearch);
+        btn_token =(Button)findViewById(R.id.btn_token);
 
         drugSearch.setOnClickListener(drugClickListener);
         photoSearch.setOnClickListener(drugClickListener);
+        btn_token.setOnClickListener(drugClickListener);
 
     }
 
@@ -58,9 +50,15 @@ public class drugSearchMain extends AppCompatActivity {
                                 Intent(drugSearchMain.this, drugPhoto.class);
                             startActivity(intent);
                             break;
+                        case R.id.btn_token:
+                            intent  = new
+                                Intent(drugSearchMain.this, token.class);
+                            startActivity(intent);
+                            break;
                     }
                 }
             };
+
 
 //    //RequestCode
 //    final static int PICK_IMAGE = 1; //갤러리에서 사진선택

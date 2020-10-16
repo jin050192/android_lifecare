@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: :unityandroidpermissions:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1fa2343b99322fdbcf6c4828484e6c25/jetified-unityandroidpermissions/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1fa2343b99322fdbcf6c4828484e6c25/jetified-unityandroidpermissions/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1fa2343b99322fdbcf6c4828484e6c25/jetified-unityandroidpermissions/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

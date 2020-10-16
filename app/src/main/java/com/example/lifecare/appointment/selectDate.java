@@ -1,23 +1,26 @@
 package com.example.lifecare.appointment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.lifecare.EclipseConnect.HttpClient;
-import com.example.lifecare.EclipseConnect.SharedPreferenceHandler;
 import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.AppointmentVO;
-import com.example.lifecare.VO.DoctorVO;
 import com.example.lifecare.VO.UserVO;
 import com.google.gson.Gson;
 import com.muddzdev.styleabletoast.StyleableToast;
@@ -65,7 +68,32 @@ public class selectDate extends AppCompatActivity {
                 linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        NotificationManager notificationManager= (NotificationManager)selectDate.this.getSystemService(selectDate.this.NOTIFICATION_SERVICE);
+        Intent intent1 = new Intent(selectDate.this.getApplicationContext(),selectDate.class); //인텐트 생성.
+        System.out.println("111111 ");
+
+        Notification.Builder builder = new Notification.Builder(getApplicationContext());
+        intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //현재 액티비티를 최상으로 올리고, 최상의 액티비티를 제외한 모든 액티비티를 없앤다.
+        System.out.println("22222222 ");
+        PendingIntent pendingNotificationIntent = PendingIntent.getActivity( selectDate.this,0, intent1,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setSmallIcon(R.drawable.app_icon).setTicker("HETT").setWhen(System.currentTimeMillis())
+                .setNumber(1).setContentTitle("푸쉬 제목").setContentText("푸쉬내용")
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE).setContentIntent(pendingNotificationIntent).setAutoCancel(true).setOngoing(true);
+        System.out.println("33333 ");
+        //해당 부분은 API 4.1버전부터 작동합니다.
+        //setSmallIcon - > 작은 아이콘 이미지
+        //setTicker - > 알람이 출력될 때 상단에 나오는 문구.
+        //setWhen -> 알림 출력 시간.
+        //setContentTitle-> 알림 제목
+        //setConentText->푸쉬내용
+        notificationManager.notify(1, builder.build()); // Notification send
+        System.out.println("44444 ");
+
+
     }
+
 
     //각 Activity 마다 Task 작성
     public class InnerTask extends AsyncTask<Map, Integer, String> {
@@ -123,16 +151,26 @@ public class selectDate extends AppCompatActivity {
                         // 해당 시간 선택하면....
                         AppointmentVO item = adapter.getItem(position);
                         // System.out.println(item.getAppoint_num());
-
-                        selectDate.InnerTask2 task = new selectDate.InnerTask2();
-                        Map<String, String> map = new HashMap<>();
-                        map.put("appoint_num", item.getAppoint_num());
-                        map.put("doctor_id", item.getDoctor_id());
-                        map.put("appoint_date", item.getAppoint_date());
-                        map.put("customer_id", UserVO.getInstance().getId());
-                        if(map.get("appoint_num") != null) {
-                            task.execute(map); // 밑에 스프링과 연동 시키기
-                    }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(selectDate.this);
+                        builder.setTitle("예약확인창");
+                        builder.setMessage(item.getAppoint_date()+"으로예약을진행하시겠습니까?");
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                selectDate.InnerTask2 task = new selectDate.InnerTask2();
+                                Map<String, String> map = new HashMap<>();
+                                map.put("appoint_num", item.getAppoint_num());
+                                map.put("doctor_id", item.getDoctor_id());
+                                map.put("appoint_date", item.getAppoint_date());
+                                map.put("customer_id", UserVO.getInstance().getId());
+                                if(map.get("appoint_num") != null) {
+                                    task.execute(map); // 밑에 스프링과 연동 시키기
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("아니오",null);
+                        builder.setNeutralButton("취소",null);
+                        builder.create().show();
                     }
             });
         }
@@ -178,10 +216,11 @@ public class selectDate extends AppCompatActivity {
                 map = gson.fromJson(s, map.getClass());
 
                 if (map.get("insertCnt") != null && map.get("insertCnt") != "") {
-                    Intent intent = new Intent(selectDate.this, confirmReservation.class);
+                    Intent intent = new Intent(selectDate.this.getApplicationContext(), confirmReservation.class);
                     //Map<String, Object>[] m = (Map<String, Object>[])gson.fromJson(s, Map[].class);
                     StyleableToast.makeText(getApplicationContext(), "진료예약에 성공했습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
-                    startActivity(intent);
+                     startActivity(intent);
+
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "진료 예약이 실패했습니다.", Toast.LENGTH_SHORT).show();
