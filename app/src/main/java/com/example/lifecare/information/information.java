@@ -7,7 +7,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
+import com.example.lifecare.appointment.appointment;
 
 
 public class information extends AppCompatActivity {
@@ -16,7 +18,6 @@ public class information extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        getSupportActionBar().hide();
     }
 
     public void findMap(View w){
@@ -29,6 +30,11 @@ public class information extends AppCompatActivity {
     }
     public void prevealRoom(View w){
         Intent intent = new Intent(getApplicationContext(), hospitalRoom.class);
+        startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(information.this, MainActivity.class);
         startActivity(intent);
     }
 }

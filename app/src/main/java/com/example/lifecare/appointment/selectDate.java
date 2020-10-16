@@ -44,7 +44,7 @@ public class selectDate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_date);
-
+        getSupportActionBar().hide();
          // 전 화면에서 받아온 값
         Intent getIntent = getIntent();
         doctor_id = getIntent.getStringExtra("doctor_id");

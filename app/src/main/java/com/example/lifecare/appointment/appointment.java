@@ -21,7 +21,7 @@ public class appointment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
-        getSupportActionBar().hide();
+
     }
 
     public void selectMajor(View w){

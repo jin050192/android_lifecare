@@ -18,7 +18,7 @@ public class hospitalRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_room);
-
+        getSupportActionBar().hide();
         ImageButton btn2 = (ImageButton) findViewById(R.id.btn_fourroom);
 
         btn2.setOnClickListener(room);
