@@ -1,8 +1,10 @@
 package com.example.lifecare.appointment;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -149,19 +151,26 @@ public class selectDate extends AppCompatActivity {
                         // 해당 시간 선택하면....
                         AppointmentVO item = adapter.getItem(position);
                         // System.out.println(item.getAppoint_num());
-
-                        selectDate.InnerTask2 task = new selectDate.InnerTask2();
-                        Map<String, String> map = new HashMap<>();
-                        map.put("appoint_num", item.getAppoint_num());
-                        map.put("doctor_id", item.getDoctor_id());
-                        map.put("appoint_date", item.getAppoint_date());
-                        map.put("customer_id", UserVO.getInstance().getId());
-                        if(map.get("appoint_num") != null) {
-                            task.execute(map); // 밑에 스프링과 연동 시키기
-                    }
-
-
-
+                        AlertDialog.Builder builder = new AlertDialog.Builder(selectDate.this);
+                        builder.setTitle("예약확인창");
+                        builder.setMessage(item.getAppoint_date()+"으로예약을진행하시겠습니까?");
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                selectDate.InnerTask2 task = new selectDate.InnerTask2();
+                                Map<String, String> map = new HashMap<>();
+                                map.put("appoint_num", item.getAppoint_num());
+                                map.put("doctor_id", item.getDoctor_id());
+                                map.put("appoint_date", item.getAppoint_date());
+                                map.put("customer_id", UserVO.getInstance().getId());
+                                if(map.get("appoint_num") != null) {
+                                    task.execute(map); // 밑에 스프링과 연동 시키기
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("아니오",null);
+                        builder.setNeutralButton("취소",null);
+                        builder.create().show();
                     }
             });
         }
