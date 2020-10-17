@@ -162,7 +162,12 @@ public class health extends AppCompatActivity {
                c = (Map) b.get("body");
                d = (Map) c.get("items");
                e = (Map) d.get("item").get(0);
-               f = Integer.parseInt(e.get("today"));
+               if(!e.get("today").equals("")){
+                   f = Integer.parseInt(e.get("today"));
+               }else{
+                   f = Integer.parseInt(e.get("tomorrow"));
+               }
+
                //식중독
                if (f < 55) {
                    foodp = "관심";
@@ -192,7 +197,15 @@ public class health extends AppCompatActivity {
                c = (Map) b.get("body");
                d = (Map) c.get("items");
                e = (Map) d.get("item").get(0);
-               int cnt=Integer.parseInt(e.get("today"));
+
+               int cnt=0;
+
+               if(!e.get("today").equals("")){
+                   cnt = Integer.parseInt(e.get("today"));
+               }else{
+                   cnt = Integer.parseInt(e.get("tomorrow"));
+               }
+
                if(cnt==0){
                    tCold="낮음";
                    cold.setTextColor(Color.parseColor(greenYellow));
@@ -220,7 +233,13 @@ public class health extends AppCompatActivity {
                c = (Map) b.get("body");
                d = (Map) c.get("items");
                e = (Map) d.get("item").get(0);
-               cnt=Integer.parseInt(e.get("today"));
+
+               if(!e.get("today").equals("")){
+                   cnt = Integer.parseInt(e.get("today"));
+               }else{
+                   cnt = Integer.parseInt(e.get("tomorrow"));
+               }
+
                if(cnt==0){
                    lungDisease.setTextColor(Color.parseColor(greenYellow));
                    tLungDisease="낮음";
@@ -247,7 +266,13 @@ public class health extends AppCompatActivity {
                c = (Map) b.get("body");
                d = (Map) c.get("items");
                e = (Map) d.get("item").get(0);
-               cnt=Integer.parseInt(e.get("today"));
+
+               if(!e.get("today").equals("")){
+                   cnt = Integer.parseInt(e.get("today"));
+               }else{
+                   cnt = Integer.parseInt(e.get("tomorrow"));
+               }
+
                if(cnt==0){
                    tBrain="낮음";
                    brain.setTextColor(Color.parseColor(greenYellow));
