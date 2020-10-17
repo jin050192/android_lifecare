@@ -241,6 +241,7 @@ public class Covid extends AppCompatActivity {
 
             BarData barData = new BarData(barDataSet);
             barChart.setData(barData);
+            barData.setBarWidth(5f);
 
             XAxis xAxis = barChart.getXAxis();
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);

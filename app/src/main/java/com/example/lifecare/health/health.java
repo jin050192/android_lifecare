@@ -3,6 +3,7 @@ package com.example.lifecare.health;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -20,6 +21,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.lifecare.EclipseConnect.SignInActivity;
+import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -40,6 +43,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -291,8 +295,10 @@ public class health extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_health);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_health);
+
+
         //권한확인
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //권한이 없을 경우
@@ -312,15 +318,29 @@ public class health extends AppCompatActivity {
 
         if (location == null) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            wido = Double.toString(location.getLatitude());//위도
-            kyungdo = Double.toString(location.getLongitude());//경도
+            try{
+                wido = Double.toString(location.getLatitude());//위도
+                kyungdo = Double.toString(location.getLongitude());//경도
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "위치서비스를 켜주세요", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+
         }
         final LocationListener mLocationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+                    try{
+                        wido = Double.toString(location.getLatitude());//위도
+                        kyungdo = Double.toString(location.getLongitude());//경도
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "위치서비스를 켜주세요", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
 
-                    wido = Double.toString(location.getLatitude());//위도
-                    kyungdo = Double.toString(location.getLongitude());//경도
+
                 }
             }
             public void onProviderDisabled(String provider) {}
@@ -328,7 +348,14 @@ public class health extends AppCompatActivity {
             public void onStatusChanged(String provider, int status, Bundle extras) {}
         };
 
-        mLocationListener.onLocationChanged(location);
+        try{
+            mLocationListener.onLocationChanged(location);
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "위치서비스를 켜주세요", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
         //날씨 변수
         weather_image = findViewById(R.id.weather_image);
         wi = findViewById(R.id.wi);
@@ -347,7 +374,6 @@ public class health extends AppCompatActivity {
 
         //텍스트뷰 슬라이드
         slide=findViewById(R.id.slide);
-        slide=findViewById(R.id.slide);
         slide.setSelected(true);
         slide.setSingleLine(true);
 
@@ -362,13 +388,19 @@ public class health extends AppCompatActivity {
                     Double.parseDouble(wido), // 위도
                     Double.parseDouble(kyungdo), // 경도
                     10); // 얻어올 값의 개수
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "위치서비스를 켜주세요", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         }
         //현재 지점
-        now = list.get(0).getAddressLine(0).split(" ")[1];
+        try {
+            now = list.get(0).getAddressLine(0).split(" ")[1];
+
+
 
         //현재주소 셋팅
+
         nowWhere = list.get(0).getAddressLine(0);
         //검색어
         first=nowWhere.split(" ")[1];
@@ -443,6 +475,11 @@ public class health extends AppCompatActivity {
 
         /*상단바 숨기기*/
         getSupportActionBar().hide();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "위치서비스를 켜주세요", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -541,15 +578,15 @@ public class health extends AppCompatActivity {
             //합쳐질곳
             LineData chartData = new LineData();
 
-            LineDataSet set1 = new LineDataSet(entries,"오전");
-            set1.setColor(Color.parseColor("#FF228B22"));
-            set1.setCircleColor(Color.parseColor("#FF228B22"));
+            LineDataSet set1 = new LineDataSet(entries,"최고기온");
+            set1.setColor(Color.parseColor("#FFFF4500"));
+            set1.setCircleColor(Color.parseColor("#FFFF4500"));
             //차트1 합침
             chartData.addDataSet(set1);
 
-            LineDataSet set2 = new LineDataSet(entries1,"오후");
-            set2.setColor(Color.parseColor("#FFFF4500"));
-            set2.setCircleColor(Color.parseColor("#FFFF4500"));
+            LineDataSet set2 = new LineDataSet(entries1,"최저기온");
+            set2.setColor(Color.parseColor("#FF228B22"));
+            set2.setCircleColor(Color.parseColor("#FF228B22"));
             //차트2 합침
             chartData.addDataSet(set2);
 
