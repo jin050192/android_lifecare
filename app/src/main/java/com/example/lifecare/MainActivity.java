@@ -166,9 +166,13 @@ public class MainActivity extends AppCompatActivity {
             {
                 case R.id.navigation_deeplearningcare :
                     transaction.replace(R.id.nav_host_fragment, deeplearningcare).commitAllowingStateLoss();
+                    Intent deep = new Intent(getApplicationContext(),FoodPhoto.class);
+                    startActivity(deep);
                     break;
                 case R.id.navigation_helth:
                     transaction.replace(R.id.nav_host_fragment, helth).commitAllowingStateLoss();
+                    Intent health=new Intent(getApplicationContext(),health.class);
+                    startActivity(health);
                     break;
                 case R.id.navigation_mypage:
                     /*로그인 안했을때*/
