@@ -36,6 +36,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.gson.Gson;
 
 import org.jsoup.Jsoup;
@@ -129,6 +130,16 @@ public class health extends AppCompatActivity {
     float graph14 =0f;
     float graph15 =0f;
     float graph16 =0f;
+
+    //날씨 day
+    String today="";
+    String todayp1="";
+    String todayp2="";
+    String todayp3="";
+    String todayp4="";
+    String todayp5="";
+    String todayp6="";
+    String todayp7="";
 
    private class sync extends AsyncTask <Void,Void,Void> {
         String juso="";
@@ -541,7 +552,16 @@ public class health extends AppCompatActivity {
                 graph14=Integer.parseInt(c.eq(22).text());
                 graph15=Integer.parseInt(c.eq(26).text());
                 graph16=Integer.parseInt(c.eq(30).text());
+                //요일
 
+
+                todayp1=b.select(".QrNVmd").eq(2).text();
+                todayp2=b.select(".QrNVmd").eq(4).text();
+                todayp3=b.select(".QrNVmd").eq(6).text();
+                todayp4=b.select(".QrNVmd").eq(8).text();
+                todayp5=b.select(".QrNVmd").eq(10).text();
+                todayp6=b.select(".QrNVmd").eq(12).text();
+                todayp7=b.select(".QrNVmd").eq(14).text();
 
                 //네이버 미세먼지
                 doc2 = Jsoup.connect("https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query="+first+"날씨").get();
@@ -624,8 +644,12 @@ public class health extends AppCompatActivity {
             xAxis.enableGridDashedLine(8, 24, 0);
             YAxis yLAxis = lineChart.getAxisLeft();
 
+
             //x축 마진주기
+
             xAxis.setAxisMinValue(0.8f);
+            xAxis.setAxisMaxValue(8.2f);
+
             yLAxis.setAxisMaxValue(40f);
             yLAxis.setAxisMinValue(0f);
             yLAxis.setTextColor(Color.BLACK);
@@ -640,6 +664,10 @@ public class health extends AppCompatActivity {
             lineChart.setDescription(description);
             lineChart.animateY(500, Easing.EasingOption.EaseInCubic);
 
+            String[] days={"","금일",todayp1,todayp2,todayp3,todayp4,todayp5,todayp6,todayp7};
+
+            xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
+            
             //값뿌리기
             lineChart.invalidate();
 
