@@ -4,15 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,57 +20,24 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.example.lifecare.R;
-import com.example.lifecare.drug.PackageManagerUtils;
+import com.example.lifecare.VO.FoodVO;
 import com.example.lifecare.drug.PermissionUtils;
-import com.example.lifecare.drug.drugPhotoResult;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.json.GoogleJsonResponseException;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.services.vision.v1.Vision;
-import com.google.api.services.vision.v1.VisionRequest;
-import com.google.api.services.vision.v1.VisionRequestInitializer;
-import com.google.api.services.vision.v1.model.AnnotateImageRequest;
-import com.google.api.services.vision.v1.model.BatchAnnotateImagesRequest;
-import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
-import com.google.api.services.vision.v1.model.EntityAnnotation;
-import com.google.api.services.vision.v1.model.Feature;
-import com.google.api.services.vision.v1.model.Image;
-import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
-import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
-import com.google.firebase.ml.custom.FirebaseCustomRemoteModel;
-import com.google.firebase.ml.custom.FirebaseModelInterpreter;
-import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.tensorflow.lite.Interpreter;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.lang.ref.WeakReference;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FoodPhoto extends AppCompatActivity {
 
@@ -92,6 +58,10 @@ public class FoodPhoto extends AppCompatActivity {
     Interpreter interpreter;
     float[][] modelOutput;
     //ByteBuffer modelOutput;
+
+    private FoodVO foodVO;
+    SimpleDateFormat format1 = new SimpleDateFormat( "yyyy-MM-dd");
+    Date time;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,8 +85,9 @@ public class FoodPhoto extends AppCompatActivity {
 
         mImageDetails = findViewById(R.id.foodDetail);
         mMainImage = findViewById(R.id.main_image);
+        foodVO= new FoodVO();
 
-
+        time = new Date();
         interpreter = getTfliteInterpreter("your_model.tflite");
 //        FirebaseCustomRemoteModel remoteModel =
 //                new FirebaseCustomRemoteModel.Builder("your_model").build();
@@ -242,6 +213,18 @@ public class FoodPhoto extends AppCompatActivity {
         sb.append("비타민C : " +maxVitaminC+"mg\n");
         sb.append("칼로리 : "+maxKcal+"kcal");
 
+        foodVO.setDate(format1.format(time));
+        foodVO.setFoodName(maxLabel);
+        foodVO.setKcal(maxKcal);
+        foodVO.setCarbo(maxCarbohydrate);
+        foodVO.setProtein(maxProtein);
+        foodVO.setFat(maxFat);
+        foodVO.setFoodNum(maxNum);
+        int lid = getResources().getIdentifier("food_"+ String.format("%03d",maxNum), "drawable", this.getPackageName());
+        System.out.println("======================================="+"food_"+ String.format("%03d",maxNum));
+        System.out.println("======================================"+lid);
+        foodVO.setFoodImg(lid);
+
         mImageDetails.setText(sb.toString());
     }
 
@@ -349,5 +332,24 @@ public class FoodPhoto extends AppCompatActivity {
             resizedWidth = maxDimension;
         }
         return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
+    }
+
+    public void addFood(View w){
+        if(foodVO.getFoodName()==null){
+            StyleableToast.makeText(FoodPhoto.this, "음식사진을 아직 등록하지 않으셨습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
+            return;
+        }
+
+        DbOpenHelper mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+        mDbOpenHelper.insertColumn(foodVO);
+
+        StyleableToast.makeText(FoodPhoto.this, foodVO.getFoodName()+"음식을 등록하셨습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
+    }
+
+    public void todayFoodButton(View w){
+        Intent intent = new Intent(FoodPhoto.this, FoodToday.class);
+        startActivity(intent);
     }
 }

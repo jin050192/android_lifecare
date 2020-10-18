@@ -10,18 +10,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:layout_height="78dp"
+        android:orientation="horizontal"
+        android:background="@color/food"
+        >
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
+            android:layout_width="350dp"
+            android:layout_height="75dp"
             android:gravity="center"
             android:text=" 음식으로 건강관리 "
             android:textColor="#ffffff"
-            android:background="@color/food"
             android:textSize="30dp" />
-
+        <ImageView
+            android:id="@+id/todayFoodButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/post_button"
+            android:onClick="todayFoodButton"
+            />
     </LinearLayout>
 
 
@@ -62,5 +68,28 @@
         android:layout_margin="16dp"
         android:background="@drawable/cam"
         />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_smlarge"
+            android:layout_marginLeft="@dimen/spacing_smlarge"
+            android:layout_marginRight="@dimen/spacing_smlarge"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:onClick="addFood"
+            android:tint="@android:color/white"
+            app:fabSize="normal"
+            app:rippleColor="@android:color/white"
+            app:srcCompat="@drawable/ic_add" />
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -169,5 +169,12 @@ dependencies {
     implementation 'com.github.PhilJay:MpAndroidChart:v3.0.2'
     implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+    //horizontal Calendar
+    implementation 'noman.weekcalendar:weekcalendar:1.0.6'
+
+    //matrialX
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'
 }
 

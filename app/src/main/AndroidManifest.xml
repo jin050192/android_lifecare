@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lifecare"
     android:targetSandboxVersion="1">
     <!-- 저장소 -->
@@ -43,8 +44,9 @@
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
+        <activity android:name=".food.FoodToday"></activity>
         <activity android:name=".food.FoodPhoto" />
         <activity android:name=".Chating.AdminChatActivity" />
         <activity android:name=".myPage.Mypage" />
@@ -73,7 +75,8 @@
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".payment.payment" />
         <activity android:name=".appointment.diagnosis" />
-        <activity android:name=".push.token"/>
+        <activity android:name=".push.token" />
+
         <service
             android:name=".push.FirebaseMessagingIDService"
             android:enabled="true"
@@ -169,8 +172,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
-
 
 </manifest>

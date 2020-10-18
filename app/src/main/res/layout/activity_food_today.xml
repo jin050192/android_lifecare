@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".food.FoodToday">
+
+    <noman.weekcalendar.WeekCalendar
+        android:id="@+id/weekCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:weekBackgroundColor="@color/food"
+        app:daysBackgroundColor="@color/food"
+        app:numOfPages="150"
+        app:dayNameLength="threeLetters"
+        app:daysTextSize="25dp"
+        app:weekTextSize="15dp"
+        app:todaysDateBgColor="#1aa6b7"
+       />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_marginLeft="@dimen/spacing_middle"
+        android:layout_marginRight="@dimen/spacing_middle"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:visibility="visible"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_large">
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="0dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="총 섭취량  "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/totalKcal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="90"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/food" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="/1936Kcal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:layout_marginHorizontal="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:max="1936"
+                android:id="@+id/kcal_progress" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/spacing_middle"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large"
+                android:paddingTop="@dimen/spacing_middle"
+                android:layout_weight="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="탄수화물"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+
+                    <ProgressBar
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:max="315"
+                        android:id="@+id/carbo_progress" />
+                    <TextView
+                        android:id="@+id/totalCarbo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="23/315g"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="단백질"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+
+                    <ProgressBar
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="97"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:id="@+id/protein_progress" />
+                    <TextView
+                        android:id="@+id/totalProtein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="23/97g"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="지방"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+
+                    <ProgressBar
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="58"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:id="@+id/fat_progress" />
+                    <TextView
+                        android:id="@+id/totalFat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="23/58g"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todayFoodRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</LinearLayout>

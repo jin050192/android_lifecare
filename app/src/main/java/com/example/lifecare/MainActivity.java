@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import com.example.lifecare.EclipseConnect.SignInActivity;
 import com.example.lifecare.VO.UserVO;
 import com.example.lifecare.appointment.appointment;
 import com.example.lifecare.drug.drugSearchMain;
+import com.example.lifecare.food.DbOpenHelper;
 import com.example.lifecare.food.FoodPhoto;
 import com.example.lifecare.health.health;
 import com.example.lifecare.information.hospitalRoom;
@@ -78,7 +80,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+        //음식 테이블 번호 초기화
+        foodTableCount();
     }
+    public void foodTableCount(){
+        DbOpenHelper mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
+        Cursor iCursor = mDbOpenHelper.selectColumns();
+        while(iCursor.moveToNext()) {
+            DbOpenHelper.KeyNum++;
+        }
+
+        System.out.println("====================keynum : "+DbOpenHelper.KeyNum);
+    }
+
+
     /*1:1 채팅*/
     public void chat(View w){
         System.out.println("=======================enterMypage : " + user.getId());
