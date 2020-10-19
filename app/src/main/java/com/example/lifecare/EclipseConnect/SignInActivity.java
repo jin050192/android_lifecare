@@ -15,6 +15,7 @@ import android.security.keystore.KeyProperties;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -62,6 +63,9 @@ public class SignInActivity extends AppCompatActivity {
     EditText edtId, edtPwd;
     Button btnSignIn;
     ImageView btnKakaoLogin;
+    CheckBox idRemember;
+
+    SharedPreferenceHandler sh;
 
     /*지문인식 부분*/
     private static final String KEY_NAME = "example_key";
@@ -96,6 +100,14 @@ public class SignInActivity extends AppCompatActivity {
         btnSignIn = (Button) findViewById(R.id.btn_login);
         btnKakaoLogin = (ImageView) findViewById(R.id.kakao);
         jimunLogin = (ImageView) findViewById(R.id.jimun);
+        idRemember = (CheckBox) findViewById(R.id.idRemember);
+
+        sh = new SharedPreferenceHandler(getApplicationContext());
+
+        if(sh.getId() != null ){
+            idRemember.setChecked(true);
+            edtId.setText(sh.getId());
+        }
 
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -256,7 +268,6 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("JSON_RESULT ㅁㄴㅇㄹ", s);
-            SharedPreferenceHandler sh = new SharedPreferenceHandler(getApplicationContext());
             //JSON으로 받은 데이터를 VO Obejct로 바꿔준다.
             if(s.length() > 0) {
                 Gson gson = new Gson();
@@ -271,7 +282,12 @@ public class SignInActivity extends AppCompatActivity {
                     userVO.setCustomer_echeck(m.getCustomer_echeck());
 
                     //아이디 저장 & 자동로그인
-                    sh.keepId(m.getId());
+                    if(idRemember.isChecked()){
+                        sh.keepId(m.getId());
+                    }else{
+                        sh.clear();
+                    }
+
 
                     StyleableToast.makeText(getApplicationContext(), m.getId()+"님 로그인 되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
                     startActivity(intent);

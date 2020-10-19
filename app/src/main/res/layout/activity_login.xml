@@ -36,6 +36,7 @@
             />
 
         <CheckBox
+            android:id="@+id/idRemember"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginLeft="3dp"
