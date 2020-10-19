@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:max="1936"
+                android:progressTint="@color/food"
                 android:id="@+id/kcal_progress" />
 
             <View
@@ -116,16 +117,18 @@
                         android:gravity="center_vertical"
                         android:text="탄수화물"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@android:color/black" />
+                        />
 
                     <ProgressBar
                         android:layout_marginHorizontal="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:progressTint="@color/food_carbo"
                         android:max="315"
                         android:id="@+id/carbo_progress" />
                     <TextView
+                        android:layout_marginLeft="6dp"
                         android:id="@+id/totalCarbo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -148,16 +151,18 @@
                         android:gravity="center_vertical"
                         android:text="단백질"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@android:color/black" />
+                         />
 
                     <ProgressBar
                         android:layout_marginHorizontal="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:progressTint="@color/food_protein"
                         android:max="97"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:id="@+id/protein_progress" />
                     <TextView
+                        android:layout_marginLeft="6dp"
                         android:id="@+id/totalProtein"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,16 +185,18 @@
                         android:gravity="center_vertical"
                         android:text="지방"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@android:color/black" />
+                        />
 
                     <ProgressBar
                         android:layout_marginHorizontal="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:progressTint="@color/food_fat"
                         android:max="58"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:id="@+id/fat_progress" />
                     <TextView
+                        android:layout_marginLeft="6dp"
                         android:id="@+id/totalFat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
