@@ -15,7 +15,7 @@ import com.example.lifecare.R;
 
 public class drugSearch extends AppCompatActivity {
     private  WebView webView;
-    private String url = "http://192.168.219.103/lifecare/android_drugSearch";
+    private String url = "http://192.168.219.133/lifecare/android_drugSearch";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

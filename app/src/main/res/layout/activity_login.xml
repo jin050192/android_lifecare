@@ -114,13 +114,4 @@
         android:textSize="15dp"
         />
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btnround"
-        android:text="아이디 또는 비밀번호 찾기"
-        android:textSize="15dp"
-        />
 </LinearLayout>
