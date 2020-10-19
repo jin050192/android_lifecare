@@ -74,6 +74,9 @@ public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             FoodVO n = items.get(position);
             view.foodKcal.setText(n.getKcal()+" Kcal");
+
+
+
             view.tdz.setText("탄 : "+n.getCarbo() +"g 단 : "+n.getProtein() + "g 지 : "+n.getFat()+"g");
             view.foodListImg.setImageResource(n.getFoodImg());
             view.foodListName.setText(n.getFoodName());
