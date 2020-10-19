@@ -109,8 +109,6 @@ public class FoodToday extends AppCompatActivity {
                 foodVO.setFoodNum(foodNum);
                 foodVO.setFoodImg(foodImg);
 
-
-
                 totalKcalInfo = totalKcalInfo+Float.valueOf(foodVO.getKcal());
                 totalCarboInfo = totalCarboInfo+Float.valueOf(foodVO.getCarbo());
                 totalProteinInfo = totalProteinInfo + Float.valueOf(foodVO.getProtein());
@@ -127,10 +125,10 @@ public class FoodToday extends AppCompatActivity {
             fat_progress.setProgress((int)totalFatInfo);
 
             //정보 설정
-            totalKcal.setText((int)totalKcalInfo);
-            totalCarbo.setText((int)totalCarboInfo + "/315g");
-            totalProtein.setText((int)totalProteinInfo + "/97g");
-            totalFat.setText((int)totalFatInfo + "/58g");
+            totalKcal.setText(Integer.toString((int)totalKcalInfo));
+            totalCarbo.setText(Integer.toString((int)totalCarboInfo) + "/315g");
+            totalProtein.setText(Integer.toString((int)totalProteinInfo) + "/97g");
+            totalFat.setText(Integer.toString((int)totalFatInfo) + "/58g");
         }
 
         recyclerView.setAdapter(mAdapter);
