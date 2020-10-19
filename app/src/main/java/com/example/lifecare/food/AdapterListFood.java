@@ -20,7 +20,7 @@ import com.example.lifecare.VO.FoodVO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterListFood extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<FoodVO> items = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public AdapterListNews(Context context, List<FoodVO> items, @LayoutRes int layout_id) {
+    public AdapterListFood(Context context, List<FoodVO> items, @LayoutRes int layout_id) {
         this.items = items;
         ctx = context;
         this.layout_id = layout_id;

@@ -27,7 +27,7 @@ public class FoodToday extends AppCompatActivity {
     private WeekCalendar weekCalendar;
 
     private RecyclerView recyclerView;
-    private AdapterListNews mAdapter;
+    private AdapterListFood mAdapter;
 
     private TextView totalKcal;
     private ProgressBar kcal_progress;
@@ -61,7 +61,7 @@ public class FoodToday extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        mAdapter = new AdapterListNews(FoodToday.this ,arrayList, R.layout.item_food);
+        mAdapter = new AdapterListFood(FoodToday.this ,arrayList, R.layout.item_food);
         //recyclerView.setAdapter(mAdapter); 어뎁터에 정보넣기
 
 
