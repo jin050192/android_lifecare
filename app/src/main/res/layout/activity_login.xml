@@ -69,12 +69,12 @@
         android:textColor="#000000"
         android:textSize="20dp"
         android:gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         >
         <ImageView
             android:id="@+id/jimun"
@@ -108,20 +108,11 @@
     <Button
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:layout_gravity="center"
         android:background="@drawable/btnround"
         android:text="회원가입"
         android:textSize="15dp"
         />
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btnround"
-        android:text="아이디 또는 비밀번호 찾기"
-        android:textSize="15dp"
-        />
 </LinearLayout>

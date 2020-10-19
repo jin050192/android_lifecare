@@ -34,6 +34,8 @@ import com.example.lifecare.EclipseConnect.Web;
 import com.example.lifecare.MainActivity;
 import com.example.lifecare.R;
 import com.example.lifecare.VO.UserVO;
+import com.example.lifecare.appointment.appointment;
+import com.example.lifecare.payment.payment;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -70,6 +72,8 @@ public class mypage extends Fragment  {
 
     LinearLayout jimunadd;
     LinearLayout logoutBtn;
+    LinearLayout reservation;
+    LinearLayout mypayment;
     UserVO user = UserVO.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +86,12 @@ public class mypage extends Fragment  {
 
         logoutBtn = (LinearLayout)view.findViewById(R.id.logout);
         logoutBtn.setOnClickListener(onClickListener);
+
+        reservation = (LinearLayout)view.findViewById(R.id.reservation);
+        reservation.setOnClickListener(onClickListener);
+
+        mypayment = (LinearLayout)view.findViewById(R.id.mypayment);
+        mypayment.setOnClickListener(onClickListener);
 
         //마이페이지 이름
         TextView Customername = (TextView)view.findViewById(R.id.Customername);
@@ -133,12 +143,20 @@ public class mypage extends Fragment  {
                 case R.id.jimunadd: {
                     setJimun();
                     break;
-                }case R.id.logout: {
+                }
+                case R.id.logout: {
                     logout();
                     break;
                 }
-                default:
+                case R.id.reservation: {
+                    reservation();
                     break;
+                }
+                case R.id.mypayment: {
+                    mypayment();
+                    break;
+                }
+                default:
             }
         }
     }
@@ -242,9 +260,16 @@ public class mypage extends Fragment  {
         UserVO userVO = UserVO.getInstance();
         userVO.clearVO();
         Intent intent = new Intent(getContext(), MainActivity.class);
-
         startActivity(intent);
+    }
 
-        //(MainActivity)getActivity().
+    public void reservation(){
+        Intent intent = new Intent(getContext(), appointment.class);
+        startActivity(intent);
+    }
+
+    public void mypayment(){
+        Intent intent = new Intent(getContext(), payment.class);
+        startActivity(intent);
     }
 }
