@@ -29,7 +29,7 @@
                 android:layout_height="100dp"
                 android:background="@color/grey_20"
                 android:padding="@dimen/spacing_xsmall"
-                android:src="@drawable/photo_male_2" />
+                android:src="@drawable/man" />
 
             <View
                 android:layout_width="0dp"
@@ -100,6 +100,7 @@
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
+                    android:id="@+id/reservation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -108,14 +109,14 @@
                     <ImageView
                         android:layout_width="@dimen/spacing_mxlarge"
                         android:layout_height="@dimen/spacing_mxlarge"
-                        app:srcCompat="@drawable/ic_people_outline"
+                        app:srcCompat="@drawable/dpdir"
                         app:tint="@color/indigo_400" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_mxlarge"
-                        android:text="내정보"
+                        android:text="예약 하기"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@color/grey_60" />
 
@@ -177,6 +178,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_xsmall"
@@ -190,6 +192,7 @@
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
+                    android:id="@+id/mypayment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -198,45 +201,19 @@
                     <ImageView
                         android:layout_width="@dimen/spacing_mxlarge"
                         android:layout_height="@dimen/spacing_mxlarge"
-                        app:srcCompat="@drawable/ic_chat"
+                        app:srcCompat="@drawable/payments"
                         app:tint="@color/orange_400" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_mxlarge"
-                        android:text="QnA 게시판"
+                        android:text="결제"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@color/grey_60" />
 
                 </LinearLayout>
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/spacing_large">
-
-                <ImageView
-                    android:layout_width="@dimen/spacing_mxlarge"
-                    android:layout_height="@dimen/spacing_mxlarge"
-                    app:srcCompat="@drawable/ic_chat"
-                    app:tint="@color/orange_400" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_mxlarge"
-                    android:text="QnA 게시판"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/grey_60" />
-
-            </LinearLayout>
-
-
-
-
             </androidx.cardview.widget.CardView>
-
 
             <View
                 android:layout_width="@dimen/spacing_middle"

@@ -16,6 +16,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -247,6 +248,18 @@ public class Covid extends AppCompatActivity {
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setTextColor(Color.BLACK);
             xAxis.enableGridDashedLine(8, 24, 0);
+
+            ArrayList<String> age = new ArrayList();
+            age.add("10대");
+            age.add("20대");
+            age.add("30대");
+            age.add("40대");
+            age.add("50대");
+            age.add("60대");
+            age.add("70대");
+            age.add("80대");
+            barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(age));
+
 
             YAxis yLAxis = barChart.getAxisLeft();
             yLAxis.setTextColor(Color.BLACK);

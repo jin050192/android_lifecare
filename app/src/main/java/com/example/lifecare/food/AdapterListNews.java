@@ -1,6 +1,10 @@
 package com.example.lifecare.food;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +79,22 @@ public class AdapterListNews extends RecyclerView.Adapter<RecyclerView.ViewHolde
             FoodVO n = items.get(position);
             view.foodKcal.setText(n.getKcal()+" Kcal");
 
+            String tdz = "탄 : "+n.getCarbo() +"g  단 : "+n.getProtein() + "g  지 : "+n.getFat()+"g";
+            SpannableStringBuilder ssb = new SpannableStringBuilder(tdz);
+/*
+            ssb.setSpan(new BackgroundColorSpan(Color.parseColor("#f6830f")), tdz.indexOf("탄"), tdz.indexOf("탄")+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new BackgroundColorSpan(Color.parseColor("#0e918c")), tdz.indexOf("단"), tdz.indexOf("단")+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new BackgroundColorSpan(Color.parseColor("#4c00b8")), tdz.indexOf("지"), tdz.indexOf("지")+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")), tdz.indexOf("탄"), tdz.indexOf("탄")+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")), tdz.indexOf("단"), tdz.indexOf("단")+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")), tdz.indexOf("지"), tdz.indexOf("지")+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+*/
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#f6830f")), tdz.indexOf("탄")+1, tdz.indexOf("단")-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#0e918c")), tdz.indexOf("단")+1, tdz.indexOf("지")-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#4c00b8")), tdz.indexOf("지")+1, tdz.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            view.tdz.setText("탄 : "+n.getCarbo() +"g 단 : "+n.getProtein() + "g 지 : "+n.getFat()+"g");
+            view.tdz.setText(ssb);
             view.foodListImg.setImageResource(n.getFoodImg());
             view.foodListName.setText(n.getFoodName());
         }
