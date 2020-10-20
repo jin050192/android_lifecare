@@ -4,76 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".drug.drugSearchMain"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".drug.drugSearchMain">
 
-<ImageView
-android:layout_width="200dp"
-android:layout_height="60dp"
-android:layout_gravity="center"
-android:layout_marginTop="10dp"
-android:layout_marginBottom="20dp"
-android:src="@mipmap/logo" />
-
-<View
-android:layout_gravity="center"
-android:layout_width="350dp"
-android:layout_height="2dp"
-android:background="#000000"
-    />
-
-<TextView
-android:layout_width="match_parent"
-android:layout_height="78dp"
-android:layout_marginTop="10dp"
-android:gravity="center"
-android:text="약 정보 조회 하기"
-android:textColor="#000000"
-android:textSize="30dp" />
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:background="@drawable/dr" >
-
-
-<Button
-    android:id="@+id/btn_drugSearch"
-    android:layout_width="200dp"
-    android:layout_height="50dp"
-    android:layout_gravity="center"
-    android:layout_marginTop="30dp"
-    android:background="@drawable/durg_button2"
-    android:text=" 약 검색하기 "
-    android:textSize="20dp"
-    tools:layout_editor_absoluteX="30dp"
-
-    tools:layout_editor_absoluteY="5dp" />
-
-
-<Button
-    android:id="@+id/btn_photoSearch"
-    android:layout_width="200dp"
-    android:layout_height="50dp"
-    android:layout_gravity="center"
-    android:layout_marginTop="30dp"
-    android:background="@drawable/durg_button2"
-    android:text="사진으로 약 검색하기"
-    android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btn_token"
+    <ImageView
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/durg_button2"
-        android:text=" 토큰 "
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="5dp"
-        android:visibility="invisible"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/logo" />
 
-</LinearLayout>
+    <View
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:background="#000000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="약 정보 조회 하기"
+        android:textColor="#000000"
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dr"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btn_drugSearch"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/durg_button2"
+            android:text=" 약 검색하기 "
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="30dp"
+
+            tools:layout_editor_absoluteY="5dp" />
+
+
+        <Button
+            android:id="@+id/btn_photoSearch"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/durg_button2"
+            android:text="사진으로 약 검색하기"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_token"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/durg_button2"
+            android:text=" 토큰 "
+            android:textSize="20dp"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="5dp" />
+
     </LinearLayout>
+</LinearLayout>

@@ -39,6 +39,4 @@ public class SharedPreferenceHandler {
         editor.clear();
         editor.commit();
     }
-
-
 }

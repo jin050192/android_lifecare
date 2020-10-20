@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lifecare.R;
 import com.example.lifecare.VO.FoodVO;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.joda.time.DateTime;
 
@@ -23,7 +24,6 @@ import noman.weekcalendar.WeekCalendar;
 import noman.weekcalendar.listener.OnDateClickListener;
 
 public class FoodToday extends AppCompatActivity {
-
     private WeekCalendar weekCalendar;
 
     private RecyclerView recyclerView;
@@ -136,11 +136,63 @@ public class FoodToday extends AppCompatActivity {
         weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
-                Toast.makeText(FoodToday.this,
-                        "당신의 선택" + dateTime.toString(), Toast.LENGTH_SHORT).show();
+                //2020-10-21
+                StyleableToast.makeText(FoodToday.this, dateTime.toString().substring(0,10) +"일에 드신 음식에 관한 정보입니다.", Toast.LENGTH_LONG, R.style.mytoast).show();
+
+                //변수 초기화
+                totalKcalInfo=0;
+                totalCarboInfo=0;
+                totalProteinInfo=0;
+                totalFatInfo=0;
+                arrayList= new ArrayList<FoodVO>();
+                mAdapter = new AdapterListFood(FoodToday.this ,arrayList, R.layout.item_food);
+
+
+                Cursor iCursor = mDbOpenHelper.selectColumns();
+                while(iCursor.moveToNext()){
+                    String date = iCursor.getString(iCursor.getColumnIndex("date"));
+                    String foodName = iCursor.getString(iCursor.getColumnIndex("foodName"));
+                    String kcal = iCursor.getString(iCursor.getColumnIndex("kcal"));
+                    String carbo = iCursor.getString(iCursor.getColumnIndex("carbo"));
+                    String protein = iCursor.getString(iCursor.getColumnIndex("protein"));
+                    String fat = iCursor.getString(iCursor.getColumnIndex("fat"));
+                    int foodNum = iCursor.getInt(iCursor.getColumnIndex("foodNum"));
+                    int foodImg =  iCursor.getInt(iCursor.getColumnIndex("foodImg"));
+
+                    if(date.equals(dateTime.toString().substring(0,10))){
+                        FoodVO foodVO = new FoodVO();
+                        foodVO.setDate(date);
+                        foodVO.setFoodName(foodName);
+                        foodVO.setKcal(kcal);
+                        foodVO.setCarbo(carbo);
+                        foodVO.setProtein(protein);
+                        foodVO.setFat(fat);
+                        foodVO.setFoodNum(foodNum);
+                        foodVO.setFoodImg(foodImg);
+
+                        totalKcalInfo = totalKcalInfo+Float.valueOf(foodVO.getKcal());
+                        totalCarboInfo = totalCarboInfo+Float.valueOf(foodVO.getCarbo());
+                        totalProteinInfo = totalProteinInfo + Float.valueOf(foodVO.getProtein());
+                        totalFatInfo=totalFatInfo+Float.valueOf(foodVO.getFat());
+
+                        arrayList.add(foodVO);
+                    }
+
+
+                    //progress bar 설정
+                    kcal_progress.setProgress((int)totalKcalInfo);
+                    carbo_progress.setProgress((int)totalCarboInfo);
+                    protein_progress.setProgress((int)totalProteinInfo);
+                    fat_progress.setProgress((int)totalFatInfo);
+
+                    //정보 설정
+                    totalKcal.setText(Integer.toString((int)totalKcalInfo));
+                    totalCarbo.setText(Integer.toString((int)totalCarboInfo) + "/315g");
+                    totalProtein.setText(Integer.toString((int)totalProteinInfo) + "/97g");
+                    totalFat.setText(Integer.toString((int)totalFatInfo) + "/58g");
+                }
+                recyclerView.setAdapter(mAdapter);
             }
         });
     }
-
-
 }

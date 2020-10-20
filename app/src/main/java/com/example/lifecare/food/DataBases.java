@@ -3,7 +3,6 @@ package com.example.lifecare.food;
 import android.provider.BaseColumns;
 
 public final class DataBases {
-
     public static final class CreateDB implements BaseColumns {
         public static final String key = "key";
         public static final String date = "date";
