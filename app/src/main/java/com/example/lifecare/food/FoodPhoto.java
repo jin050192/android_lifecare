@@ -10,6 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -213,6 +217,13 @@ public class FoodPhoto extends AppCompatActivity {
         sb.append("비타민C : " +maxVitaminC+"mg\n");
         sb.append("칼로리 : "+maxKcal+"kcal");
 
+        SpannableStringBuilder ssb = new SpannableStringBuilder(sb.toString());
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#4c00b8")), sb.toString().indexOf(": ")+1, sb.toString().indexOf("확률"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new AbsoluteSizeSpan(160), sb.toString().indexOf(": "), sb.toString().indexOf("확률"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#F44336")), sb.toString().indexOf("칼로리"), sb.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new AbsoluteSizeSpan(160), sb.toString().indexOf("칼로리"), sb.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         foodVO.setDate(format1.format(time));
         foodVO.setFoodName(maxLabel);
         foodVO.setKcal(maxKcal);
@@ -225,7 +236,7 @@ public class FoodPhoto extends AppCompatActivity {
         System.out.println("======================================"+lid);
         foodVO.setFoodImg(lid);
 
-        mImageDetails.setText(sb.toString());
+        mImageDetails.setText(ssb);
     }
 
 

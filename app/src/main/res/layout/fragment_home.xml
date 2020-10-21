@@ -200,7 +200,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="건강정보 Health"
+                android:text="건강지수 Health"
                 android:textSize="17dp"
                 android:gravity="center"
                 />
