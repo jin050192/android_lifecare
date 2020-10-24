@@ -20,4 +20,10 @@
     <string name="dialog_select_gallery">갤러리</string>
 
     <string name="image_picker_error">결과가 없습니다. 사진을 다시 또는 촬영 하세요. </string>
+    <string name="project_context">
+        KOSMO 65기 4팀(디버깅팀) LifeCare 프로젝트\n
+        프로젝트 기간 : 2020.04.06 ~ 2020.10.28\n
+        발표 영상 : https://youtu.be/tk9Bebf2sWI \n
+        소스 : https://github.com/swhan9404/android_lifecare
+    </string>
 </resources>

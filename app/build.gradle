@@ -176,5 +176,6 @@ dependencies {
     //matrialX
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.wdullaer:materialdatetimepicker:3.2.0'
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view
 }
 

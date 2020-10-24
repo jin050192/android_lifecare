@@ -31,4 +31,8 @@ public class information extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), hospitalRoom.class);
         startActivity(intent);
     }
+    public void aboutUs(View w){
+        Intent intent = new Intent(getApplicationContext(), AboutUs.class);
+        startActivity(intent);
+    }
 }

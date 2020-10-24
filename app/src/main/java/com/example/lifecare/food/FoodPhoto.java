@@ -120,10 +120,6 @@ public class FoodPhoto extends AppCompatActivity {
 
     }
 
-
-
-
-
     private Interpreter getTfliteInterpreter(String modelPath){
         try{
             return new Interpreter(loadModelFile(FoodPhoto.this, modelPath));

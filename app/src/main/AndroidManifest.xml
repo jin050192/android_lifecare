@@ -46,7 +46,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".food.FoodToday"></activity>
+        <activity android:name=".information.AboutUs"></activity>
+        <activity android:name=".food.FoodToday" />
         <activity android:name=".food.FoodPhoto" />
         <activity android:name=".Chating.AdminChatActivity" />
         <activity android:name=".myPage.Mypage" />
