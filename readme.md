@@ -38,6 +38,10 @@
 
 ![image-20210416002821277](readme.assets/image-20210416002821277.png)
 
+# :memo: ERD
+
+![image-20210416183528282](readme.assets/image-20210416183528282.png)
+
 
 
 # :mag: overview
