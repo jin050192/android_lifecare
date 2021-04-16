@@ -84,5 +84,7 @@
 
 ![image-20210416005846946](readme.assets/image-20210416005846946.png)
 
+## 건강정보 확인
 
+![image-20210416091200742](readme.assets/image-20210416091200742.png)
 
