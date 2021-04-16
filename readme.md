@@ -2,7 +2,7 @@
 
 ![logo](readme.assets/logo.png)
 
-### 🏠 [Github/spring](https://github.com/swhan9404/spring_lifecare)  :iphone: [Github/Android](https://github.com/swhan9404/android_lifecare)  :page_with_curl:[기능정의서](https://drive.google.com/file/d/1LZsXce04RQRZWH4noepl6sUtd362d0IS/view?usp=sharing) :microphone:[Presentation](https://youtu.be/8FPHJWBBEOk)
+### 🏠 [Github/spring](https://github.com/swhan9404/spring_lifecare)  :iphone: [Github/Android](https://github.com/swhan9404/android_lifecare)  :page_with_curl:[기능정의서](https://drive.google.com/file/d/1LZsXce04RQRZWH4noepl6sUtd362d0IS/view?usp=sharing) :microphone:[Presentation](https://youtu.be/8FPHJWBBEOk) :closed_book: [PPT](https://drive.google.com/file/d/1BJg5DiyWyoE2j8Xaad7Byc_xobz8FpN7/view?usp=sharing) 
 
 
 
@@ -13,6 +13,12 @@
   - android : 환자 중심의 편의시스템
 - 팀원 : 한승운, 이한림, 진은성, 윤재진, 이건희, 차세웅, 김수정
 - 프로젝트 기간 :  2020.09.07 ~ 2020.10.21 ( 6주 )
+
+
+
+## :speech_balloon: 기획의도
+
+![image-20210416144115905](readme.assets/image-20210416144115905.png)
 
 
 
